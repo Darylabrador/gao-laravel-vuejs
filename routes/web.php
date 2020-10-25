@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DesktopController;
+use App\Http\Controllers\AssignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resources([
+    "client"  => ClientController::class,
+    "desktop" => DesktopController::class,
+    "assign"  => AssignController::class,
+]);
+
