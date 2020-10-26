@@ -1,5 +1,5 @@
 import Axios from "axios";
-import Ordinateur from '../components/ordinateur.vue';
+import Ordinateur from '../components/Ordinateur.vue';
 import AddOrdinateur from '../components/AddOrdinateur.vue';
 
 /**

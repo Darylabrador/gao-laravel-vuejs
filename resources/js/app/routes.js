@@ -7,7 +7,7 @@ import Home from './views/Home.vue';
 
 Vue.use(VueRouter);
 
-// mode history => eleve le #/ dans l'url
+// mode history => hide #/ in the URL
 const router = new VueRouter({
     mode: 'history',
     routes: [

@@ -1,6 +1,7 @@
 /**
- * Recupérer la donnée passer dans la composante 
- * et la transformer en object via le return
+ * Get Data from main Home vue when we pass it data
+ * All props are equivalent of what we pass to component. 
+ * All props are returning data in object format
  */
 export default {
     props: {

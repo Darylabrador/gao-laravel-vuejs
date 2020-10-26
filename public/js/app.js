@@ -20309,12 +20309,6 @@ var render = function() {
             _vm._v("\n      Ajouter un ordinateur\n    ")
           ]),
           _vm._v(" "),
-          _c("v-card-text", [
-            _vm._v(
-              "Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running."
-            )
-          ]),
-          _vm._v(" "),
           _c(
             "v-card-actions",
             [
