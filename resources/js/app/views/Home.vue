@@ -1,5 +1,5 @@
 /**
-* dashboard vue
+* Home vue
 */
 <template>
     <v-container>
