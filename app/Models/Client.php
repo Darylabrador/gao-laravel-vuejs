@@ -13,6 +13,10 @@ class Client extends Model
         'name',  'surname'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+    
     public function assigns()
     {
         return $this->hasMany('App\Models\Assign');

@@ -14,7 +14,8 @@ class DesktopController extends Controller
      */
     public function index()
     {
-        //
+       
+        return Desktop::all();
     }
 
     /**

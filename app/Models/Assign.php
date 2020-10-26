@@ -13,6 +13,10 @@ class Assign extends Model
         'date', 'hours'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     public function clients()
     {
         return $this->belongsTo('App\Models\Client');

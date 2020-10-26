@@ -14,7 +14,7 @@ class AssignController extends Controller
      */
     public function index()
     {
-        //
+      
     }
 
     /**
