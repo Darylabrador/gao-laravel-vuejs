@@ -5,6 +5,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Routes from './routes';
 import Layout from './layouts/layout.vue';
+import 'vuetify/dist/vuetify.min.css';
 import _ from 'lodash';
 
 Vue.use(Vuetify);
