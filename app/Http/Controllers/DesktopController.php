@@ -15,7 +15,8 @@ class DesktopController extends Controller
     public function index()
     {
        
-        return Desktop::all();
+        $desktop = Desktop::paginate(3);
+        return $desktop;
     }
 
     /**

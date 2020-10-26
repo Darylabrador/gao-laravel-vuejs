@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\DesktopController;
-use App\Http\Controllers\AssignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +13,8 @@ use App\Http\Controllers\AssignController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/')->group(function () {
+    Route::get('/{any}',function () {
+        return view('app');
+    })->where('any', '.*');
 });

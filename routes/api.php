@@ -23,6 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResources([
     "client"  => ClientController::class,
-    "desktop" => DesktopController::class,
+    "computers" => DesktopController::class,
     "assign"  => AssignController::class,
 ]);
