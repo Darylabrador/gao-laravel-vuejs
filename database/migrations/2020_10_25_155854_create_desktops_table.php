@@ -16,6 +16,7 @@ class CreateDesktopsTable extends Migration
         Schema::create('desktops', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->timestamps();
         });
     }
 

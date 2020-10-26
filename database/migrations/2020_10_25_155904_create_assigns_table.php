@@ -19,6 +19,7 @@ class CreateAssignsTable extends Migration
             $table->integer('desktop_id', null, false)->index();
             $table->dateTime('date');
             $table->string('hours');
+            $table->timestamps();
         });
     }
 

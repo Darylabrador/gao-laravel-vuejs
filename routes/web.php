@@ -19,10 +19,3 @@ use App\Http\Controllers\AssignController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::resources([
-    "client"  => ClientController::class,
-    "desktop" => DesktopController::class,
-    "assign"  => AssignController::class,
-]);
-
