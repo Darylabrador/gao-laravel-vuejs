@@ -13,16 +13,19 @@ export default {
         AddOrdinateurModal
     },
 
+    // data that we can use
     data() {
         return {
             computerList: []
         }
     },
 
+    // init function when the parent is created on SPA
     created() {
        this.getAllDesktops(); 
     },
 
+    // All methods
     methods: {
         getAllDesktops() {
             Axios.get('api/computers').then( ({ data }) => {
@@ -33,7 +36,7 @@ export default {
             })
         },
 
-        // push the created desktop info to current array
+        // push the created desktop info to current array depending on $emit event
         newdesktop(newcomputer) {
             this.computerList.push(newcomputer)
         }

@@ -11,7 +11,7 @@ import _ from 'lodash';
 // Vue using Vuetify
 Vue.use(Vuetify);
 
-// Main component
+// Main component that use Layout and it's component from app.blade.php
 const main = new Vue({
     el: '#main',
     vuetify: new Vuetify({}),

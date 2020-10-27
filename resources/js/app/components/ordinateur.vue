@@ -1,3 +1,6 @@
+/** 
+* Card for desktop
+*/
 <template>
     <v-card outlined>
         <v-list-item three-line>

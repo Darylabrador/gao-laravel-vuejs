@@ -5,10 +5,13 @@ import AlertDesktop from "../alerts/AlertAddDesktop.vue";
  * Form to add computer
  */
 export default {
+
+    // child components
     components: {
         AlertDesktop
     },
 
+    // Data that can be use on component
     data: () => ({
         name: '',
         message: '',
@@ -16,6 +19,7 @@ export default {
         isError: false
     }),
 
+    // All methods
     methods: {
         submitForm(event) {
             event.preventDefault();
@@ -24,7 +28,7 @@ export default {
                 name: this.name
             };
 
-            // add desktop
+            // Send data to add desktop API route
             Axios.post('/api/computers', dataSend)
                 .then(({data}) => {
                     if(data.success) {
