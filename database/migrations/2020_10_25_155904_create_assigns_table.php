@@ -15,8 +15,8 @@ class CreateAssignsTable extends Migration
     {
         Schema::create('assigns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('desktop_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('client_id')->constrained();
+            $table->foreignId('desktop_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('client_id')->nullable()->constrained();
             $table->string('hours');
             $table->timestamps();
         });
