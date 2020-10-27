@@ -19,11 +19,11 @@ class Assign extends Model
 
     public function clients()
     {
-        return $this->belongsTo('App\Models\Client');
+        return $this->belongsTo('App\Models\Client', 'client_id', 'id');
     }
 
     public function desktops()
     {
-        return $this->belongsTo('App\Models\Desktop');
+        return $this->belongsTo('App\Models\Desktop', 'desktop_id', 'id');
     }
 }
