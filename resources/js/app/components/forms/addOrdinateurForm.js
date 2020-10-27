@@ -30,7 +30,7 @@ export default {
                     if(data.success) {
                         document.getElementById('formAddOrdi').reset();
                         this.$emit('closemodal', false);
-                        this.$emit('desktopInfoAdd', data.desktop);
+                        this.$emit('adddesktop', data.desktop);
                     } else {
                         this.color = "red";
                         this.message = data.message;

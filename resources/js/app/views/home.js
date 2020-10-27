@@ -24,17 +24,6 @@ export default {
     },
 
     methods: {
-        // Enable it only when we use pagination
-        // getAllDesktops() {
-        //     Axios.get('api/computers').then( ({ data }) => {
-        //         var responseData = data.data;
-        //         // console.log('liste des ordinateur', responseData);
-        //         responseData.forEach(element => {
-        //             this.computerList.push(element);
-        //         })
-        //     })
-        // }
-
         getAllDesktops() {
             Axios.get('api/computers').then( ({ data }) => {
                 // console.log(data);
@@ -42,6 +31,11 @@ export default {
                     this.computerList.push(element);
                 })
             })
+        },
+
+        // push the created desktop info to current array
+        newdesktop(newcomputer) {
+            this.computerList.push(newcomputer)
         }
     },
 }

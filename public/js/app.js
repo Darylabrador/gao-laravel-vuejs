@@ -1982,7 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$emit('closemodal', false);
 
-          _this.$emit('desktopInfoAdd', data.desktop);
+          _this.$emit('adddesktop', data.desktop);
         } else {
           _this.color = "red";
           _this.message = data.message;
@@ -2022,6 +2022,10 @@ __webpack_require__.r(__webpack_exports__);
     // GET data from emit event from child element to close modal
     isclosemodal: function isclosemodal(event) {
       return this.dialog = event;
+    },
+    // Push data to 1 step parent to home
+    newdesktop: function newdesktop(evnt) {
+      this.$emit('adddesktop', evnt);
     }
   }
 });
@@ -2097,16 +2101,6 @@ __webpack_require__.r(__webpack_exports__);
     this.getAllDesktops();
   },
   methods: {
-    // Enable it only when we use pagination
-    // getAllDesktops() {
-    //     Axios.get('api/computers').then( ({ data }) => {
-    //         var responseData = data.data;
-    //         // console.log('liste des ordinateur', responseData);
-    //         responseData.forEach(element => {
-    //             this.computerList.push(element);
-    //         })
-    //     })
-    // }
     getAllDesktops: function getAllDesktops() {
       var _this = this;
 
@@ -2117,6 +2111,10 @@ __webpack_require__.r(__webpack_exports__);
           _this.computerList.push(element);
         });
       });
+    },
+    // push the created desktop info to current array
+    newdesktop: function newdesktop(newcomputer) {
+      this.computerList.push(newcomputer);
     }
   }
 });
@@ -20664,7 +20662,9 @@ var render = function() {
             [
               _c("v-spacer"),
               _vm._v(" "),
-              _c("addOrdinateurForm", { on: { closemodal: _vm.isclosemodal } })
+              _c("addOrdinateurForm", {
+                on: { closemodal: _vm.isclosemodal, adddesktop: _vm.newdesktop }
+              })
             ],
             1
           )
@@ -20742,7 +20742,7 @@ var render = function() {
   return _c(
     "v-container",
     [
-      _c("addOrdinateurModal"),
+      _c("addOrdinateurModal", { on: { adddesktop: _vm.newdesktop } }),
       _vm._v(" "),
       _c(
         "v-row",

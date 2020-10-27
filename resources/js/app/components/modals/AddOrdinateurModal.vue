@@ -16,7 +16,7 @@
           <v-spacer></v-spacer>
 
             <!-- Get data from child when we have an emit request from it -->
-            <addOrdinateurForm @closemodal='isclosemodal'/>
+            <addOrdinateurForm @closemodal='isclosemodal' @adddesktop="newdesktop"/>
 
         </v-card-actions>
       </v-card>
