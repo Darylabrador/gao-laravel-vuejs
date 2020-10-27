@@ -1,11 +1,13 @@
 import Axios from "axios";
 import Ordinateur from '../components/Ordinateur.vue';
-import AddOrdinateur from '../components/AddOrdinateur.vue';
+import AddOrdinateur from '../components/modals/AddOrdinateurModal.vue';
 
 /**
  * Dashboard data
  */
 export default {
+
+    // components 
     components: {
         Ordinateur,
         AddOrdinateur

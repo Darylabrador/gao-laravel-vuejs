@@ -1899,19 +1899,60 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/addOrdinateur.js?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/addOrdinateur.js?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /**
- * Script for dialog using vuetify modal
+ * Form to add computer
  */
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      valid: true,
+      name: '' // isDisabled: 'disabled'
+
+    };
+  },
+  methods: {
+    validate: function validate() {
+      this.$refs.form.validate();
+    } // checkForm() {
+    //     if (this.name.length >= 1) {
+    //         return this.isDisabled = "";
+    //     } else {
+    //         return this.isDisabled = "disabled";
+    //     }
+    // }
+
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/addOrdinateurModal.js?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/modals/addOrdinateurModal.js?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _forms_AddOrdinateurForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../forms/AddOrdinateurForm.vue */ "./resources/js/app/components/forms/AddOrdinateurForm.vue");
+/**
+ * Script for dialog using vuetify modal
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AddOrdinateurForm: _forms_AddOrdinateurForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       dialog: false
@@ -1964,7 +2005,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Ordinateur.vue */ "./resources/js/app/components/Ordinateur.vue");
-/* harmony import */ var _components_AddOrdinateur_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AddOrdinateur.vue */ "./resources/js/app/components/AddOrdinateur.vue");
+/* harmony import */ var _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modals/AddOrdinateurModal.vue */ "./resources/js/app/components/modals/AddOrdinateurModal.vue");
 
 
 
@@ -1973,9 +2014,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // components 
   components: {
     Ordinateur: _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AddOrdinateur: _components_AddOrdinateur_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    AddOrdinateur: _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -20253,113 +20295,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/AddOrdinateur.vue?vue&type=template&id=746cbcfd&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/AddOrdinateur.vue?vue&type=template&id=746cbcfd& ***!
-  \********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-dialog",
-    {
-      attrs: { "max-width": "290" },
-      scopedSlots: _vm._u([
-        {
-          key: "activator",
-          fn: function(ref) {
-            var on = ref.on
-            var attrs = ref.attrs
-            return [
-              _c(
-                "v-btn",
-                _vm._g(
-                  _vm._b(
-                    { attrs: { color: "primary", dark: "" } },
-                    "v-btn",
-                    attrs,
-                    false
-                  ),
-                  on
-                ),
-                [_vm._v("\n      Open Dialog\n    ")]
-              )
-            ]
-          }
-        }
-      ]),
-      model: {
-        value: _vm.dialog,
-        callback: function($$v) {
-          _vm.dialog = $$v
-        },
-        expression: "dialog"
-      }
-    },
-    [
-      _vm._v(" "),
-      _c(
-        "v-card",
-        [
-          _c("v-card-title", { staticClass: "headline" }, [
-            _vm._v("\n      Ajouter un ordinateur\n    ")
-          ]),
-          _vm._v(" "),
-          _c(
-            "v-card-actions",
-            [
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "green darken-1", text: "" },
-                  on: {
-                    click: function($event) {
-                      _vm.dialog = false
-                    }
-                  }
-                },
-                [_vm._v("\n        Annuler\n      ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "green darken-1", text: "" },
-                  on: {
-                    click: function($event) {
-                      _vm.dialog = false
-                    }
-                  }
-                },
-                [_vm._v("\n        Ajouter\n      ")]
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/Ordinateur.vue?vue&type=template&id=08d6a966&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/Ordinateur.vue?vue&type=template&id=08d6a966& ***!
@@ -20401,6 +20336,208 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("v-card-actions")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "" } },
+    [
+      _c(
+        "v-form",
+        {
+          ref: "form",
+          attrs: { "lazy-validation": "", method: "POST" },
+          model: {
+            value: _vm.valid,
+            callback: function($$v) {
+              _vm.valid = $$v
+            },
+            expression: "valid"
+          }
+        },
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "form-control my-4",
+            attrs: { required: "", placeholder: "Nom du postes" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "d-flex justify-content-end" },
+            [
+              _vm.name.length > 1
+                ? _c(
+                    "v-btn",
+                    {
+                      staticClass: "mr-4",
+                      attrs: { color: "blue" },
+                      on: { click: _vm.validate }
+                    },
+                    [_vm._v(" Ajouter ")]
+                  )
+                : _c(
+                    "v-btn",
+                    {
+                      staticClass: "mr-4",
+                      attrs: { color: "blue", disabled: "" }
+                    },
+                    [_vm._v(" Ajouter ")]
+                  )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/modals/AddOrdinateurModal.vue?vue&type=template&id=e3dd4502&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/modals/AddOrdinateurModal.vue?vue&type=template&id=e3dd4502& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-dialog",
+    {
+      attrs: { "max-width": "500" },
+      scopedSlots: _vm._u([
+        {
+          key: "activator",
+          fn: function(ref) {
+            var on = ref.on
+            var attrs = ref.attrs
+            return [
+              _c(
+                "v-btn",
+                _vm._g(
+                  _vm._b(
+                    { attrs: { color: "primary", dark: "" } },
+                    "v-btn",
+                    attrs,
+                    false
+                  ),
+                  on
+                ),
+                [
+                  _c("span", {
+                    staticClass: "iconify",
+                    staticStyle: { "font-size": "35px !important" },
+                    attrs: {
+                      "data-inline": "false",
+                      "data-icon": "ant-design:plus-circle-outlined"
+                    }
+                  })
+                ]
+              )
+            ]
+          }
+        }
+      ]),
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
+      }
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-card-title",
+            {
+              staticClass:
+                "headline font-weight-bold border-bottom border-dark d-flex justify-content-between"
+            },
+            [
+              _c("h5", [_vm._v(" Ajouter un ordinateur ")]),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "grey darken-1", text: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.dialog = false
+                    }
+                  }
+                },
+                [_vm._v(" X ")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [_c("v-spacer"), _vm._v(" "), _c("addOrdinateurForm")],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -79583,61 +79720,6 @@ __webpack_require__(/*! ./app/main */ "./resources/js/app/main.js");
 
 /***/ }),
 
-/***/ "./resources/js/app/components/AddOrdinateur.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/app/components/AddOrdinateur.vue ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddOrdinateur_vue_vue_type_template_id_746cbcfd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddOrdinateur.vue?vue&type=template&id=746cbcfd& */ "./resources/js/app/components/AddOrdinateur.vue?vue&type=template&id=746cbcfd&");
-/* harmony import */ var _addOrdinateur_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addOrdinateur.js?vue&type=script&lang=js& */ "./resources/js/app/components/addOrdinateur.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _addOrdinateur_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AddOrdinateur_vue_vue_type_template_id_746cbcfd___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AddOrdinateur_vue_vue_type_template_id_746cbcfd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/app/components/AddOrdinateur.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/app/components/AddOrdinateur.vue?vue&type=template&id=746cbcfd&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/app/components/AddOrdinateur.vue?vue&type=template&id=746cbcfd& ***!
-  \**************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateur_vue_vue_type_template_id_746cbcfd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AddOrdinateur.vue?vue&type=template&id=746cbcfd& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/AddOrdinateur.vue?vue&type=template&id=746cbcfd&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateur_vue_vue_type_template_id_746cbcfd___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateur_vue_vue_type_template_id_746cbcfd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/app/components/Ordinateur.vue":
 /*!****************************************************!*\
   !*** ./resources/js/app/components/Ordinateur.vue ***!
@@ -79693,17 +79775,141 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/app/components/addOrdinateur.js?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/app/components/addOrdinateur.js?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/app/components/forms/AddOrdinateurForm.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/app/components/forms/AddOrdinateurForm.vue ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateur_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!./addOrdinateur.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/addOrdinateur.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateur_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _AddOrdinateurForm_vue_vue_type_template_id_23145341___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddOrdinateurForm.vue?vue&type=template&id=23145341& */ "./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341&");
+/* harmony import */ var _addOrdinateurForm_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addOrdinateurForm.js?vue&type=script&lang=js& */ "./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _addOrdinateurForm_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddOrdinateurForm_vue_vue_type_template_id_23145341___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddOrdinateurForm_vue_vue_type_template_id_23145341___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/forms/AddOrdinateurForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateurForm_vue_vue_type_template_id_23145341___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddOrdinateurForm.vue?vue&type=template&id=23145341& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateurForm_vue_vue_type_template_id_23145341___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateurForm_vue_vue_type_template_id_23145341___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateurForm_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./addOrdinateurForm.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateurForm_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/components/modals/AddOrdinateurModal.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/app/components/modals/AddOrdinateurModal.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddOrdinateurModal_vue_vue_type_template_id_e3dd4502___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddOrdinateurModal.vue?vue&type=template&id=e3dd4502& */ "./resources/js/app/components/modals/AddOrdinateurModal.vue?vue&type=template&id=e3dd4502&");
+/* harmony import */ var _addOrdinateurModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addOrdinateurModal.js?vue&type=script&lang=js& */ "./resources/js/app/components/modals/addOrdinateurModal.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _addOrdinateurModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddOrdinateurModal_vue_vue_type_template_id_e3dd4502___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddOrdinateurModal_vue_vue_type_template_id_e3dd4502___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/modals/AddOrdinateurModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/modals/AddOrdinateurModal.vue?vue&type=template&id=e3dd4502&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/app/components/modals/AddOrdinateurModal.vue?vue&type=template&id=e3dd4502& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateurModal_vue_vue_type_template_id_e3dd4502___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddOrdinateurModal.vue?vue&type=template&id=e3dd4502& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/modals/AddOrdinateurModal.vue?vue&type=template&id=e3dd4502&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateurModal_vue_vue_type_template_id_e3dd4502___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddOrdinateurModal_vue_vue_type_template_id_e3dd4502___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/app/components/modals/addOrdinateurModal.js?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/app/components/modals/addOrdinateurModal.js?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateurModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./addOrdinateurModal.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/addOrdinateurModal.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateurModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
