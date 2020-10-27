@@ -29,8 +29,10 @@ export default {
     methods: {
         getAllDesktops() {
             Axios.get('api/computers').then( ({ data }) => {
-                // console.log(data);
-                data.forEach(element => {
+                var responseData = data.data;
+                console.log(responseData);
+
+                responseData.forEach(element => {
                     this.computerList.push(element);
                 })
             })

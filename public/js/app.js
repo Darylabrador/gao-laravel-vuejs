@@ -1908,7 +1908,11 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/**
+ * Js for alert add desktop component
+ */
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // data from parent components
   props: {
     message: {
       "default": function _default() {
@@ -1926,6 +1930,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  // data that can be use by alert add desktop component
   data: function data() {
     return {
       alert: this.isError
@@ -1954,9 +1959,11 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // child components
   components: {
     AlertDesktop: _alerts_AlertAddDesktop_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  // Data that can be use on component
   data: function data() {
     return {
       name: '',
@@ -1965,6 +1972,7 @@ __webpack_require__.r(__webpack_exports__);
       isError: false
     };
   },
+  // All methods
   methods: {
     submitForm: function submitForm(event) {
       var _this = this;
@@ -1972,7 +1980,7 @@ __webpack_require__.r(__webpack_exports__);
       event.preventDefault();
       var dataSend = {
         name: this.name
-      }; // add desktop
+      }; // Send data to add desktop API route
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers', dataSend).then(function (_ref) {
         var data = _ref.data;
@@ -2010,20 +2018,23 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // child components
   components: {
     AddOrdinateurForm: _forms_AddOrdinateurForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  // Data that can be used
   data: function data() {
     return {
       dialog: false
     };
   },
+  // all methods
   methods: {
     // GET data from emit event from child element to close modal
     isclosemodal: function isclosemodal(event) {
       return this.dialog = event;
     },
-    // Push data to 1 step parent to home
+    // $emit can be use to push data to parent component through an event
     newdesktop: function newdesktop(evnt) {
       this.$emit('adddesktop', evnt);
     }
@@ -2092,27 +2103,31 @@ __webpack_require__.r(__webpack_exports__);
     Ordinateur: _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     AddOrdinateurModal: _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  // data that we can use
   data: function data() {
     return {
       computerList: []
     };
   },
+  // init function when the parent is created on SPA
   created: function created() {
     this.getAllDesktops();
   },
+  // All methods
   methods: {
     getAllDesktops: function getAllDesktops() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers').then(function (_ref) {
         var data = _ref.data;
-        // console.log(data);
-        data.forEach(function (element) {
+        var responseData = data.data;
+        console.log(responseData);
+        responseData.forEach(function (element) {
           _this.computerList.push(element);
         });
       });
     },
-    // push the created desktop info to current array
+    // push the created desktop info to current array depending on $emit event
     newdesktop: function newdesktop(newcomputer) {
       this.computerList.push(newcomputer);
     }
@@ -80211,7 +80226,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // Vue using Vuetify
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a); // Main component
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a); // Main component that use Layout and it's component from app.blade.php
 
 var main = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#main',
