@@ -53,10 +53,11 @@ class DesktopController extends Controller
         }
 
         $desktop = Desktop::create($validator->validated());
+
         return response()->json([
             'success' => true,
             'message' => 'Poste créer',
-            'desktop' =>  DesktopResources::collection($desktop)
+            'desktop' =>  $desktop
         ], 200);
     }
 
@@ -99,12 +100,11 @@ class DesktopController extends Controller
         }
 
         $desktop->name = $validator->validated()['name'];
-        $updateDesktop = $desktop->save();
+        $desktop->save();
 
         return response()->json([
             'success' => true,
-            'message' => 'Mise à jour effectuée',
-            'desktop' =>  DesktopResources::collection($updateDesktop)
+            'message' => 'Mise à jour effectuée'
         ]);
     }
 

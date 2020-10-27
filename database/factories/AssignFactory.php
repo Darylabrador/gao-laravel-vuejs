@@ -22,9 +22,9 @@ class AssignFactory extends Factory
     public function definition()
     {
         return [
-            'hours' => $this->faker->numberBetween(8,16),
-            'user_id' => $this->faker->numberBetween(1,4),
-            'desktop_id' => $this->faker->numberBetween(1,4),
+            'hours' => "{$this->faker->numberBetween(8,16)}",
+            'desktop_id' => $this->faker->numberBetween(1,5),
+            'client_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }
