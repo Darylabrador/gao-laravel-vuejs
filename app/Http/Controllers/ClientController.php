@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
+use App\Http\Resources\ClientResources as ClientResources;
+
 class ClientController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return Client::all(); 
+        return ClientResources::collection(Client::all()); 
     }
 
     /**

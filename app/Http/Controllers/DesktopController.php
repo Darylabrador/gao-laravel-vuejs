@@ -6,6 +6,8 @@ use App\Models\Desktop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Resources\DesktopResources as DesktopResources;
+
 class DesktopController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class DesktopController extends Controller
     {
         // $desktop = Desktop::paginate(3);
         $desktop = Desktop::all();
-        return $desktop;
+        return DesktopResources::collection($desktop);
     }
 
 
@@ -54,7 +56,7 @@ class DesktopController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Poste créer',
-            'desktop' => $desktop
+            'desktop' =>  DesktopResources::collection($desktop)
         ], 200);
     }
 
@@ -97,11 +99,12 @@ class DesktopController extends Controller
         }
 
         $desktop->name = $validator->validated()['name'];
-        $desktop->save();
+        $updateDesktop = $desktop->save();
 
         return response()->json([
             'success' => true,
-            'message' => 'Mise à jour effectuée'
+            'message' => 'Mise à jour effectuée',
+            'desktop' =>  DesktopResources::collection($updateDesktop)
         ]);
     }
 
