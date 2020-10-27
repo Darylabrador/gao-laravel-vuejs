@@ -15,7 +15,8 @@ class DesktopController extends Controller
      */
     public function index()
     {
-        $desktop = Desktop::paginate(3);
+        // $desktop = Desktop::paginate(3);
+        $desktop = Desktop::all();
         return $desktop;
     }
 
@@ -46,13 +47,14 @@ class DesktopController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $errors->first('name')
-            ], 422);
+            ]);
         }
 
-        Desktop::create($validator->validated());
+        $desktop = Desktop::create($validator->validated());
         return response()->json([
             'success' => true,
-            'message' => 'Poste créer'
+            'message' => 'Poste créer',
+            'desktop' => $desktop
         ], 200);
     }
 
@@ -82,7 +84,7 @@ class DesktopController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $errors->first('name')
-            ], 422);
+            ]);
         }
 
         $desktop = Desktop::find($id);
@@ -91,7 +93,7 @@ class DesktopController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => "Poste introuvable"
-            ], 422);
+            ]);
         }
 
         $desktop->name = $validator->validated()['name'];
@@ -100,9 +102,7 @@ class DesktopController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Mise à jour effectuée'
-        ],
-            200
-        );
+        ]);
     }
 
     /**
@@ -118,9 +118,7 @@ class DesktopController extends Controller
             return response()->json([
                     'success' => false,
                     'message' => "Poste introuvable"
-                ], 
-                422
-            );
+                ]);
         }
 
         $desktop->delete();
@@ -128,8 +126,6 @@ class DesktopController extends Controller
             [
                 'success' => true,
                 'message' => 'Suppression effectuée'
-            ],
-            200
-        );
+            ]);
     }
 }

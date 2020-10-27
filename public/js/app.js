@@ -1899,6 +1899,42 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    message: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    color: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    isError: {
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
+  data: function data() {
+    return {
+      alert: this.isError
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js& ***!
@@ -1908,28 +1944,52 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _alerts_AlertAddDesktop_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../alerts/AlertAddDesktop.vue */ "./resources/js/app/components/alerts/AlertAddDesktop.vue");
+
+
 /**
  * Form to add computer
  */
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AlertDesktop: _alerts_AlertAddDesktop_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      valid: true,
-      name: '' // isDisabled: 'disabled'
-
+      name: '',
+      message: '',
+      color: '',
+      isError: false
     };
   },
   methods: {
-    validate: function validate() {
-      this.$refs.form.validate();
-    } // checkForm() {
-    //     if (this.name.length >= 1) {
-    //         return this.isDisabled = "";
-    //     } else {
-    //         return this.isDisabled = "disabled";
-    //     }
-    // }
+    submitForm: function submitForm(event) {
+      var _this = this;
 
+      event.preventDefault();
+      var dataSend = {
+        name: this.name
+      }; // add desktop
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers', dataSend).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.success) {
+          document.getElementById('formAddOrdi').reset();
+
+          _this.$emit('closemodal', false);
+
+          _this.$emit('desktopInfoAdd', data.desktop);
+        } else {
+          _this.color = "red";
+          _this.message = data.message;
+          _this.isError = true;
+        }
+      });
+    }
   }
 });
 
@@ -1957,6 +2017,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       dialog: false
     };
+  },
+  methods: {
+    // GET data from emit event from child element to close modal
+    isclosemodal: function isclosemodal(event) {
+      return this.dialog = event;
+    }
   }
 });
 
@@ -1975,6 +2041,9 @@ __webpack_require__.r(__webpack_exports__);
  * Get Data from main Home vue when we pass it data
  * All props are equivalent of what we pass to component. 
  * All props are returning data in object format
+ * 
+ *  /!\ parent to child /!\
+ * 
  */
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2017,27 +2086,34 @@ __webpack_require__.r(__webpack_exports__);
   // components 
   components: {
     Ordinateur: _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AddOrdinateur: _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    AddOrdinateurModal: _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
       computerList: []
     };
   },
-  // mounted() {
-  // },
   created: function created() {
     this.getAllDesktops();
   },
   methods: {
+    // Enable it only when we use pagination
+    // getAllDesktops() {
+    //     Axios.get('api/computers').then( ({ data }) => {
+    //         var responseData = data.data;
+    //         // console.log('liste des ordinateur', responseData);
+    //         responseData.forEach(element => {
+    //             this.computerList.push(element);
+    //         })
+    //     })
+    // }
     getAllDesktops: function getAllDesktops() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers').then(function (_ref) {
         var data = _ref.data;
-        var responseData = data.data; // console.log('liste des ordinateur', responseData);
-
-        responseData.forEach(function (element) {
+        // console.log(data);
+        data.forEach(function (element) {
           _this.computerList.push(element);
         });
       });
@@ -20347,6 +20423,56 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-alert",
+        {
+          attrs: {
+            border: "left",
+            "close-text": "Close Alert",
+            color: _vm.color,
+            dark: "",
+            dismissible: ""
+          },
+          on: { click: _vm.resetAlert },
+          model: {
+            value: _vm.alert,
+            callback: function($$v) {
+              _vm.alert = $$v
+            },
+            expression: "alert"
+          }
+        },
+        [_vm._v("\n    " + _vm._s(_vm.message) + "\n  ")]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/forms/AddOrdinateurForm.vue?vue&type=template&id=23145341& ***!
@@ -20366,18 +20492,22 @@ var render = function() {
     "v-container",
     { attrs: { fluid: "" } },
     [
+      _vm.isError
+        ? _c("alertDesktop", {
+            attrs: {
+              color: _vm.color,
+              message: _vm.message,
+              isError: _vm.isError
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "v-form",
         {
           ref: "form",
-          attrs: { "lazy-validation": "", method: "POST" },
-          model: {
-            value: _vm.valid,
-            callback: function($$v) {
-              _vm.valid = $$v
-            },
-            expression: "valid"
-          }
+          attrs: { id: "formAddOrdi", method: "POST" },
+          on: { submit: _vm.submitForm }
         },
         [
           _c("input", {
@@ -20411,8 +20541,7 @@ var render = function() {
                     "v-btn",
                     {
                       staticClass: "mr-4",
-                      attrs: { color: "blue" },
-                      on: { click: _vm.validate }
+                      attrs: { color: "blue", type: "submit" }
                     },
                     [_vm._v(" Ajouter ")]
                   )
@@ -20532,7 +20661,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-card-actions",
-            [_c("v-spacer"), _vm._v(" "), _c("addOrdinateurForm")],
+            [
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c("addOrdinateurForm", { on: { closemodal: _vm.isclosemodal } })
+            ],
             1
           )
         ],
@@ -20609,7 +20742,7 @@ var render = function() {
   return _c(
     "v-container",
     [
-      _c("addOrdinateur"),
+      _c("addOrdinateurModal"),
       _vm._v(" "),
       _c(
         "v-row",
@@ -79772,6 +79905,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ordinateur_vue_vue_type_template_id_08d6a966___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/app/components/alerts/AlertAddDesktop.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/app/components/alerts/AlertAddDesktop.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlertAddDesktop.vue?vue&type=template&id=6538d53c& */ "./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&");
+/* harmony import */ var _alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alertAddDesktop.js?vue&type=script&lang=js& */ "./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/alerts/AlertAddDesktop.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AlertAddDesktop.vue?vue&type=template&id=6538d53c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./alertAddDesktop.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

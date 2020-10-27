@@ -14,7 +14,10 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-            <addOrdinateurForm />
+
+            <!-- Get data from child when we have an emit request from it -->
+            <addOrdinateurForm @closemodal='isclosemodal'/>
+
         </v-card-actions>
       </v-card>
     </v-dialog>

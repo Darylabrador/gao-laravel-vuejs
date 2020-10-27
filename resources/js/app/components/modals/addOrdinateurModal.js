@@ -15,4 +15,11 @@ export default {
             dialog: false,
         }
     },
+    
+    methods: {
+        // GET data from emit event from child element to close modal
+        isclosemodal: function(event){
+           return this.dialog = event;
+        }
+    }
 }

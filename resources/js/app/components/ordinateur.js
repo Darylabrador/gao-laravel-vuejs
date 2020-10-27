@@ -2,6 +2,9 @@
  * Get Data from main Home vue when we pass it data
  * All props are equivalent of what we pass to component. 
  * All props are returning data in object format
+ * 
+ *  /!\ parent to child /!\
+ * 
  */
 export default {
     props: {

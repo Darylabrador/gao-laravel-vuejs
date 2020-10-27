@@ -3,10 +3,12 @@
 */
 <template>
     <v-container fluid>
-        <v-form ref="form" v-model="valid" lazy-validation method="POST">
+        <alertDesktop :color="color" :message="message" :isError="isError" v-if="isError" />
+
+        <v-form id="formAddOrdi" ref="form" method="POST" @submit="submitForm">
             <input required v-model="name" class="form-control my-4" placeholder="Nom du postes">
             <div class="d-flex justify-content-end">
-                <v-btn color="blue" class="mr-4" @click="validate" v-if="name.length > 1"> Ajouter </v-btn>
+                <v-btn color="blue" class="mr-4" type="submit" v-if="name.length > 1"> Ajouter </v-btn>
                 <v-btn color="blue" class="mr-4" v-else disabled> Ajouter </v-btn>
             </div>
         </v-form>

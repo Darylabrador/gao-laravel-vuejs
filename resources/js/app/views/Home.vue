@@ -3,7 +3,7 @@
 */
 <template>
     <v-container>
-        <addOrdinateur />
+        <addOrdinateurModal />
         <v-row>
             <v-col md='4' v-for='(ordinateur,key) in computerList' :key='key'>
                 <ordinateur :ordinateurId='ordinateur.id' :ordinateurName='ordinateur.name'/>
