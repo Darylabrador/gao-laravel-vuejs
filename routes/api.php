@@ -23,8 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource("computers", DesktopController::class)->except(['show']);
 
-// Route::apiResources([
-//     "client"  => ClientController::class,
-//     "computers" => DesktopController::class,
-//     "assign"  => AssignController::class,
-// ]);
+Route::apiResource("clients", ClientController::class)->only(['index', 'store', 'destroy']);
+
+Route::apiResource("assigns", AssignController::class)->only(['index', 'store', 'update', 'destroy' ]);

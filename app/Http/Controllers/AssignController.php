@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AssignResources;
 use App\Models\Assign;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,8 @@ class AssignController extends Controller
      */
     public function index()
     {
-      
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+      $assign = Assign::all();
+      return AssignResources::collection($assign);
     }
 
     /**
@@ -38,27 +30,6 @@ class AssignController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Assign  $assign
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Assign $assign)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Assign  $assign
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Assign $assign)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
