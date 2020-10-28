@@ -2079,7 +2079,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  // init function when the component is loaded
+  // init function when the component is created
   created: function created() {
     this.initialize();
     this.displayHoraire();
@@ -20580,9 +20580,7 @@ var render = function() {
             }),
             1
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("v-card-actions")
+        : _vm._e()
     ],
     2
   )

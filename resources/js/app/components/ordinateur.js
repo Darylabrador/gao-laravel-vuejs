@@ -28,7 +28,7 @@ export default {
     },
 
 
-    // init function when the component is loaded
+    // init function when the component is created
     created() {
         this.initialize();
         this.displayHoraire();
@@ -60,6 +60,7 @@ export default {
             })
         },
 
+        
         /**
          * Display assigns hours
          */

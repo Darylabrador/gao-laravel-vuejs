@@ -52,9 +52,6 @@
                 </v-col>
             </v-row>
         </v-container>
-
-        <v-card-actions>
-        </v-card-actions>
     </v-card>
 </template>
 
