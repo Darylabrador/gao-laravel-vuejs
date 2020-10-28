@@ -1940,6 +1940,74 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/datepickers/datepicker.js?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/datepickers/datepicker.js?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data(vm) {
+    return {
+      date: new Date().toISOString().substr(0, 10),
+      dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+      menu1: false,
+      menu2: false
+    };
+  },
+  computed: {
+    computedDateFormatted: function computedDateFormatted() {
+      return this.formatDate(this.date);
+    }
+  },
+  watch: {
+    date: function date(val) {
+      this.dateFormatted = this.formatDate(this.date);
+    }
+  },
+  methods: {
+    formatDate: function formatDate(date) {
+      if (!date) return null;
+
+      var _date$split = date.split('-'),
+          _date$split2 = _slicedToArray(_date$split, 3),
+          year = _date$split2[0],
+          month = _date$split2[1],
+          day = _date$split2[2];
+
+      return "".concat(month, "/").concat(day, "/").concat(year);
+    },
+    parseDate: function parseDate(date) {
+      if (!date) return null;
+
+      var _date$split3 = date.split('/'),
+          _date$split4 = _slicedToArray(_date$split3, 3),
+          month = _date$split4[0],
+          day = _date$split4[1],
+          year = _date$split4[2];
+
+      return "".concat(year, "-").concat(month.padStart(2, '0'), "-").concat(day.padStart(2, '0'));
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/forms/addOrdinateurForm.js?vue&type=script&lang=js& ***!
@@ -2087,9 +2155,8 @@ __webpack_require__.r(__webpack_exports__);
   // All data disponible for the child component
   data: function data() {
     return {
-      attributions: [],
-      timeslots: [],
-      horaires: []
+      attributions: {},
+      timeslots: []
     };
   },
   // All disponible methods
@@ -2101,14 +2168,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.attributionList.forEach(function (element) {
-        var heure = element.hours;
-        var client = "".concat(element.client[0].surname, " ").concat(element.client[0].name);
-        var arrayData = {
-          'key': heure,
-          'value': client
+        _this.attributions[element.hours] = {
+          id: element.client.id,
+          surname: element.client.surname,
+          name: element.client.name
         };
-
-        _this.attributions.push(arrayData);
       });
     },
 
@@ -2116,38 +2180,23 @@ __webpack_require__.r(__webpack_exports__);
      * Display assigns hours
      */
     displayHoraire: function displayHoraire() {
-      var _this2 = this;
+      var arrayData = {};
 
-      var horaires = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-      var arrayData;
-
-      var _loop = function _loop(i) {
-        _this2.attributions.forEach(function (element) {
-          if (element.key == horaires[i]) {
-            arrayData = {
-              'horaire': horaires[i],
-              'client': element.value
-            };
-
-            _this2.timeslots.push(arrayData);
-          } else {
-            arrayData = {
-              'horaire': horaires[i],
-              'client': ""
-            };
-
-            _this2.timeslots.push(arrayData);
-          }
-        });
-      };
-
-      for (var i = 0; i < horaires.length; i++) {
-        _loop(i);
+      for (var i = 8; i < 19; i++) {
+        if (this.attributions[i]) {
+          arrayData = {
+            hours: i,
+            client: this.attributions[i]
+          };
+          this.timeslots.push(arrayData);
+        } else {
+          arrayData = {
+            hours: i,
+            client: ''
+          };
+          this.timeslots.push(arrayData);
+        }
       }
-
-      horaires.forEach(function (element) {
-        _this2.horaires.push(element);
-      });
     }
   }
 });
@@ -2167,6 +2216,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Ordinateur.vue */ "./resources/js/app/components/Ordinateur.vue");
 /* harmony import */ var _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modals/AddOrdinateurModal.vue */ "./resources/js/app/components/modals/AddOrdinateurModal.vue");
+/* harmony import */ var _components_datepickers_Datepicker_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/datepickers/Datepicker.vue */ "./resources/js/app/components/datepickers/Datepicker.vue");
+
 
 
 
@@ -2178,7 +2229,8 @@ __webpack_require__.r(__webpack_exports__);
   // components 
   components: {
     Ordinateur: _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AddOrdinateurModal: _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    AddOrdinateurModal: _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Datepicker: _components_datepickers_Datepicker_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   // data that we can use
   data: function data() {
@@ -2197,7 +2249,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers').then(function (_ref) {
         var data = _ref.data;
-        var responseData = data.data;
+        var responseData = data.data; // console.log(responseData);
+
         responseData.forEach(function (element) {
           _this.computerList.push(element);
         });
@@ -20501,86 +20554,49 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-row",
-        [
-          _c("v-col", [_vm._v("\n            Horaire\n        ")]),
-          _vm._v(" "),
-          _c("v-col", [_vm._v("\n            Attributions\n        ")]),
-          _vm._v(" "),
-          _c("v-col", [_vm._v("\n            Actions\n        ")])
-        ],
-        1
-      ),
-      _vm._v(" "),
       _vm._l(_vm.timeslots, function(timeslot) {
         return _c(
           "v-row",
           { key: timeslot.id },
           [
-            _c("v-col", [
-              _vm._v(
-                "\n            " + _vm._s(timeslot.horaire) + "h\n        "
-              )
+            _c("v-col", { attrs: { cols: "2" } }, [
+              _vm._v("\n            " + _vm._s(timeslot.hours) + "h\n        ")
             ]),
             _vm._v(" "),
-            _c("v-col", [
-              _vm._v("\n            " + _vm._s(timeslot.client) + "\n        ")
+            _c("v-col", { attrs: { cols: "8" } }, [
+              _vm._v(
+                "\n            " +
+                  _vm._s(timeslot.client.surname) +
+                  "  " +
+                  _vm._s(timeslot.client.name) +
+                  "\n        "
+              )
             ]),
             _vm._v(" "),
             _c(
               "v-col",
+              { attrs: { cols: "2" } },
               [
-                timeslot.client == ""
-                  ? _c("v-btn", { attrs: { depressed: "", color: "green" } }, [
-                      _vm._v(" + ")
-                    ])
-                  : _c("v-btn", { attrs: { depressed: "", color: "red" } }, [
-                      _vm._v(" - ")
-                    ])
+                timeslot.client != ""
+                  ? _c(
+                      "v-btn",
+                      { attrs: { color: "red", icon: "" } },
+                      [_c("v-icon", [_vm._v(" mdi-close-circle ")])],
+                      1
+                    )
+                  : _c(
+                      "v-btn",
+                      { attrs: { icon: "", color: "green" } },
+                      [_c("v-icon", [_vm._v(" mdi-plus-circle-outline ")])],
+                      1
+                    )
               ],
               1
             )
           ],
           1
         )
-      }),
-      _vm._v(" "),
-      _vm.timeslots.length == 0
-        ? _c(
-            "v-container",
-            { attrs: { fluid: "" } },
-            _vm._l(_vm.horaires, function(horaire) {
-              return _c(
-                "v-row",
-                { key: horaire.id },
-                [
-                  _c("v-col", [
-                    _vm._v(
-                      "\n                " + _vm._s(horaire) + "h\n            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("v-col"),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    [
-                      _c(
-                        "v-btn",
-                        { attrs: { depressed: "", color: "green" } },
-                        [_vm._v(" + ")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            }),
-            1
-          )
-        : _vm._e()
+      })
     ],
     2
   )
@@ -20630,6 +20646,123 @@ var render = function() {
           }
         },
         [_vm._v("\n    " + _vm._s(_vm.message) + "\n  ")]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/datepickers/Datepicker.vue?vue&type=template&id=6023e851&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/datepickers/Datepicker.vue?vue&type=template&id=6023e851& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    [
+      _c(
+        "v-col",
+        { attrs: { cols: "12", lg: "6" } },
+        [
+          _c(
+            "v-menu",
+            {
+              ref: "menu1",
+              attrs: {
+                "close-on-content-click": false,
+                transition: "scale-transition",
+                "offset-y": "",
+                "max-width": "290px",
+                "min-width": "290px"
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    var attrs = ref.attrs
+                    return [
+                      _c(
+                        "v-text-field",
+                        _vm._g(
+                          _vm._b(
+                            {
+                              attrs: {
+                                label: "Date",
+                                hint: "MM/DD/YYYY format",
+                                "persistent-hint": "",
+                                "prepend-icon": "mdi-calendar"
+                              },
+                              on: {
+                                blur: function($event) {
+                                  _vm.date = _vm.parseDate(_vm.dateFormatted)
+                                }
+                              },
+                              model: {
+                                value: _vm.dateFormatted,
+                                callback: function($$v) {
+                                  _vm.dateFormatted = $$v
+                                },
+                                expression: "dateFormatted"
+                              }
+                            },
+                            "v-text-field",
+                            attrs,
+                            false
+                          ),
+                          on
+                        )
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.menu1,
+                callback: function($$v) {
+                  _vm.menu1 = $$v
+                },
+                expression: "menu1"
+              }
+            },
+            [
+              _vm._v(" "),
+              _c("v-date-picker", {
+                attrs: { "no-title": "" },
+                on: {
+                  input: function($event) {
+                    _vm.menu1 = false
+                  }
+                },
+                model: {
+                  value: _vm.date,
+                  callback: function($$v) {
+                    _vm.date = $$v
+                  },
+                  expression: "date"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
       )
     ],
     1
@@ -20913,6 +21046,8 @@ var render = function() {
   return _c(
     "v-container",
     [
+      _c("datepicker"),
+      _vm._v(" "),
       _c("addOrdinateurModal", { on: { adddesktop: _vm.newdesktop } }),
       _vm._v(" "),
       _c(
@@ -80146,6 +80281,75 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./alertAddDesktop.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/components/datepickers/Datepicker.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/app/components/datepickers/Datepicker.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Datepicker_vue_vue_type_template_id_6023e851___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Datepicker.vue?vue&type=template&id=6023e851& */ "./resources/js/app/components/datepickers/Datepicker.vue?vue&type=template&id=6023e851&");
+/* harmony import */ var _datepicker_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./datepicker.js?vue&type=script&lang=js& */ "./resources/js/app/components/datepickers/datepicker.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _datepicker_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Datepicker_vue_vue_type_template_id_6023e851___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Datepicker_vue_vue_type_template_id_6023e851___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/datepickers/Datepicker.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/datepickers/Datepicker.vue?vue&type=template&id=6023e851&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/app/components/datepickers/Datepicker.vue?vue&type=template&id=6023e851& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Datepicker_vue_vue_type_template_id_6023e851___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Datepicker.vue?vue&type=template&id=6023e851& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/datepickers/Datepicker.vue?vue&type=template&id=6023e851&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Datepicker_vue_vue_type_template_id_6023e851___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Datepicker_vue_vue_type_template_id_6023e851___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/app/components/datepickers/datepicker.js?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/app/components/datepickers/datepicker.js?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_datepicker_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./datepicker.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/datepickers/datepicker.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_datepicker_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

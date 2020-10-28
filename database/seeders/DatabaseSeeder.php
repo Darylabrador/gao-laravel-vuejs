@@ -30,21 +30,29 @@ class DatabaseSeeder extends Seeder
         $faker = \Faker\Factory::create();
         for ($i=1; $i < 5; $i++) { 
             DB::table('assigns')->insert([
-                'hours' => "{$faker->numberBetween(8, 16)}",
+                'hours' => 8,
                 'desktop_id' => $i,
                 'client_id' => $faker->numberBetween(1, 5),
                 'date' => "2020-10-28"
             ]);
         }
 
+        for ($i = 1; $i < 5; $i++) {
+            DB::table('assigns')->insert([
+                'hours' => 10,
+                'desktop_id' => $i,
+                'client_id' => $faker->numberBetween(1, 5),
+                'date' => "2020-10-28"
+            ]);
+        }
 
-        // for ($i = 1; $i < 5; $i++) {
-        //     DB::table('assigns')->insert([
-        //         'hours' => "{$faker->numberBetween(8, 16)}",
-        //         'desktop_id' => $i,
-        //         'client_id' => $faker->numberBetween(1, 5),
-        //         'date' => "2020-10-29"
-        //     ]);
-        // }
+        for ($i = 1; $i < 5; $i++) {
+            DB::table('assigns')->insert([
+                'hours' => 16,
+                'desktop_id' => $i,
+                'client_id' => $faker->numberBetween(1, 5),
+                'date' => "2020-10-28"
+            ]);
+        }
     }
 }

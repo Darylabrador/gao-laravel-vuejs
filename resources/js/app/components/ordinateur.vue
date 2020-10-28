@@ -11,47 +11,24 @@
             </v-list-item-content>
         </v-list-item>
 
-         <!-- row with header -->
-        <v-row>
-            <v-col>
-                Horaire
-            </v-col>
-            <v-col>
-                Attributions
-            </v-col>
-            <v-col>
-                Actions
-            </v-col>
-        </v-row>
-
         <!-- row with data -->
         <v-row v-for="timeslot in timeslots" :key="timeslot.id">
-            <v-col>
-                {{ timeslot.horaire }}h
+            <v-col cols="2">
+                {{ timeslot.hours }}h
             </v-col>
-            <v-col>
-                {{ timeslot.client }}
+            <v-col cols="8">
+                {{ timeslot.client.surname}}  {{ timeslot.client.name}}
             </v-col>
-            <v-col>
-                <v-btn depressed color="green" v-if="timeslot.client == ''"> + </v-btn>
-                <v-btn depressed color="red" v-else> - </v-btn>
+
+            <v-col cols="2">
+                <v-btn color="red" icon v-if="timeslot.client != ''"> 
+                    <v-icon> mdi-close-circle </v-icon>
+                </v-btn>
+                <v-btn icon color="green" v-else>
+                    <v-icon > mdi-plus-circle-outline </v-icon>
+                </v-btn>
             </v-col>
         </v-row>
-
-        <!-- if we haven't data -->
-        <v-container fluid v-if="timeslots.length == 0"> 
-            <v-row v-for="horaire in horaires" :key="horaire.id">
-                <v-col>
-                    {{ horaire }}h
-                </v-col>
-                <v-col>
-                    
-                </v-col>
-                <v-col>
-                    <v-btn depressed color="green"> + </v-btn>
-                </v-col>
-            </v-row>
-        </v-container>
     </v-card>
 </template>
 

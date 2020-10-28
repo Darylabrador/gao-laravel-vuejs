@@ -1,6 +1,7 @@
 import Axios from "axios";
 import Ordinateur from '../components/Ordinateur.vue';
 import AddOrdinateurModal from '../components/modals/AddOrdinateurModal.vue';
+import Datepicker from '../components/datepickers/Datepicker.vue';
 
 /**
  * Dashboard data
@@ -10,7 +11,8 @@ export default {
     // components 
     components: {
         Ordinateur,
-        AddOrdinateurModal
+        AddOrdinateurModal,
+        Datepicker
     },
 
     // data that we can use
@@ -30,6 +32,8 @@ export default {
         getAllDesktops() {
             Axios.get('api/computers').then( ({ data }) => {
                 var responseData = data.data;
+                // console.log(responseData);
+
                 responseData.forEach(element => {
                     this.computerList.push(element);
                 })

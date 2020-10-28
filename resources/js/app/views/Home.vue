@@ -5,6 +5,9 @@
 <template>
     <v-container>
 
+        <!-- datepicker component -->
+        <datepicker />
+
         <!-- event to get new desktop info from child component through adddesktop emit and newdesktop method -->
         <addOrdinateurModal @adddesktop="newdesktop"/>
         

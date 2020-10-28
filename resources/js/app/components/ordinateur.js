@@ -38,9 +38,8 @@ export default {
     // All data disponible for the child component
     data() {
         return {
-            attributions: [],
-            timeslots: [],
-            horaires: []
+            attributions: {},
+            timeslots: []
         }
     },
 
@@ -53,10 +52,11 @@ export default {
          */
         initialize() {
             this.attributionList.forEach(element => {
-                let heure  = element.hours;
-                let client = `${element.client[0].surname} ${element.client[0].name}`;
-                let arrayData = { 'key': heure, 'value': client }
-                this.attributions.push(arrayData)
+                this.attributions[element.hours] = {
+                    id: element.client.id,
+                    surname: element.client.surname,
+                    name: element.client.name
+                }
             })
         },
 
@@ -65,24 +65,22 @@ export default {
          * Display assigns hours
          */
         displayHoraire() {
-            let horaires = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-            let arrayData;
-
-            for (let i = 0; i < horaires.length; i++) {
-                this.attributions.forEach(element => {
-                    if (element.key == horaires[i]) {
-                        arrayData = { 'horaire': horaires[i], 'client': element.value }
-                        this.timeslots.push(arrayData)
-                    } else {
-                        arrayData = { 'horaire': horaires[i], 'client': "" }
-                        this.timeslots.push(arrayData);
+            let arrayData = {};
+            for(let i = 8; i < 19; i++){
+                if (this.attributions[i]){
+                    arrayData = {
+                        hours: i,
+                        client: this.attributions[i]
                     }
-                })
+                    this.timeslots.push(arrayData)
+                }else{
+                    arrayData = {
+                        hours: i,
+                        client: ''
+                    }
+                    this.timeslots.push(arrayData)
+                }
             }
-
-            horaires.forEach(element => {
-                this.horaires.push(element)
-            });
         }
     }
 }
