@@ -53,8 +53,8 @@ export default {
          */
         initialize() {
             this.attributionList.forEach(element => {
-                let heure  = element.heure;
-                let client = `${element.nom} ${element.prenom}`;
+                let heure  = element.hours;
+                let client = `${element.client[0].surname} ${element.client[0].name}`;
                 let arrayData = { 'key': heure, 'value': client }
                 this.attributions.push(arrayData)
             })

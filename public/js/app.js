@@ -2101,8 +2101,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.attributionList.forEach(function (element) {
-        var heure = element.heure;
-        var client = "".concat(element.nom, " ").concat(element.prenom);
+        var heure = element.hours;
+        var client = "".concat(element.client[0].surname, " ").concat(element.client[0].name);
         var arrayData = {
           'key': heure,
           'value': client
@@ -2197,8 +2197,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers').then(function (_ref) {
         var data = _ref.data;
-        var responseData = data.data; // console.log(responseData);
-
+        var responseData = data.data;
         responseData.forEach(function (element) {
           _this.computerList.push(element);
         });
