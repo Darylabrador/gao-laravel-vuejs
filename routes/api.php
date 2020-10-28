@@ -2,9 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\DesktopController;
-use App\Http\Controllers\AssignController;
+use App\Http\Controllers\GeneralController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource("computers", DesktopController::class)->except(['show']);
+Route::get('/computers', [GeneralController::class, 'getAll']);
 
-Route::apiResource("clients", ClientController::class)->only(['index', 'store', 'destroy']);
-
-Route::apiResource("assigns", AssignController::class)->only(['index', 'store', 'update', 'destroy' ]);
+Route::post('/computers', [GeneralController::class, 'createDesktop']);

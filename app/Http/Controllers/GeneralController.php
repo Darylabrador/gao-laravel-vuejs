@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Http\Resources\DesktopResources as DesktopResources;
 
-class DesktopController extends Controller
+class GeneralController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the desktop.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAll()
     {
         // $desktop = Desktop::paginate(3);
         $desktop = Desktop::all();
@@ -24,12 +24,12 @@ class DesktopController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created desktop in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createDesktop(Request $request)
     {
         $validator = Validator::make(
             $request->all(),
@@ -62,12 +62,12 @@ class DesktopController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified desktop in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateDesktop(Request $request, $id)
     {
         $validator = Validator::make(
             $request->all(),
@@ -109,11 +109,11 @@ class DesktopController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy specific desktop using $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyDesktop($id)
     {
         $desktop = Desktop::find($id);
 
