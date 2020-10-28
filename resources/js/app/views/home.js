@@ -19,7 +19,7 @@ export default {
     data() {
         return {
             computerList: [],
-            dateRechercher: ""
+            dateRechercher: new Date().toISOString().substr(0, 10)
         }
     },
 
@@ -28,15 +28,10 @@ export default {
        this.getAllDesktops(); 
     },
     
-    created() {
-        this.getAllDesktops();
-    },
-
     // All methods
     methods: {
         getAllDesktops() {
-            this.dateRechercher = '2020-10-28';
-
+            console.log(this.dateRechercher)
             Axios.get('api/computers', {
                 params: {
                     date: this.dateRechercher
@@ -53,7 +48,13 @@ export default {
 
         // push the created desktop info to current array depending on $emit event
         newdesktop(newcomputer) {
-            // this.computerList.push(newcomputer)
+            this.computerList.push(newcomputer)
+        },
+
+        // Datepicker value
+        changementDate(selectDate){
+            this.dateRechercher = selectDate;
+            this.computerList = [];
             this.getAllDesktops(); 
         }
     },
