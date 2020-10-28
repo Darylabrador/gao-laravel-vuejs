@@ -2082,11 +2082,14 @@ __webpack_require__.r(__webpack_exports__);
   // init function when the component is loaded
   created: function created() {
     this.initialize();
+    this.displayHoraire();
   },
   // All data disponible for the child component
   data: function data() {
     return {
-      attributions: []
+      attributions: [],
+      timeslots: [],
+      horaires: []
     };
   },
   // All disponible methods
@@ -2100,14 +2103,52 @@ __webpack_require__.r(__webpack_exports__);
       this.attributionList.forEach(function (element) {
         var heure = element.heure;
         var client = "".concat(element.nom, " ").concat(element.prenom);
-        var array = {
+        var arrayData = {
           'key': heure,
           'value': client
         };
 
-        _this.attributions.push(array);
+        _this.attributions.push(arrayData);
+      }); // console.log(this.attributions)
+    },
+
+    /**
+     * Display assigns hours
+     */
+    displayHoraire: function displayHoraire() {
+      var _this2 = this;
+
+      var horaires = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+      var arrayData;
+
+      var _loop = function _loop(i) {
+        _this2.attributions.forEach(function (element) {
+          if (element.key == horaires[i]) {
+            arrayData = {
+              'horaire': horaires[i],
+              'client': element.value
+            };
+
+            _this2.timeslots.push(arrayData);
+          } else {
+            arrayData = {
+              'horaire': horaires[i],
+              'client': ""
+            };
+
+            _this2.timeslots.push(arrayData);
+          }
+        });
+      };
+
+      for (var i = 0; i < horaires.length; i++) {
+        _loop(i);
+      }
+
+      horaires.forEach(function (element) {
+        _this2.horaires.push(element);
       });
-      console.log(this.attributions);
+      console.log(this.timeslots);
     }
   }
 });
@@ -20449,9 +20490,9 @@ var render = function() {
             [
               _c("v-list-item-title", { staticClass: "headline mb-1" }, [
                 _vm._v(
-                  "\n                \n                " +
+                  "\n                " +
                     _vm._s(_vm.ordinateurName) +
-                    "\n\n            "
+                    "\n            "
                 )
               ])
             ],
@@ -20461,9 +20502,90 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c(
+        "v-row",
+        [
+          _c("v-col", [_vm._v("\n            Horaire\n        ")]),
+          _vm._v(" "),
+          _c("v-col", [_vm._v("\n            Attributions\n        ")]),
+          _vm._v(" "),
+          _c("v-col", [_vm._v("\n            Actions\n        ")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.timeslots, function(timeslot) {
+        return _c(
+          "v-row",
+          { key: timeslot.id },
+          [
+            _c("v-col", [
+              _vm._v(
+                "\n            " + _vm._s(timeslot.horaire) + "h\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("v-col", [
+              _vm._v("\n            " + _vm._s(timeslot.client) + "\n        ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "v-col",
+              [
+                timeslot.client == ""
+                  ? _c("v-btn", { attrs: { depressed: "", color: "green" } }, [
+                      _vm._v(" + ")
+                    ])
+                  : _c("v-btn", { attrs: { depressed: "", color: "red" } }, [
+                      _vm._v(" - ")
+                    ])
+              ],
+              1
+            )
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
+      _vm.timeslots.length == 0
+        ? _c(
+            "v-container",
+            { attrs: { fluid: "" } },
+            _vm._l(_vm.horaires, function(horaire) {
+              return _c(
+                "v-row",
+                { key: horaire.id },
+                [
+                  _c("v-col", [
+                    _vm._v(
+                      "\n                " + _vm._s(horaire) + "h\n            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-col"),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    [
+                      _c(
+                        "v-btn",
+                        { attrs: { depressed: "", color: "green" } },
+                        [_vm._v(" + ")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c("v-card-actions")
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

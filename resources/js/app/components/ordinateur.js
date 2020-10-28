@@ -31,13 +31,16 @@ export default {
     // init function when the component is loaded
     created() {
         this.initialize();
+        this.displayHoraire();
     },
 
 
     // All data disponible for the child component
     data() {
         return {
-            attributions: []
+            attributions: [],
+            timeslots: [],
+            horaires: []
         }
     },
 
@@ -52,10 +55,36 @@ export default {
             this.attributionList.forEach(element => {
                 let heure  = element.heure;
                 let client = `${element.nom} ${element.prenom}`;
-                let array = { 'key': heure, 'value': client }
-                this.attributions.push(array)
+                let arrayData = { 'key': heure, 'value': client }
+                this.attributions.push(arrayData)
             })
-            console.log(this.attributions)
+            // console.log(this.attributions)
+        },
+
+        /**
+         * Display assigns hours
+         */
+        displayHoraire() {
+            let horaires = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+            let arrayData;
+
+            for (let i = 0; i < horaires.length; i++) {
+                this.attributions.forEach(element => {
+                    if (element.key == horaires[i]) {
+                        arrayData = { 'horaire': horaires[i], 'client': element.value }
+                        this.timeslots.push(arrayData)
+                    } else {
+                        arrayData = { 'horaire': horaires[i], 'client': "" }
+                        this.timeslots.push(arrayData);
+                    }
+                })
+            }
+
+            horaires.forEach(element => {
+                this.horaires.push(element)
+            });
+
+            console.log(this.timeslots)
         }
     }
 }

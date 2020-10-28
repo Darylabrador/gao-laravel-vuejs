@@ -24,7 +24,16 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory(1)->create();
         \App\Models\Desktop::factory(5)->create();
-        \App\Models\Client::factory(5)->create(); 
-        \App\Models\Assign::factory(15)->create();
+        \App\Models\Client::factory(5)->create();
+
+
+        $faker = \Faker\Factory::create();
+        for ($i=0; $i < 5; $i++) { 
+            DB::table('assigns')->insert([
+                'hours' => "{$faker->numberBetween(8, 16)}",
+                'desktop_id' => $i,
+                'client_id' => $faker->numberBetween(1, 5)
+            ]);
+        }
     }
 }
