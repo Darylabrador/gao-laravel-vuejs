@@ -10,7 +10,7 @@ class Assign extends Model
     use HasFactory;
 
     protected $fillable = [
-        'hours'
+        'hours', 'date'
     ];
 
     protected $hidden = [

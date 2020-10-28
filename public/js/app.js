@@ -2109,7 +2109,7 @@ __webpack_require__.r(__webpack_exports__);
         };
 
         _this.attributions.push(arrayData);
-      }); // console.log(this.attributions)
+      });
     },
 
     /**
@@ -2148,7 +2148,6 @@ __webpack_require__.r(__webpack_exports__);
       horaires.forEach(function (element) {
         _this2.horaires.push(element);
       });
-      console.log(this.timeslots);
     }
   }
 });

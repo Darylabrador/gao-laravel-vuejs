@@ -58,7 +58,6 @@ export default {
                 let arrayData = { 'key': heure, 'value': client }
                 this.attributions.push(arrayData)
             })
-            // console.log(this.attributions)
         },
 
         /**
@@ -83,8 +82,6 @@ export default {
             horaires.forEach(element => {
                 this.horaires.push(element)
             });
-
-            console.log(this.timeslots)
         }
     }
 }
