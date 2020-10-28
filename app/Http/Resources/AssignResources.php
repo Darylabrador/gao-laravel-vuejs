@@ -15,10 +15,10 @@ class AssignResources extends JsonResource
     public function toArray($request)
     {
         return [
-            "id"         => $this->id,
-            "client_id"  => $this->client_id,
-            "desktop_id" => $this->desktop_id,
-            "hours"      => $this->hours
+            "id"      => $this->id,
+            "client"  => $this->clients,
+            "desktop" => $this->desktops,
+            "hours"   => $this->hours
         ];
     }
 }

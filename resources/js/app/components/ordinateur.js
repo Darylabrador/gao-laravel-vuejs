@@ -7,6 +7,8 @@
  * 
  */
 export default {
+    
+    // Data from parent components
     props: {
         ordinateurId: {
             default: function() {
@@ -17,6 +19,32 @@ export default {
             default: function () {
                 return {}
             }
+        },
+        attributionList: {
+            default: function () {
+                return {}
+            }
+        }
+    },
+
+
+    // init function when the component is loaded
+    created() {
+        this.initialize();
+    },
+
+
+    data() {
+        return {
+            attributions: []
+        }
+    },
+
+
+    // All disponible methods
+    methods: {
+        initialize() {
+            console.log('heure', this.attributionList)
         }
     }
 }

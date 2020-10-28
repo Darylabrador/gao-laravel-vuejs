@@ -2061,6 +2061,7 @@ __webpack_require__.r(__webpack_exports__);
  * 
  */
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // Data from parent components
   props: {
     ordinateurId: {
       "default": function _default() {
@@ -2071,6 +2072,26 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return {};
       }
+    },
+    attributionList: {
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
+  // init function when the component is loaded
+  created: function created() {
+    this.initialize();
+  },
+  data: function data() {
+    return {
+      attributions: []
+    };
+  },
+  // All disponible methods
+  methods: {
+    initialize: function initialize() {
+      console.log('heure', this.attributionList);
     }
   }
 });
@@ -2120,8 +2141,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers').then(function (_ref) {
         var data = _ref.data;
-        var responseData = data.data;
-        console.log(responseData);
+        var responseData = data.data; // console.log(responseData);
+
         responseData.forEach(function (element) {
           _this.computerList.push(element);
         });
@@ -20769,9 +20790,15 @@ var render = function() {
               _c("ordinateur", {
                 attrs: {
                   ordinateurId: ordinateur.id,
-                  ordinateurName: ordinateur.name
+                  ordinateurName: ordinateur.name,
+                  attributionList: ordinateur.attributions
                 }
-              })
+              }),
+              _vm._v(
+                "\n            " +
+                  _vm._s(ordinateur.attributions) +
+                  "\n        "
+              )
             ],
             1
           )
