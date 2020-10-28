@@ -34,6 +34,7 @@ export default {
     },
 
 
+    // All data disponible for the child component
     data() {
         return {
             attributions: []
@@ -43,8 +44,18 @@ export default {
 
     // All disponible methods
     methods: {
+
+        /**
+         * Create the array with assign data
+         */
         initialize() {
-            console.log('heure', this.attributionList)
+            this.attributionList.forEach(element => {
+                let heure  = element.heure;
+                let client = `${element.nom} ${element.prenom}`;
+                let array = { 'key': heure, 'value': client }
+                this.attributions.push(array)
+            })
+            console.log(this.attributions)
         }
     }
 }

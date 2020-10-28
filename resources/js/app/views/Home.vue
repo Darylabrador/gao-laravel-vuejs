@@ -11,7 +11,6 @@
         <v-row>
             <v-col md='4' v-for='(ordinateur,key) in computerList' :key='key'>
                 <ordinateur :ordinateurId='ordinateur.id' :ordinateurName='ordinateur.name' :attributionList='ordinateur.attributions' />
-                {{  ordinateur.attributions }}
             </v-col>
         </v-row>
 

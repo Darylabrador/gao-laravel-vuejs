@@ -2083,6 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.initialize();
   },
+  // All data disponible for the child component
   data: function data() {
     return {
       attributions: []
@@ -2090,8 +2091,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   // All disponible methods
   methods: {
+    /**
+     * Create the array with assign data
+     */
     initialize: function initialize() {
-      console.log('heure', this.attributionList);
+      var _this = this;
+
+      this.attributionList.forEach(function (element) {
+        var heure = element.heure;
+        var client = "".concat(element.nom, " ").concat(element.prenom);
+        var array = {
+          'key': heure,
+          'value': client
+        };
+
+        _this.attributions.push(array);
+      });
+      console.log(this.attributions);
     }
   }
 });
@@ -20793,12 +20809,7 @@ var render = function() {
                   ordinateurName: ordinateur.name,
                   attributionList: ordinateur.attributions
                 }
-              }),
-              _vm._v(
-                "\n            " +
-                  _vm._s(ordinateur.attributions) +
-                  "\n        "
-              )
+              })
             ],
             1
           )
