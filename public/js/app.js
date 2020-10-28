@@ -2217,6 +2217,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Ordinateur.vue */ "./resources/js/app/components/Ordinateur.vue");
 /* harmony import */ var _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modals/AddOrdinateurModal.vue */ "./resources/js/app/components/modals/AddOrdinateurModal.vue");
 /* harmony import */ var _components_datepickers_Datepicker_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/datepickers/Datepicker.vue */ "./resources/js/app/components/datepickers/Datepicker.vue");
+var _components$data$crea;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2225,7 +2229,7 @@ __webpack_require__.r(__webpack_exports__);
  * Dashboard data
  */
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_components$data$crea = {
   // components 
   components: {
     Ordinateur: _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -2235,34 +2239,40 @@ __webpack_require__.r(__webpack_exports__);
   // data that we can use
   data: function data() {
     return {
-      computerList: []
+      computerList: [],
+      dateRechercher: ""
     };
   },
   // init function when the parent is created on SPA
   created: function created() {
     this.getAllDesktops();
-  },
-  // All methods
-  methods: {
-    getAllDesktops: function getAllDesktops() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers').then(function (_ref) {
-        var data = _ref.data;
-        var responseData = data.data; // console.log(responseData);
-
-        responseData.forEach(function (element) {
-          _this.computerList.push(element);
-        });
-      });
-    },
-    // push the created desktop info to current array depending on $emit event
-    newdesktop: function newdesktop(newcomputer) {
-      // this.computerList.push(newcomputer)
-      this.getAllDesktops();
-    }
   }
-});
+}, _defineProperty(_components$data$crea, "created", function created() {
+  this.getAllDesktops();
+}), _defineProperty(_components$data$crea, "methods", {
+  getAllDesktops: function getAllDesktops() {
+    var _this = this;
+
+    this.dateRechercher = '2020-10-28';
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers', {
+      params: {
+        date: this.dateRechercher
+      }
+    }).then(function (_ref) {
+      var data = _ref.data;
+      var responseData = data.data; // console.log(responseData);
+
+      responseData.forEach(function (element) {
+        _this.computerList.push(element);
+      });
+    });
+  },
+  // push the created desktop info to current array depending on $emit event
+  newdesktop: function newdesktop(newcomputer) {
+    // this.computerList.push(newcomputer)
+    this.getAllDesktops();
+  }
+}), _components$data$crea);
 
 /***/ }),
 

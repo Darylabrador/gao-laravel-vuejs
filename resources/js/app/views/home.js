@@ -18,7 +18,8 @@ export default {
     // data that we can use
     data() {
         return {
-            computerList: []
+            computerList: [],
+            dateRechercher: ""
         }
     },
 
@@ -26,11 +27,21 @@ export default {
     created() {
        this.getAllDesktops(); 
     },
+    
+    created() {
+        this.getAllDesktops();
+    },
 
     // All methods
     methods: {
         getAllDesktops() {
-            Axios.get('api/computers').then( ({ data }) => {
+            this.dateRechercher = '2020-10-28';
+
+            Axios.get('api/computers', {
+                params: {
+                    date: this.dateRechercher
+                }
+            }).then( ({ data }) => {
                 var responseData = data.data;
                 // console.log(responseData);
 

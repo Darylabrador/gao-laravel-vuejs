@@ -16,11 +16,13 @@ class GeneralController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAll()
+    public function getAll(Request $request)
     {
         // $desktop = Desktop::paginate(3);
-        $desktop = Desktop::with(array('assigns' => function($query) {
-            $dateNow = now()->toDateString();
+
+        $dateNow = $request->date;
+
+        $desktop = Desktop::with(array('assigns' => function ($query) use ($dateNow) {
             $query->where('date', $dateNow);
         }))->get();
 
