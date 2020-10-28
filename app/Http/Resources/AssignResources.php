@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Client;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AssignResources extends JsonResource
@@ -17,7 +16,7 @@ class AssignResources extends JsonResource
     {
         return [
             "idAssign" => $this->id,
-            "client"   => ClientResources::collection(Client::whereId($this->client_id)->get()),
+            "client"   => new ClientResources($this->clients),
             "hours"    => $this->hours,
             "date"     => $this->date
         ];

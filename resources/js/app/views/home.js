@@ -38,7 +38,8 @@ export default {
 
         // push the created desktop info to current array depending on $emit event
         newdesktop(newcomputer) {
-            this.computerList.push(newcomputer)
+            // this.computerList.push(newcomputer)
+            this.getAllDesktops(); 
         }
     },
 }

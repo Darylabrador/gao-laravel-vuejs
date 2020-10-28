@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Desktop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 use App\Http\Resources\DesktopResources as DesktopResources;
 
@@ -18,7 +19,11 @@ class GeneralController extends Controller
     public function getAll()
     {
         // $desktop = Desktop::paginate(3);
-        $desktop = Desktop::all();
+        $desktop = Desktop::with(array('assigns' => function($query) {
+            $dateNow = now()->toDateString();
+            $query->where('date', $dateNow);
+        }))->get();
+
         return DesktopResources::collection($desktop);
     }
 

@@ -2205,7 +2205,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     // push the created desktop info to current array depending on $emit event
     newdesktop: function newdesktop(newcomputer) {
-      this.computerList.push(newcomputer);
+      // this.computerList.push(newcomputer)
+      this.getAllDesktops();
     }
   }
 });
