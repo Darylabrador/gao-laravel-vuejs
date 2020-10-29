@@ -1,0 +1,22 @@
+<template>
+    <v-dialog v-model="dialog" max-width="500">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn icon color="green" dark v-bind="attrs" v-on="on"></v-btn>
+      </template>
+
+      <v-card>
+        <v-card-title class="headline font-weight-bold border-bottom border-dark d-flex justify-content-between">
+          <h5> Attribuer </h5>
+          <v-btn color="grey darken-1" text @click="close"> X </v-btn>
+        </v-card-title>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+            <v-btn color="grey darken-1" text> time {{ selectedHours }} </v-btn>
+            <v-btn color="grey darken-1" text> ordi {{ selectedDesktop }} </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+</template>
+
+<script src="./addAttributionModal.js"></script>

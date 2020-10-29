@@ -10,7 +10,7 @@
 
         <!-- event to get new desktop info from child component through adddesktop emit and newdesktop method -->
         <addOrdinateurModal @adddesktop="newdesktop"/>
-        
+
         <v-row>
             <v-col md='4' v-for='(ordinateur,key) in computerList' :key='key'>
                 <ordinateur :ordinateurId='ordinateur.id' :ordinateurName='ordinateur.name' :attributionList='ordinateur.attributions' />

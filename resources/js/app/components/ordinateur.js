@@ -6,8 +6,14 @@
  *  /!\ parent to child /!\
  * 
  */
+
+import AddAttributionModal from "../components/modals/AddAttributionModal.vue";
+
 export default {
-    
+    components: {
+        AddAttributionModal
+    },
+
     // Data from parent components
     props: {
         ordinateurId: {
@@ -39,7 +45,10 @@ export default {
     data() {
         return {
             attributions: {},
-            timeslots: []
+            timeslots: [],
+            dialog: false,
+            selectedHours: '',
+            selectedDesktop: ''
         }
     },
 
@@ -81,6 +90,12 @@ export default {
                     this.timeslots.push(arrayData)
                 }
             }
+        },
+
+        attributionData(dialog, hours, desktop ) {
+            this.dialog = dialog;
+            this.selectedHours = hours;
+            this.selectedDesktop = desktop;
         }
     }
 }

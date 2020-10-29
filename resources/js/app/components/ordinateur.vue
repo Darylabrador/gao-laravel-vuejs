@@ -3,6 +3,9 @@
 */
 <template>
     <v-card outlined>
+
+        <addAttributionModal :dialog.sync="dialog" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" />
+
         <v-list-item three-line>
             <v-list-item-content>
                 <v-list-item-title class="headline mb-1">
@@ -24,8 +27,8 @@
                 <v-btn color="red" icon v-if="timeslot.client != ''"> 
                     <v-icon> mdi-close-circle </v-icon>
                 </v-btn>
-                <v-btn icon color="green" v-else>
-                    <v-icon > mdi-plus-circle-outline </v-icon>
+                <v-btn icon color="green" v-else @click="attributionData(true, timeslot.hours, ordinateurId)">
+                    <v-icon> mdi-plus-circle-outline  </v-icon>
                 </v-btn>
             </v-col>
         </v-row>
