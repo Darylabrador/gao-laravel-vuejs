@@ -2394,8 +2394,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (_ref) {
         var data = _ref.data;
-        var responseData = data.data; // console.log(responseData);
-
+        var responseData = data.data;
         responseData.forEach(function (element) {
           _this.computerList.push(element);
         });
@@ -20681,7 +20680,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
-    { attrs: { outlined: "" } },
+    { staticClass: "mx-auto rounded" },
     [
       _c("addAttributionModal", {
         attrs: {
@@ -20698,82 +20697,83 @@ var render = function() {
       }),
       _vm._v(" "),
       _c(
-        "v-list-item",
-        { attrs: { "three-line": "" } },
+        "v-card-text",
         [
-          _c(
-            "v-list-item-content",
-            [
-              _c("v-list-item-title", { staticClass: "headline mb-1" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.ordinateurName) +
-                    "\n            "
-                )
-              ])
-            ],
-            1
-          )
+          _c("div", { staticClass: "border-bottom border-dark" }, [
+            _c("h5", { staticClass: "text-center" }, [
+              _vm._v(" " + _vm._s(_vm.ordinateurName) + " ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("v-simple-table", {
+            attrs: { dense: "" },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function() {
+                  return _vm._l(_vm.timeslots, function(timeslot) {
+                    return _c("tr", { key: timeslot.id }, [
+                      _c(
+                        "td",
+                        { staticClass: "border-right border-dark col-2 py-0" },
+                        [_vm._v(_vm._s(timeslot.hours) + "h")]
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "col-8 py-0 text-center" }, [
+                        _vm._v(
+                          _vm._s(timeslot.client.surname) +
+                            "  " +
+                            _vm._s(timeslot.client.name)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "col-2 py-0" },
+                        [
+                          timeslot.client != ""
+                            ? _c(
+                                "v-btn",
+                                { attrs: { color: "red", icon: "" } },
+                                [_c("v-icon", [_vm._v(" mdi-close-circle ")])],
+                                1
+                              )
+                            : _c(
+                                "v-btn",
+                                {
+                                  attrs: { icon: "", color: "green" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.attributionData(
+                                        true,
+                                        timeslot.hours,
+                                        _vm.ordinateurId
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("v-icon", [
+                                    _vm._v(" mdi-plus-circle-outline  ")
+                                  ])
+                                ],
+                                1
+                              )
+                        ],
+                        1
+                      )
+                    ])
+                  })
+                },
+                proxy: true
+              }
+            ])
+          })
         ],
         1
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.timeslots, function(timeslot) {
-        return _c(
-          "v-row",
-          { key: timeslot.id },
-          [
-            _c("v-col", { attrs: { cols: "2" } }, [
-              _vm._v("\n            " + _vm._s(timeslot.hours) + "h\n        ")
-            ]),
-            _vm._v(" "),
-            _c("v-col", { attrs: { cols: "8" } }, [
-              _vm._v(
-                "\n            " +
-                  _vm._s(timeslot.client.surname) +
-                  "  " +
-                  _vm._s(timeslot.client.name) +
-                  "\n        "
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "v-col",
-              { attrs: { cols: "2" } },
-              [
-                timeslot.client != ""
-                  ? _c(
-                      "v-btn",
-                      { attrs: { color: "red", icon: "" } },
-                      [_c("v-icon", [_vm._v(" mdi-close-circle ")])],
-                      1
-                    )
-                  : _c(
-                      "v-btn",
-                      {
-                        attrs: { icon: "", color: "green" },
-                        on: {
-                          click: function($event) {
-                            return _vm.attributionData(
-                              true,
-                              timeslot.hours,
-                              _vm.ordinateurId
-                            )
-                          }
-                        }
-                      },
-                      [_c("v-icon", [_vm._v(" mdi-plus-circle-outline  ")])],
-                      1
-                    )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      })
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -21153,29 +21153,6 @@ var render = function() {
     "v-dialog",
     {
       attrs: { "max-width": "500" },
-      scopedSlots: _vm._u([
-        {
-          key: "activator",
-          fn: function(ref) {
-            var on = ref.on
-            var attrs = ref.attrs
-            return [
-              _c(
-                "v-btn",
-                _vm._g(
-                  _vm._b(
-                    { attrs: { icon: "", color: "green", dark: "" } },
-                    "v-btn",
-                    attrs,
-                    false
-                  ),
-                  on
-                )
-              )
-            ]
-          }
-        }
-      ]),
       model: {
         value: _vm.dialog,
         callback: function($$v) {
@@ -21185,7 +21162,6 @@ var render = function() {
       }
     },
     [
-      _vm._v(" "),
       _c(
         "v-card",
         [

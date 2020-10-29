@@ -1,9 +1,5 @@
 <template>
     <v-dialog v-model="dialog" max-width="500">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn icon color="green" dark v-bind="attrs" v-on="on"></v-btn>
-      </template>
-
       <v-card>
           <v-card-title class="headline font-weight-bold border-bottom border-dark d-flex justify-content-between">
             <h5> Attribuer </h5>

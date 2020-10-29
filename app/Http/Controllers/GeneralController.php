@@ -72,6 +72,27 @@ class GeneralController extends Controller
 
 
     /**
+     * Set attribution 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function setAttribution(Request $request){
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
      * Update the specified desktop in storage.
      *
      * @param  \Illuminate\Http\Request  $request

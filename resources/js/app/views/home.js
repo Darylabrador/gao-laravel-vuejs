@@ -37,8 +37,6 @@ export default {
                 }
             }).then( ({ data }) => {
                 var responseData = data.data;
-                // console.log(responseData);
-
                 responseData.forEach(element => {
                     this.computerList.push(element);
                 })
