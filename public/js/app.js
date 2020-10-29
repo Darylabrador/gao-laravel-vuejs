@@ -2157,6 +2157,11 @@ __webpack_require__.r(__webpack_exports__);
         return {};
       }
     },
+    addmodal: {
+      "default": function _default() {
+        return {};
+      }
+    },
     selectedHours: {
       "default": function _default() {
         return {};
@@ -2248,6 +2253,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/deleteAttributionModal.js?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/modals/deleteAttributionModal.js?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    dialog: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    deletemodal: {}
+  },
+  data: function data() {
+    return {};
+  },
+  methods: {
+    close: function close() {
+      this.$emit('update:dialog', false);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/ordinateur.js?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/ordinateur.js?vue&type=script&lang=js& ***!
@@ -2258,6 +2296,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_modals_AddAttributionModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/modals/AddAttributionModal.vue */ "./resources/js/app/components/modals/AddAttributionModal.vue");
+/* harmony import */ var _components_modals_DeleteAttributionModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/modals/DeleteAttributionModal.vue */ "./resources/js/app/components/modals/DeleteAttributionModal.vue");
 /**
  * Get Data from main Home vue when we pass it data
  * All props are equivalent of what we pass to component. 
@@ -2267,9 +2306,11 @@ __webpack_require__.r(__webpack_exports__);
  * 
  */
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AddAttributionModal: _components_modals_AddAttributionModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    AddAttributionModal: _components_modals_AddAttributionModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    DeleteAttributionModal: _components_modals_DeleteAttributionModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   // Data from parent components
   props: {
@@ -2304,7 +2345,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       attributions: {},
       timeslots: [],
-      dialog: false,
+      addmodal: false,
+      deletemodal: false,
       selectedHours: '',
       selectedDesktop: ''
     };
@@ -2353,7 +2395,7 @@ __webpack_require__.r(__webpack_exports__);
      * Pass multiple value as props to child component
      */
     attributionDataAction: function attributionDataAction(dialog, hours, desktop) {
-      this.dialog = dialog;
+      this.addmodal = dialog;
       this.selectedHours = hours;
       this.selectedDesktop = desktop;
     },
@@ -2370,6 +2412,13 @@ __webpack_require__.r(__webpack_exports__);
       this.timeslots = [];
       this.initialize();
       this.displayHoraire();
+    },
+
+    /**
+     * Pass value to delete attribution
+     */
+    deleteAttributionData: function deleteAttributionData(dialog) {
+      this.deletemodal = dialog;
     }
   }
 });
@@ -20721,16 +20770,25 @@ var render = function() {
     [
       _c("addAttributionModal", {
         attrs: {
-          dialog: _vm.dialog,
+          dialog: _vm.addmodal,
           selectedHours: _vm.selectedHours,
           selectedDesktop: _vm.selectedDesktop,
           selectedDate: _vm.selectedDate
         },
         on: {
           "update:dialog": function($event) {
-            _vm.dialog = $event
+            _vm.addmodal = $event
           },
           addassign: _vm.getAssignData
+        }
+      }),
+      _vm._v(" "),
+      _c("deleteAttributionModal", {
+        attrs: { dialog: _vm.deletemodal },
+        on: {
+          "update:dialog": function($event) {
+            _vm.deletemodal = $event
+          }
         }
       }),
       _vm._v(" "),
@@ -20772,7 +20830,14 @@ var render = function() {
                           timeslot.client != ""
                             ? _c(
                                 "v-btn",
-                                { attrs: { color: "red", icon: "" } },
+                                {
+                                  attrs: { color: "red", icon: "" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteAttributionData(true)
+                                    }
+                                  }
+                                },
                                 [_c("v-icon", [_vm._v(" mdi-close-circle ")])],
                                 1
                               )
@@ -21370,6 +21435,103 @@ var render = function() {
               _c("addOrdinateurForm", {
                 on: { closemodal: _vm.isclosemodal, adddesktop: _vm.newdesktop }
               })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/modals/DeleteAttributionModal.vue?vue&type=template&id=76093dd6&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/modals/DeleteAttributionModal.vue?vue&type=template&id=76093dd6& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-dialog",
+    {
+      attrs: { "max-width": "500" },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
+      }
+    },
+    [
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-card-title",
+            {
+              staticClass:
+                "headline font-weight-bold border-bottom border-dark d-flex justify-content-between"
+            },
+            [
+              _c("h5", [_vm._v(" Suppression d'attribution ")]),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "grey darken-1", text: "" },
+                  on: { click: _vm.close }
+                },
+                [_vm._v(" X ")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-card-text", [
+            _vm._v(
+              "\n      Voulez-vous vraiment supprimer cette attribution ?\n    "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            { staticClass: "d-flex justify-content-end mt-0 pt-0" },
+            [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "text-white",
+                  attrs: { color: "grey darken-1" },
+                  on: { click: _vm.close }
+                },
+                [_vm._v(" Annuler ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  staticClass: "text-white",
+                  attrs: { color: "blue darken-1" }
+                },
+                [_vm._v(" Supprimer ")]
+              )
             ],
             1
           )
@@ -81003,6 +81165,61 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/app/components/modals/DeleteAttributionModal.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/app/components/modals/DeleteAttributionModal.vue ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DeleteAttributionModal_vue_vue_type_template_id_76093dd6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteAttributionModal.vue?vue&type=template&id=76093dd6& */ "./resources/js/app/components/modals/DeleteAttributionModal.vue?vue&type=template&id=76093dd6&");
+/* harmony import */ var _deleteAttributionModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deleteAttributionModal.js?vue&type=script&lang=js& */ "./resources/js/app/components/modals/deleteAttributionModal.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _deleteAttributionModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteAttributionModal_vue_vue_type_template_id_76093dd6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DeleteAttributionModal_vue_vue_type_template_id_76093dd6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/modals/DeleteAttributionModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/modals/DeleteAttributionModal.vue?vue&type=template&id=76093dd6&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/app/components/modals/DeleteAttributionModal.vue?vue&type=template&id=76093dd6& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteAttributionModal_vue_vue_type_template_id_76093dd6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteAttributionModal.vue?vue&type=template&id=76093dd6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/modals/DeleteAttributionModal.vue?vue&type=template&id=76093dd6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteAttributionModal_vue_vue_type_template_id_76093dd6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteAttributionModal_vue_vue_type_template_id_76093dd6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/app/components/modals/addAttributionModal.js?vue&type=script&lang=js&":
 /*!********************************************************************************************!*\
   !*** ./resources/js/app/components/modals/addAttributionModal.js?vue&type=script&lang=js& ***!
@@ -81028,6 +81245,20 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateurModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./addOrdinateurModal.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/addOrdinateurModal.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_addOrdinateurModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/components/modals/deleteAttributionModal.js?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/app/components/modals/deleteAttributionModal.js?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_deleteAttributionModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./deleteAttributionModal.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/deleteAttributionModal.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_deleteAttributionModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

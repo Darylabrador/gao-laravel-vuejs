@@ -11,6 +11,11 @@ export default {
                 return {}
             }
         },
+        addmodal: {
+            default: function () {
+                return {}
+            }
+        },
         selectedHours: {
             default: function () {
                 return {}

@@ -4,7 +4,8 @@
 <template>
     <v-card class="mx-auto rounded">
 
-        <addAttributionModal :dialog.sync="dialog" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @addassign="getAssignData"/>
+        <addAttributionModal :dialog.sync="addmodal" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @addassign="getAssignData"/>
+        <deleteAttributionModal :dialog.sync="deletemodal" />
 
         <v-card-text>
             <div class="border-bottom border-dark">
@@ -20,7 +21,7 @@
                     <td class="col-8 py-0 text-center">{{ timeslot.client.surname}}  {{ timeslot.client.name}}</td>
 
                     <td class="col-2 py-0">
-                        <v-btn color="red" icon v-if="timeslot.client != ''"> 
+                        <v-btn color="red" icon v-if="timeslot.client != ''" @click="deleteAttributionData(true)"> 
                             <v-icon> mdi-close-circle </v-icon>
                         </v-btn>
                         <v-btn icon color="green" v-else @click="attributionDataAction(true, timeslot.hours, ordinateurId)">

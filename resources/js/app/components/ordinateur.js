@@ -8,10 +8,12 @@
  */
 
 import AddAttributionModal from "../components/modals/AddAttributionModal.vue";
+import DeleteAttributionModal from "../components/modals/DeleteAttributionModal.vue";
 
 export default {
     components: {
-        AddAttributionModal
+        AddAttributionModal,
+        DeleteAttributionModal
     },
 
     // Data from parent components
@@ -51,7 +53,8 @@ export default {
         return {
             attributions: {},
             timeslots: [],
-            dialog: false,
+            addmodal: false,
+            deletemodal: false,
             selectedHours: '',
             selectedDesktop: ''
         }
@@ -101,7 +104,7 @@ export default {
          * Pass multiple value as props to child component
          */
         attributionDataAction(dialog, hours, desktop ) {
-            this.dialog = dialog;
+            this.addmodal = dialog;
             this.selectedHours = hours;
             this.selectedDesktop = desktop;
         },
@@ -119,6 +122,13 @@ export default {
             this.timeslots = [];
             this.initialize();
             this.displayHoraire();
+        },
+
+        /**
+         * Pass value to delete attribution
+         */
+        deleteAttributionData(dialog){
+            this.deletemodal = dialog;
         }
     }
 }
