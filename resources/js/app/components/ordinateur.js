@@ -97,10 +97,28 @@ export default {
             }
         },
 
-        attributionData(dialog, hours, desktop ) {
+        /**
+         * Pass multiple value as props to child component
+         */
+        attributionDataAction(dialog, hours, desktop ) {
             this.dialog = dialog;
             this.selectedHours = hours;
             this.selectedDesktop = desktop;
+        },
+
+        /**
+         * Refresh desktop component with new assign data
+         */
+        getAssignData(assignData){
+            this.attributions[assignData.hours] = {
+                id: assignData.client.id,
+                surname: assignData.client.surname,
+                name: assignData.client.name
+            }
+
+            this.timeslots = [];
+            this.initialize();
+            this.displayHoraire();
         }
     }
 }

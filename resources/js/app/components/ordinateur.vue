@@ -4,7 +4,7 @@
 <template>
     <v-card class="mx-auto rounded">
 
-        <addAttributionModal :dialog.sync="dialog" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" />
+        <addAttributionModal :dialog.sync="dialog" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @addassign="getAssignData"/>
 
         <v-card-text>
             <div class="border-bottom border-dark">
@@ -23,7 +23,7 @@
                         <v-btn color="red" icon v-if="timeslot.client != ''"> 
                             <v-icon> mdi-close-circle </v-icon>
                         </v-btn>
-                        <v-btn icon color="green" v-else @click="attributionData(true, timeslot.hours, ordinateurId)">
+                        <v-btn icon color="green" v-else @click="attributionDataAction(true, timeslot.hours, ordinateurId)">
                             <v-icon> mdi-plus-circle-outline  </v-icon>
                         </v-btn>
                     </td>

@@ -3,6 +3,9 @@ import Ordinateur from '../components/Ordinateur.vue';
 import AddOrdinateurModal from '../components/modals/AddOrdinateurModal.vue';
 import Datepicker from '../components/datepickers/Datepicker.vue';
 
+import Vue from 'vue';
+var bus = new Vue();
+
 /**
  * Dashboard data
  */
@@ -26,6 +29,7 @@ export default {
     // init function when the parent is created on SPA
     created() {
        this.getAllDesktops(); 
+        
     },
     
     // All methods
@@ -53,6 +57,6 @@ export default {
             this.dateRechercher = selectDate;
             this.computerList = [];
             this.getAllDesktops(); 
-        }
+        },
     },
 }

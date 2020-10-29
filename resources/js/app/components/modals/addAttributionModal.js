@@ -49,8 +49,10 @@ export default {
                 hours: this.selectedHours,
                 date: this.selectedDate
             })
-            .then((response) => {
-                console.log(response)
+            .then(({data}) => {
+                const responseData = data.data;
+                this.$emit('addassign', responseData)
+                this.close();
             })
         }
     }

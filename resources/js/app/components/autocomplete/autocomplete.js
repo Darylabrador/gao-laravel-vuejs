@@ -6,7 +6,7 @@ export default {
             loading: false,
             items: [],
             search: null,
-            client: null,
+            client: null
         }
     },
     watch: {

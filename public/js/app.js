@@ -2186,14 +2186,21 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedClient = client;
     },
     attribute: function attribute() {
+      var _this = this;
+
       // Send data to attribute desktop API route
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers/attributions', {
         desktop_id: this.selectedDesktop,
         client_id: this.selectedClient.id,
         hours: this.selectedHours,
         date: this.selectedDate
-      }).then(function (response) {
-        console.log(response);
+      }).then(function (_ref) {
+        var data = _ref.data;
+        var responseData = data.data;
+
+        _this.$emit('addassign', responseData);
+
+        _this.close();
       });
     }
   }
@@ -2341,10 +2348,28 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    attributionData: function attributionData(dialog, hours, desktop) {
+
+    /**
+     * Pass multiple value as props to child component
+     */
+    attributionDataAction: function attributionDataAction(dialog, hours, desktop) {
       this.dialog = dialog;
       this.selectedHours = hours;
       this.selectedDesktop = desktop;
+    },
+
+    /**
+     * Refresh desktop component with new assign data
+     */
+    getAssignData: function getAssignData(assignData) {
+      this.attributions[assignData.hours] = {
+        id: assignData.client.id,
+        surname: assignData.client.surname,
+        name: assignData.client.name
+      };
+      this.timeslots = [];
+      this.initialize();
+      this.displayHoraire();
     }
   }
 });
@@ -2365,10 +2390,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Ordinateur.vue */ "./resources/js/app/components/Ordinateur.vue");
 /* harmony import */ var _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modals/AddOrdinateurModal.vue */ "./resources/js/app/components/modals/AddOrdinateurModal.vue");
 /* harmony import */ var _components_datepickers_Datepicker_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/datepickers/Datepicker.vue */ "./resources/js/app/components/datepickers/Datepicker.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
+
+var bus = new vue__WEBPACK_IMPORTED_MODULE_4___default.a();
 /**
  * Dashboard data
  */
@@ -20700,7 +20729,8 @@ var render = function() {
         on: {
           "update:dialog": function($event) {
             _vm.dialog = $event
-          }
+          },
+          addassign: _vm.getAssignData
         }
       }),
       _vm._v(" "),
@@ -20752,7 +20782,7 @@ var render = function() {
                                   attrs: { icon: "", color: "green" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.attributionData(
+                                      return _vm.attributionDataAction(
                                         true,
                                         timeslot.hours,
                                         _vm.ordinateurId
