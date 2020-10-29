@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
                 'hours' => 8,
                 'desktop_id' => $i,
                 'client_id' => $faker->numberBetween(1, 5),
-                'date' => "2020-10-28"
+                'date' => "2020-10-29"
             ]);
         }
 
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
                 'hours' => 10,
                 'desktop_id' => $i,
                 'client_id' => $faker->numberBetween(1, 5),
-                'date' => "2020-10-28"
+                'date' => "2020-10-29"
             ]);
         }
 
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                 'hours' => 16,
                 'desktop_id' => $i,
                 'client_id' => $faker->numberBetween(1, 5),
-                'date' => "2020-10-28"
+                'date' => "2020-10-29"
             ]);
         }
     }

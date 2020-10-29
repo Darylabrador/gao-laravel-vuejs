@@ -60,7 +60,8 @@ class GeneralController extends Controller
         }
 
         $desktop = Desktop::create($validator->validated());
-
+        $desktop = new DesktopResources($desktop);
+        
         return response()->json([
             'success' => true,
             'message' => 'Poste créer',
