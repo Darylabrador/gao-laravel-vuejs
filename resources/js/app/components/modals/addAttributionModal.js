@@ -1,3 +1,4 @@
+import Axios from "axios";
 import Autocomplete from "../autocomplete/Autocomplete.vue";
 
 export default {
@@ -41,10 +42,16 @@ export default {
             this.selectedClient = client;
         },
         attribute() {
-            console.log(this.selectedHours)
-            console.log(this.selectedDesktop)
-            console.log(this.selectedDate)
-            console.log(this.selectedClient)
+            // Send data to attribute desktop API route
+            Axios.post('/api/computers/attributions', {
+                desktop_id: this.selectedDesktop,
+                client_id: this.selectedClient.id,
+                hours: this.selectedHours,
+                date: this.selectedDate
+            })
+            .then((response) => {
+                console.log(response)
+            })
         }
     }
 }

@@ -2142,11 +2142,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../autocomplete/Autocomplete.vue */ "./resources/js/app/components/autocomplete/Autocomplete.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../autocomplete/Autocomplete.vue */ "./resources/js/app/components/autocomplete/Autocomplete.vue");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Autocomplete: _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Autocomplete: _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     dialog: {
@@ -2183,10 +2186,15 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedClient = client;
     },
     attribute: function attribute() {
-      console.log(this.selectedHours);
-      console.log(this.selectedDesktop);
-      console.log(this.selectedDate);
-      console.log(this.selectedClient);
+      // Send data to attribute desktop API route
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers/attributions', {
+        desktop_id: this.selectedDesktop,
+        client_id: this.selectedClient.id,
+        hours: this.selectedHours,
+        date: this.selectedDate
+      }).then(function (response) {
+        console.log(response);
+      });
     }
   }
 });

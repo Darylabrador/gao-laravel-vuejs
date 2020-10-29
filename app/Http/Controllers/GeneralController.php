@@ -71,14 +71,7 @@ class GeneralController extends Controller
 
 
 
-    /**
-     * Set attribution 
-     *
-     * @param  \Illuminate\Http\Request  $request
-     */
-    public function setAttribution(Request $request){
-
-    }
+  
 
 
 

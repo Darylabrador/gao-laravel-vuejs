@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AssignController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GeneralController;
+
 
 
 /*
@@ -26,3 +29,5 @@ Route::get('/computers', [GeneralController::class, 'getAll']);
 Route::post('/computers', [GeneralController::class, 'createDesktop']);
 
 Route::post('/client/search', [ClientController::class, 'searchClient']);
+
+Route::post('/computers/attributions', [AssignController::class, 'setAttribution']);
