@@ -16,8 +16,7 @@
 
         <v-card-actions class="d-flex justify-content-end mt-0 pt-0">
           <v-btn class="text-white" color="grey darken-1" @click="close"> Annuler </v-btn>
-          <v-btn class="text-white" color="blue darken-1"> Attribuer </v-btn>
-
+          <v-btn class="text-white" color="blue darken-1" @click="attribute"> Attribuer </v-btn>
         </v-card-actions>
       </v-card>
 

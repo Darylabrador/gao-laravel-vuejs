@@ -39,6 +39,11 @@ export default {
         },
         getInfoClient(client){
             this.selectedClient = client;
+        },
+        attribute() {
+            console.log(this.selectedHours)
+            console.log(this.selectedDesktop)
+            console.log(this.selectedDate)
             console.log(this.selectedClient)
         }
     }

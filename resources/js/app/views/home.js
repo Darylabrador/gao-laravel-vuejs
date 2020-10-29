@@ -31,7 +31,6 @@ export default {
     // All methods
     methods: {
         getAllDesktops() {
-            console.log(this.dateRechercher)
             Axios.get('api/computers', {
                 params: {
                     date: this.dateRechercher

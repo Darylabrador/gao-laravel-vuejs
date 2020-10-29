@@ -2052,15 +2052,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           month = _date$split2[1],
           day = _date$split2[2];
 
-      return "".concat(month, "/").concat(day, "/").concat(year);
+      return "".concat(day, "/").concat(month, "/").concat(year);
     },
     parseDate: function parseDate(date) {
       if (!date) return null;
 
       var _date$split3 = date.split('/'),
           _date$split4 = _slicedToArray(_date$split3, 3),
-          month = _date$split4[0],
-          day = _date$split4[1],
+          day = _date$split4[0],
+          month = _date$split4[1],
           year = _date$split4[2];
 
       return "".concat(year, "-").concat(month.padStart(2, '0'), "-").concat(day.padStart(2, '0'));
@@ -2181,6 +2181,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     getInfoClient: function getInfoClient(client) {
       this.selectedClient = client;
+    },
+    attribute: function attribute() {
+      console.log(this.selectedHours);
+      console.log(this.selectedDesktop);
+      console.log(this.selectedDate);
       console.log(this.selectedClient);
     }
   }
@@ -2383,7 +2388,6 @@ __webpack_require__.r(__webpack_exports__);
     getAllDesktops: function getAllDesktops() {
       var _this = this;
 
-      console.log(this.dateRechercher);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers', {
         params: {
           date: this.dateRechercher
@@ -20965,7 +20969,6 @@ var render = function() {
                             {
                               attrs: {
                                 label: "Date",
-                                hint: "MM/DD/YYYY format",
                                 "persistent-hint": "",
                                 "prepend-icon": "mdi-calendar"
                               },
@@ -21233,7 +21236,8 @@ var render = function() {
                 "v-btn",
                 {
                   staticClass: "text-white",
-                  attrs: { color: "blue darken-1" }
+                  attrs: { color: "blue darken-1" },
+                  on: { click: _vm.attribute }
                 },
                 [_vm._v(" Attribuer ")]
               )
