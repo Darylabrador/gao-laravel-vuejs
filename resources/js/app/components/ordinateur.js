@@ -30,6 +30,11 @@ export default {
             default: function () {
                 return {}
             }
+        },
+        selectedDate: {
+            default: function () {
+                return {}
+            }
         }
     },
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GeneralController;
@@ -23,3 +24,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/computers', [GeneralController::class, 'getAll']);
 
 Route::post('/computers', [GeneralController::class, 'createDesktop']);
+
+Route::post('/client/search', [ClientController::class, 'searchClient']);

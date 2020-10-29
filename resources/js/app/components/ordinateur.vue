@@ -4,7 +4,7 @@
 <template>
     <v-card outlined>
 
-        <addAttributionModal :dialog.sync="dialog" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" />
+        <addAttributionModal :dialog.sync="dialog" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" />
 
         <v-list-item three-line>
             <v-list-item-content>
@@ -32,6 +32,7 @@
                 </v-btn>
             </v-col>
         </v-row>
+        
     </v-card>
 </template>
 

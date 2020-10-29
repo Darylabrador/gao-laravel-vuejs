@@ -5,17 +5,22 @@
       </template>
 
       <v-card>
-        <v-card-title class="headline font-weight-bold border-bottom border-dark d-flex justify-content-between">
-          <h5> Attribuer </h5>
-          <v-btn color="grey darken-1" text @click="close"> X </v-btn>
-        </v-card-title>
+          <v-card-title class="headline font-weight-bold border-bottom border-dark d-flex justify-content-between">
+            <h5> Attribuer </h5>
+            <v-btn color="grey darken-1" text @click="close"> X </v-btn>
+          </v-card-title>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-            <v-btn color="grey darken-1" text> time {{ selectedHours }} </v-btn>
-            <v-btn color="grey darken-1" text> ordi {{ selectedDesktop }} </v-btn>
+        <v-card-text>
+          <autocomplete @attributeclient="getInfoClient" />
+        </v-card-text>
+
+        <v-card-actions class="d-flex justify-content-end mt-0 pt-0">
+          <v-btn class="text-white" color="grey darken-1" @click="close"> Annuler </v-btn>
+          <v-btn class="text-white" color="blue darken-1"> Attribuer </v-btn>
+
         </v-card-actions>
       </v-card>
+
     </v-dialog>
 </template>
 
