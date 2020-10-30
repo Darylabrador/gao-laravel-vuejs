@@ -9,11 +9,13 @@
 
 import AddAttributionModal from "../components/modals/AddAttributionModal.vue";
 import DeleteAttributionModal from "../components/modals/DeleteAttributionModal.vue";
+import DeleteOrdinateur from "../components/modals/DeleteOrdinateur.vue";
 
 export default {
     components: {
         AddAttributionModal,
-        DeleteAttributionModal
+        DeleteAttributionModal,
+        DeleteOrdinateur
     },
 
     // Data from parent components
@@ -55,9 +57,11 @@ export default {
             timeslots: [],
             addmodal: false,
             deletemodal: false,
+            deletedesktopmodal: false,
             selectedHours: '',
             selectedDesktop: '',
-            idAssign: ''
+            idAssign: '',
+            iddesktop: ''
         }
     },
 
@@ -152,6 +156,14 @@ export default {
                 }
             });
             this.displayHoraire();
+        },
+
+        /**
+         * Pass value to delete desktop component
+         */
+        deletedesktop(dialog, ordinateurId) {
+            this.deletedesktopmodal = dialog
+            this.iddesktop = ordinateurId;
         }
     }
 }

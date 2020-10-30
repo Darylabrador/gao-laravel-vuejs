@@ -3,7 +3,7 @@
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AssignController;
-
+use App\Http\Controllers\DesktopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +33,5 @@ Route::post('/client/search', [ClientController::class, 'searchClient']);
 Route::post('/computers/attributions', [AssignController::class, 'setAttribution']);
 
 Route::delete('/computers/attributions/{id}', [AssignController::class, 'deleteAttribution']);
+
+Route::delete('/computers/{id}', [DesktopController::class, 'deleteDesktop']);
