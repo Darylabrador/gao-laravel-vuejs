@@ -56,7 +56,8 @@ export default {
             addmodal: false,
             deletemodal: false,
             selectedHours: '',
-            selectedDesktop: ''
+            selectedDesktop: '',
+            idAssign: ''
         }
     },
 
@@ -72,7 +73,8 @@ export default {
                 this.attributions[element.hours] = {
                     id: element.client.id,
                     surname: element.client.surname,
-                    name: element.client.name
+                    name: element.client.name,
+                    idAssign: element.idAssign
                 }
             })
         },
@@ -87,7 +89,7 @@ export default {
                 if (this.attributions[i]){
                     arrayData = {
                         hours: i,
-                        client: this.attributions[i]
+                        client: this.attributions[i],
                     }
                     this.timeslots.push(arrayData)
                 }else{
@@ -116,7 +118,8 @@ export default {
             this.attributions[assignData.hours] = {
                 id: assignData.client.id,
                 surname: assignData.client.surname,
-                name: assignData.client.name
+                name: assignData.client.name,
+                idAssign: assignData.idAssign
             }
 
             this.timeslots = [];
@@ -127,8 +130,32 @@ export default {
         /**
          * Pass value to delete attribution
          */
-        deleteAttributionData(dialog){
+        deleteAttributionData(dialog, idAssign){
             this.deletemodal = dialog;
+            this.idAssign = idAssign;
+        },
+
+        /**
+         * Get delete assign data to refresh component
+         */
+        getDeleteAssignData(idAssign){
+            const refreshDeleteData = this.timeslots.filter(element => element.client.idAssign != idAssign);
+            this.attributions = {};
+            this.timeslots    = [];
+
+            refreshDeleteData.forEach(element => {
+                this.attributions[element.hours] = {
+                    id: element.client.id,
+                    surname: element.client.surname,
+                    name: element.client.name,
+                    idAssign: element.idAssign
+                }
+            });
+
+            this.displayHoraire();
+            console.log(this.attributions)
+            console.log(this.timeslots)
+
         }
     }
 }

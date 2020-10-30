@@ -2272,14 +2272,36 @@ __webpack_require__.r(__webpack_exports__);
         return {};
       }
     },
-    deletemodal: {}
-  },
-  data: function data() {
-    return {};
+    deletemodal: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    idAssign: {
+      "default": function _default() {
+        return {};
+      }
+    }
   },
   methods: {
     close: function close() {
       this.$emit('update:dialog', false);
+    },
+    deleteassign: function deleteassign() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/attributions/".concat(this.idAssign)).then(function (_ref) {
+        var data = _ref.data;
+        var responseData = data;
+
+        if (responseData.success) {
+          _this.$emit('deleteassign', _this.idAssign);
+
+          _this.close();
+        }
+      })["catch"](function (error) {
+        return console.log(error);
+      });
     }
   }
 });
@@ -2348,7 +2370,8 @@ __webpack_require__.r(__webpack_exports__);
       addmodal: false,
       deletemodal: false,
       selectedHours: '',
-      selectedDesktop: ''
+      selectedDesktop: '',
+      idAssign: ''
     };
   },
   // All disponible methods
@@ -2363,7 +2386,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.attributions[element.hours] = {
           id: element.client.id,
           surname: element.client.surname,
-          name: element.client.name
+          name: element.client.name,
+          idAssign: element.idAssign
         };
       });
     },
@@ -2407,7 +2431,8 @@ __webpack_require__.r(__webpack_exports__);
       this.attributions[assignData.hours] = {
         id: assignData.client.id,
         surname: assignData.client.surname,
-        name: assignData.client.name
+        name: assignData.client.name,
+        idAssign: assignData.idAssign
       };
       this.timeslots = [];
       this.initialize();
@@ -2417,8 +2442,33 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * Pass value to delete attribution
      */
-    deleteAttributionData: function deleteAttributionData(dialog) {
+    deleteAttributionData: function deleteAttributionData(dialog, idAssign) {
       this.deletemodal = dialog;
+      this.idAssign = idAssign;
+    },
+
+    /**
+     * Get delete assign data to refresh component
+     */
+    getDeleteAssignData: function getDeleteAssignData(idAssign) {
+      var _this2 = this;
+
+      var refreshDeleteData = this.timeslots.filter(function (element) {
+        return element.client.idAssign != idAssign;
+      });
+      this.attributions = {};
+      this.timeslots = [];
+      refreshDeleteData.forEach(function (element) {
+        _this2.attributions[element.hours] = {
+          id: element.client.id,
+          surname: element.client.surname,
+          name: element.client.name,
+          idAssign: element.idAssign
+        };
+      });
+      this.displayHoraire();
+      console.log(this.attributions);
+      console.log(this.timeslots);
     }
   }
 });
@@ -20784,11 +20834,12 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("deleteAttributionModal", {
-        attrs: { dialog: _vm.deletemodal },
+        attrs: { dialog: _vm.deletemodal, idAssign: _vm.idAssign },
         on: {
           "update:dialog": function($event) {
             _vm.deletemodal = $event
-          }
+          },
+          deleteassign: _vm.getDeleteAssignData
         }
       }),
       _vm._v(" "),
@@ -20819,7 +20870,8 @@ var render = function() {
                         _vm._v(
                           _vm._s(timeslot.client.surname) +
                             "  " +
-                            _vm._s(timeslot.client.name)
+                            _vm._s(timeslot.client.name) +
+                            " "
                         )
                       ]),
                       _vm._v(" "),
@@ -20834,7 +20886,10 @@ var render = function() {
                                   attrs: { color: "red", icon: "" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.deleteAttributionData(true)
+                                      return _vm.deleteAttributionData(
+                                        true,
+                                        timeslot.client.idAssign
+                                      )
                                     }
                                   }
                                 },
@@ -21487,11 +21542,9 @@ var render = function() {
             "v-card-title",
             {
               staticClass:
-                "headline font-weight-bold border-bottom border-dark d-flex justify-content-between"
+                "headline font-weight-bold d-flex justify-content-end"
             },
             [
-              _c("h5", [_vm._v(" Suppression d'attribution ")]),
-              _vm._v(" "),
               _c(
                 "v-btn",
                 {
@@ -21504,10 +21557,10 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("v-card-text", [
-            _vm._v(
-              "\n      Voulez-vous vraiment supprimer cette attribution ?\n    "
-            )
+          _c("v-card-text", { staticClass: "text-center my-5" }, [
+            _c("h5", [
+              _vm._v(" Voulez-vous vraiment supprimer cette attribution ? ")
+            ])
           ]),
           _vm._v(" "),
           _c(
@@ -21518,19 +21571,20 @@ var render = function() {
                 "v-btn",
                 {
                   staticClass: "text-white",
-                  attrs: { color: "grey darken-1" },
+                  attrs: { color: "blue darken-1" },
                   on: { click: _vm.close }
                 },
-                [_vm._v(" Annuler ")]
+                [_vm._v(" Non ")]
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
                   staticClass: "text-white",
-                  attrs: { color: "blue darken-1" }
+                  attrs: { color: "red darken-1" },
+                  on: { click: _vm.deleteassign }
                 },
-                [_vm._v(" Supprimer ")]
+                [_vm._v(" Oui ")]
               )
             ],
             1

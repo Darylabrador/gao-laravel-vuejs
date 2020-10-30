@@ -7,18 +7,31 @@ export default {
                 return {}
             }
         },
-        deletemodal: {}
-    },
-
-    data() {
-        return {
-            
+        deletemodal: {
+            default: function () {
+                return {}
+            }
+        },
+        idAssign: {
+            default: function () {
+                return {}
+            }
         }
     },
 
     methods: {
         close() {
             this.$emit('update:dialog', false);
+        },
+        deleteassign() {
+            Axios.delete(`/api/computers/attributions/${this.idAssign}`)
+            .then(({data}) => {
+                let responseData = data;
+                if(responseData.success){
+                    this.$emit('deleteassign', this.idAssign);
+                    this.close();
+                }
+            }).catch(error=> console.log(error))
         }
     }
 }

@@ -31,3 +31,5 @@ Route::post('/computers', [GeneralController::class, 'createDesktop']);
 Route::post('/client/search', [ClientController::class, 'searchClient']);
 
 Route::post('/computers/attributions', [AssignController::class, 'setAttribution']);
+
+Route::delete('/computers/attributions/{id}', [AssignController::class, 'deleteAttribution']);

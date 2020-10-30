@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Desktop::factory(5)->create();
         \App\Models\Client::factory(5)->create();
 
+        $now = now()->toDateString();
 
         $faker = \Faker\Factory::create();
         for ($i=1; $i < 5; $i++) { 
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
                 'hours' => 8,
                 'desktop_id' => $i,
                 'client_id' => $faker->numberBetween(1, 5),
-                'date' => "2020-10-29"
+                'date' => $now
             ]);
         }
 
@@ -42,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'hours' => 10,
                 'desktop_id' => $i,
                 'client_id' => $faker->numberBetween(1, 5),
-                'date' => "2020-10-29"
+                'date' => $now
             ]);
         }
 
@@ -51,7 +52,7 @@ class DatabaseSeeder extends Seeder
                 'hours' => 16,
                 'desktop_id' => $i,
                 'client_id' => $faker->numberBetween(1, 5),
-                'date' => "2020-10-29"
+                'date' => $now
             ]);
         }
     }

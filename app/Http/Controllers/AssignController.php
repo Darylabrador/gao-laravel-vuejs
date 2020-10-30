@@ -55,4 +55,19 @@ class AssignController extends Controller
         $assignCreate = Assign::create($request->all());
         return new AssignResources($assignCreate);
     }
+
+
+
+    /**
+     * delete attribution 
+     *
+     */
+    public function deleteAttribution($id){
+        Assign::destroy($id);
+        return response()->json([
+            'success' => true,
+            'message' => "Suppression réussie"
+        ]);
+    }
+
 }
