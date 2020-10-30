@@ -85,6 +85,8 @@ export default {
          */
         displayHoraire() {
             let arrayData = {};
+            this.timeslots = [];
+
             for(let i = 8; i < 19; i++){
                 if (this.attributions[i]){
                     arrayData = {
@@ -121,8 +123,6 @@ export default {
                 name: assignData.client.name,
                 idAssign: assignData.idAssign
             }
-
-            this.timeslots = [];
             this.initialize();
             this.displayHoraire();
         },
@@ -139,23 +139,19 @@ export default {
          * Get delete assign data to refresh component
          */
         getDeleteAssignData(idAssign){
-            const refreshDeleteData = this.timeslots.filter(element => element.client.idAssign != idAssign);
             this.attributions = {};
-            this.timeslots    = [];
-
+            const refreshDeleteData = this.timeslots.filter(element => element.client.idAssign != idAssign);
             refreshDeleteData.forEach(element => {
-                this.attributions[element.hours] = {
-                    id: element.client.id,
-                    surname: element.client.surname,
-                    name: element.client.name,
-                    idAssign: element.idAssign
+                if (element.client.id) {
+                    this.attributions[element.hours] = {
+                        id: element.client.id,
+                        surname: element.client.surname,
+                        name: element.client.name,
+                        idAssign: element.client.idAssign
+                    }
                 }
             });
-
             this.displayHoraire();
-            console.log(this.attributions)
-            console.log(this.timeslots)
-
         }
     }
 }

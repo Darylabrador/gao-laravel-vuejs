@@ -2397,6 +2397,7 @@ __webpack_require__.r(__webpack_exports__);
      */
     displayHoraire: function displayHoraire() {
       var arrayData = {};
+      this.timeslots = [];
 
       for (var i = 8; i < 19; i++) {
         if (this.attributions[i]) {
@@ -2434,7 +2435,6 @@ __webpack_require__.r(__webpack_exports__);
         name: assignData.client.name,
         idAssign: assignData.idAssign
       };
-      this.timeslots = [];
       this.initialize();
       this.displayHoraire();
     },
@@ -2453,22 +2453,21 @@ __webpack_require__.r(__webpack_exports__);
     getDeleteAssignData: function getDeleteAssignData(idAssign) {
       var _this2 = this;
 
+      this.attributions = {};
       var refreshDeleteData = this.timeslots.filter(function (element) {
         return element.client.idAssign != idAssign;
       });
-      this.attributions = {};
-      this.timeslots = [];
       refreshDeleteData.forEach(function (element) {
-        _this2.attributions[element.hours] = {
-          id: element.client.id,
-          surname: element.client.surname,
-          name: element.client.name,
-          idAssign: element.idAssign
-        };
+        if (element.client.id) {
+          _this2.attributions[element.hours] = {
+            id: element.client.id,
+            surname: element.client.surname,
+            name: element.client.name,
+            idAssign: element.client.idAssign
+          };
+        }
       });
       this.displayHoraire();
-      console.log(this.attributions);
-      console.log(this.timeslots);
     }
   }
 });
