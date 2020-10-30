@@ -164,6 +164,13 @@ export default {
         deletedesktop(dialog, ordinateurId) {
             this.deletedesktopmodal = dialog
             this.iddesktop = ordinateurId;
+        },
+
+        /**
+         * Get information about deleted desktop
+         */
+        getDeletedDesktop(iddesktop) {
+            this.$emit('deleteddesktop', iddesktop);
         }
     }
 }

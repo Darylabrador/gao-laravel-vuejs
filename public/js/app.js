@@ -2342,7 +2342,19 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.$emit('update:dialog', false);
     },
-    deletedesktop: function deletedesktop() {}
+    deletedesktop: function deletedesktop() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/".concat(this.iddesktop)).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.success) {
+          _this.$emit('deleteddesktop', _this.iddesktop);
+
+          _this.close();
+        }
+      });
+    }
   }
 });
 
@@ -2521,6 +2533,13 @@ __webpack_require__.r(__webpack_exports__);
     deletedesktop: function deletedesktop(dialog, ordinateurId) {
       this.deletedesktopmodal = dialog;
       this.iddesktop = ordinateurId;
+    },
+
+    /**
+     * Get information about deleted desktop
+     */
+    getDeletedDesktop: function getDeletedDesktop(iddesktop) {
+      this.$emit('deleteddesktop', iddesktop);
     }
   }
 });
@@ -2597,6 +2616,18 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_4___default.a();
       this.dateRechercher = selectDate;
       this.computerList = [];
       this.getAllDesktops();
+    },
+    getDeletedDesktop: function getDeletedDesktop(idDesktop) {
+      var _this2 = this;
+
+      var refreshDeleteData = this.computerList.filter(function (element) {
+        return element.id != idDesktop;
+      });
+      this.computerList = [];
+      refreshDeleteData.forEach(function (element) {
+        _this2.computerList.push(element);
+      });
+      console.log(this.computerList);
     }
   }
 });
@@ -20900,7 +20931,8 @@ var render = function() {
         on: {
           "update:dialog": function($event) {
             _vm.deletedesktopmodal = $event
-          }
+          },
+          deleteddesktop: _vm.getDeletedDesktop
         }
       }),
       _vm._v(" "),
@@ -21858,7 +21890,8 @@ var render = function() {
                   ordinateurName: ordinateur.name,
                   attributionList: ordinateur.attributions,
                   selectedDate: _vm.dateRechercher
-                }
+                },
+                on: { deleteddesktop: _vm.getDeletedDesktop }
               })
             ],
             1

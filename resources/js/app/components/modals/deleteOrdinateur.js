@@ -24,7 +24,13 @@ export default {
             this.$emit('update:dialog', false);
         },
         deletedesktop() {
-            console.log(this.iddesktop)
+            Axios.delete(`/api/computers/${this.iddesktop}`)
+                .then(({ data }) =>{
+                    if(data.success){
+                        this.$emit('deleteddesktop', this.iddesktop);
+                        this.close();
+                    }
+                })
         }
     }
 }

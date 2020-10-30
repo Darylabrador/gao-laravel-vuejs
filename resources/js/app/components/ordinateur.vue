@@ -4,9 +4,9 @@
 <template>
     <v-card class="mx-auto rounded">
 
-        <addAttributionModal :dialog.sync="addmodal" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @addassign="getAssignData"/>
-        <deleteAttributionModal :dialog.sync="deletemodal" :idAssign="idAssign" @deleteassign='getDeleteAssignData'/>
-        <deleteOrdinateur :dialog.sync="deletedesktopmodal" :iddesktop="iddesktop"/>
+        <addAttributionModal :dialog.sync="addmodal" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @addassign="getAssignData" />
+        <deleteAttributionModal :dialog.sync="deletemodal" :idAssign="idAssign" @deleteassign='getDeleteAssignData' />
+        <deleteOrdinateur :dialog.sync="deletedesktopmodal" :iddesktop="iddesktop" @deleteddesktop="getDeletedDesktop" />
 
         <v-card-text>
             <div class="border-bottom border-dark d-flex justify-content-between">

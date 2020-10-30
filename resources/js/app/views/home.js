@@ -58,5 +58,14 @@ export default {
             this.computerList = [];
             this.getAllDesktops(); 
         },
+
+        getDeletedDesktop(idDesktop){
+            const refreshDeleteData = this.computerList.filter(element => element.id != idDesktop);
+            this.computerList = [];
+            refreshDeleteData.forEach(element => {
+                this.computerList.push(element);
+            });
+            console.log(this.computerList)
+        }
     },
 }
