@@ -25,7 +25,8 @@ export default {
         return {
             computerList: [],
             dateRechercher: new Date().toISOString().substr(0, 10),
-            paginationLink: {}
+            paginationLink: {},
+            currentPage: 1
         }
     },
     
@@ -65,11 +66,26 @@ export default {
         },
 
         getDeletedDesktop(idDesktop){
-            const refreshDeleteData = this.computerList.filter(element => element.id != idDesktop);
+            // const refreshDeleteData = this.computerList.filter(element => element.id != idDesktop);
+            // this.computerList = [];
+            // refreshDeleteData.forEach(element => {
+            //     this.computerList.push(element);
+            // });
+
             this.computerList = [];
-            refreshDeleteData.forEach(element => {
-                this.computerList.push(element);
-            });
+            Axios.get(`/api/computers`, {
+                params: { 
+                    date: this.dateRechercher ,
+                    page: this.currentPage
+                }
+            })
+            .then(({ data }) => {
+                var responseData = data.data;
+                responseData.forEach(element => {
+                    this.computerList.push(element);
+                })
+                this.paginationLink = data.links;
+            })
         },
 
         newpage(page){
@@ -78,6 +94,7 @@ export default {
                 this.computerList.push(element)
             })
             this.paginationLink = page.links;
+            this.currentPage = page.meta.current_page;
         }
     },
 }

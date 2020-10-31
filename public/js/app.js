@@ -2458,7 +2458,8 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
     return {
       computerList: [],
       dateRechercher: new Date().toISOString().substr(0, 10),
-      paginationLink: {}
+      paginationLink: {},
+      currentPage: 1
     };
   },
   // init function when the parent is created on SPA
@@ -2497,12 +2498,24 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
     getDeletedDesktop: function getDeletedDesktop(idDesktop) {
       var _this2 = this;
 
-      var refreshDeleteData = this.computerList.filter(function (element) {
-        return element.id != idDesktop;
-      });
+      // const refreshDeleteData = this.computerList.filter(element => element.id != idDesktop);
+      // this.computerList = [];
+      // refreshDeleteData.forEach(element => {
+      //     this.computerList.push(element);
+      // });
       this.computerList = [];
-      refreshDeleteData.forEach(function (element) {
-        _this2.computerList.push(element);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/computers", {
+        params: {
+          date: this.dateRechercher,
+          page: this.currentPage
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        var responseData = data.data;
+        responseData.forEach(function (element) {
+          _this2.computerList.push(element);
+        });
+        _this2.paginationLink = data.links;
       });
     },
     newpage: function newpage(page) {
@@ -2513,6 +2526,7 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
         _this3.computerList.push(element);
       });
       this.paginationLink = page.links;
+      this.currentPage = page.meta.current_page;
     }
   }
 });
