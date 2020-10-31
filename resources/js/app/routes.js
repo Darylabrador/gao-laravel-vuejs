@@ -15,14 +15,29 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
+            beforeEnter(to, from, next) {
+                const loggedIn = localStorage.getItem('token');
+                if(!loggedIn) {
+                    return next('/login')
+                }
+                next()
+            }
         },
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: Login,
+            beforeEnter(to, from, next) {
+                const loggedIn = localStorage.getItem('token');
+                if (loggedIn != null) {
+                    return location.href = '/';
+                }
+                next()
+            }
         }
     ]
-})
+});
+
 
 export default router;

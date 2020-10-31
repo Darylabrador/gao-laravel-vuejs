@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import Router from '../routes.js';
 
 export default {
 
@@ -14,8 +15,14 @@ export default {
             Axios.post('/api/login',{
                 email: this.email,
                 password: this.password
-            }).then(response => {
-                console.log(response);
+            }).then((response) => {
+                let responseData = response.data;
+                if (responseData.success){
+                    localStorage.setItem('token', responseData.token);
+                    
+                } else {
+
+                }
             });
         }
     }

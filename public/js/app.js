@@ -2544,6 +2544,8 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes.js */ "./resources/js/app/routes.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2558,7 +2560,11 @@ __webpack_require__.r(__webpack_exports__);
         email: this.email,
         password: this.password
       }).then(function (response) {
-        console.log(response);
+        var responseData = response.data;
+
+        if (responseData.success) {
+          localStorage.setItem('token', responseData.token);
+        } else {}
       });
     }
   }
@@ -21988,7 +21994,12 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("v-text-field", {
-                attrs: { color: "dark", label: "Mot de passe", required: "" },
+                attrs: {
+                  type: "password",
+                  color: "dark",
+                  label: "Mot de passe",
+                  required: ""
+                },
                 model: {
                   value: _vm.password,
                   callback: function($$v) {
@@ -82029,11 +82040,29 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/',
     name: 'home',
-    component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    beforeEnter: function beforeEnter(to, from, next) {
+      var loggedIn = localStorage.getItem('token');
+
+      if (!loggedIn) {
+        return next('/login');
+      }
+
+      next();
+    }
   }, {
     path: '/login',
     name: 'login',
-    component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    beforeEnter: function beforeEnter(to, from, next) {
+      var loggedIn = localStorage.getItem('token');
+
+      if (loggedIn != null) {
+        return location.href = '/';
+      }
+
+      next();
+    }
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
