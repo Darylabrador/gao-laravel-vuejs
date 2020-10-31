@@ -17,7 +17,7 @@ export default {
     methods: {
         prevPagination() {
             Axios.get(this.paginations.prev, {
-                date: this.date
+                params: {date: this.date}
             })
             .then(({data}) => {
                 this.$emit('newpage', data)
@@ -25,11 +25,11 @@ export default {
         },
         nextPagination(){
             Axios.get(this.paginations.next, {
-                date: this.date
+                params: { date: this.date }
             })
-                .then(({ data }) => {
-                    this.$emit('newpage', data)
-                })
+            .then(({ data }) => {
+                this.$emit('newpage', data)
+            })
         }
     }
 }

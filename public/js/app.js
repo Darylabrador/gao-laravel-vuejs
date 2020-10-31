@@ -2390,7 +2390,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.paginations.prev, {
-        date: this.date
+        params: {
+          date: this.date
+        }
       }).then(function (_ref) {
         var data = _ref.data;
 
@@ -2401,7 +2403,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.paginations.next, {
-        date: this.date
+        params: {
+          date: this.date
+        }
       }).then(function (_ref2) {
         var data = _ref2.data;
 
@@ -2466,6 +2470,7 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
     getAllDesktops: function getAllDesktops() {
       var _this = this;
 
+      this.computerList = [];
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers', {
         params: {
           date: this.dateRechercher
@@ -2599,11 +2604,23 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  // init function when the component is created
-  created: function created() {
-    this.initialize();
-    this.displayHoraire();
+  watch: {
+    attributionList: {
+      immediate: true,
+      handler: function handler(value) {
+        this.attributionList = value;
+        this.attributions = {};
+        this.timeslots = [];
+        this.initialize();
+        this.displayHoraire();
+      }
+    }
   },
+  // init function when the component is created
+  // created() {
+  //     this.initialize();
+  //     this.displayHoraire();
+  // },
   // All data disponible for the child component
   data: function data() {
     return {
@@ -2626,14 +2643,16 @@ __webpack_require__.r(__webpack_exports__);
     initialize: function initialize() {
       var _this = this;
 
-      this.attributionList.forEach(function (element) {
-        _this.attributions[element.hours] = {
-          id: element.client.id,
-          surname: element.client.surname,
-          name: element.client.name,
-          idAssign: element.idAssign
-        };
-      });
+      if (this.attributionList.length != 0) {
+        this.attributionList.forEach(function (element) {
+          _this.attributions[element.hours] = {
+            id: element.client.id,
+            surname: element.client.surname,
+            name: element.client.name,
+            idAssign: element.idAssign
+          };
+        });
+      }
     },
 
     /**
@@ -82253,8 +82272,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-laravel-vuejs-2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-laravel-vuejs-2\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-laravel-vuejs\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-laravel-vuejs\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

@@ -10,10 +10,10 @@
 
 
         <div class="d-flex mb-2">
-                <pagination :paginations='paginationLink' class="mr-5" :date='dateRechercher' @newpage='newpage' />
+            <pagination :paginations='paginationLink' class="mr-5" :date='dateRechercher' @newpage='newpage' />
 
-                <!-- event to get new desktop info from child component through adddesktop emit and newdesktop method -->
-                <addOrdinateurModal @adddesktop="newdesktop"/>
+            <!-- event to get new desktop info from child component through adddesktop emit and newdesktop method -->
+            <addOrdinateurModal @adddesktop="newdesktop"/>
         </div>
 
 

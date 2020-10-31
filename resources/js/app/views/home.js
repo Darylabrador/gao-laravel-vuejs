@@ -28,7 +28,7 @@ export default {
             paginationLink: {}
         }
     },
-
+    
     // init function when the parent is created on SPA
     created() {
        this.getAllDesktops(); 
@@ -38,6 +38,7 @@ export default {
     // All methods
     methods: {
         getAllDesktops() {
+            this.computerList = [];
             Axios.get('api/computers', {
                 params: {
                     date: this.dateRechercher

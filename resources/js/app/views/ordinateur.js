@@ -42,12 +42,25 @@ export default {
         }
     },
 
+    watch: {
+        attributionList: {
+            immediate: true,
+            handler(value) {
+                this.attributionList = value;
+                this.attributions = {};
+                this.timeslots = [];
+                this.initialize();
+                this.displayHoraire();
+            },
+        }
+    },
+
 
     // init function when the component is created
-    created() {
-        this.initialize();
-        this.displayHoraire();
-    },
+    // created() {
+    //     this.initialize();
+    //     this.displayHoraire();
+    // },
 
 
     // All data disponible for the child component
@@ -73,14 +86,16 @@ export default {
          * Create the array with assign data
          */
         initialize() {
-            this.attributionList.forEach(element => {
-                this.attributions[element.hours] = {
-                    id: element.client.id,
-                    surname: element.client.surname,
-                    name: element.client.name,
-                    idAssign: element.idAssign
-                }
-            })
+            if (this.attributionList.length != 0) {
+                this.attributionList.forEach(element => {
+                    this.attributions[element.hours] = {
+                        id: element.client.id,
+                        surname: element.client.surname,
+                        name: element.client.name,
+                        idAssign: element.idAssign
+                    }
+                })
+            }
         },
 
         

@@ -19,7 +19,6 @@
           <v-simple-table dense>
             <template v-slot:default>
                 <tr v-for="timeslot in timeslots" :key="timeslot.id">
-
                     <td class="border-right border-dark col-2 py-0">{{ timeslot.hours}}h</td>
 
                     <td class="col-8 py-0 text-center">{{ timeslot.client.surname}}  {{ timeslot.client.name}} </td>
