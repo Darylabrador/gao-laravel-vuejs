@@ -34,7 +34,7 @@ class AssignController extends Controller
         if (count($errors) != 0) {
             return response()->json([
                 'success' => false,
-                'message' => $errors->first('name')
+                'message' => $errors->first()
             ]);
         }
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AssignController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DesktopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', [AuthController::class, 'postLogin']);
 
 Route::get('/computers', [GeneralController::class, 'getAll']);
 
