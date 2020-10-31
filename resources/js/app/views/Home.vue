@@ -8,8 +8,14 @@
         <!-- datepicker component -->
         <datepicker @datechange='changementDate'/>
 
-        <!-- event to get new desktop info from child component through adddesktop emit and newdesktop method -->
-        <addOrdinateurModal @adddesktop="newdesktop"/>
+
+        <div class="d-flex mb-2">
+                <pagination :paginations='paginationLink' class="mr-5" :date='dateRechercher' @newpage='newpage' />
+
+                <!-- event to get new desktop info from child component through adddesktop emit and newdesktop method -->
+                <addOrdinateurModal @adddesktop="newdesktop"/>
+        </div>
+
 
         <v-row>
             <v-col md='4' v-for='(ordinateur,key) in computerList' :key='key'>

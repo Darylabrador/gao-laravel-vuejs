@@ -18,13 +18,11 @@ class GeneralController extends Controller
      */
     public function getAll(Request $request)
     {
-        // $desktop = Desktop::paginate(3);
-
         $dateNow = $request->date;
 
         $desktop = Desktop::with(array('assigns' => function ($query) use ($dateNow) {
             $query->where('date', $dateNow);
-        }))->get();
+        }))->paginate(3);
 
         return DesktopResources::collection($desktop);
     }
@@ -67,92 +65,5 @@ class GeneralController extends Controller
             'message' => 'Poste créer',
             'desktop' =>  $desktop
         ], 200);
-    }
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Update the specified desktop in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function updateDesktop(Request $request, $id)
-    {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'name' => 'required|min:4|unique:desktops',
-            ],
-            [
-                'required' => 'Le champ :attribute est requis',
-                'min' => '5 caractères minimums',
-                'unique' => 'Poste existe déjà'
-            ]
-        );
-
-        $errors = $validator->errors();
-
-        if (count($errors) != 0) {
-            return response()->json([
-                'success' => false,
-                'message' => $errors->first('name')
-            ]);
-        }
-
-        $desktop = Desktop::find($id);
-
-        if($desktop == null) {
-            return response()->json([
-                'success' => false,
-                'message' => "Poste introuvable"
-            ]);
-        }
-
-        $desktop->name = $validator->validated()['name'];
-        $desktop->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Mise à jour effectuée'
-        ]);
-    }
-
-    /**
-     * Destroy specific desktop using $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroyDesktop($id)
-    {
-        $desktop = Desktop::find($id);
-
-        if ($desktop == null) {
-            return response()->json([
-                    'success' => false,
-                    'message' => "Poste introuvable"
-                ]);
-        }
-
-        $desktop->delete();
-        return response()->json(
-            [
-                'success' => true,
-                'message' => 'Suppression effectuée'
-            ]);
     }
 }

@@ -1,7 +1,8 @@
 import Axios from "axios";
-import Ordinateur from '../components/Ordinateur.vue';
+import Ordinateur from './Ordinateur.vue';
 import AddOrdinateurModal from '../components/modals/AddOrdinateurModal.vue';
 import Datepicker from '../components/datepickers/Datepicker.vue';
+import Pagination from '../components/pagination/Pagination.vue';
 
 import Vue from 'vue';
 var bus = new Vue();
@@ -15,14 +16,16 @@ export default {
     components: {
         Ordinateur,
         AddOrdinateurModal,
-        Datepicker
+        Datepicker,
+        Pagination
     },
 
     // data that we can use
     data() {
         return {
             computerList: [],
-            dateRechercher: new Date().toISOString().substr(0, 10)
+            dateRechercher: new Date().toISOString().substr(0, 10),
+            paginationLink: {}
         }
     },
 
@@ -44,6 +47,7 @@ export default {
                 responseData.forEach(element => {
                     this.computerList.push(element);
                 })
+                this.paginationLink = data.links;
             })
         },
 
@@ -65,7 +69,14 @@ export default {
             refreshDeleteData.forEach(element => {
                 this.computerList.push(element);
             });
-            console.log(this.computerList)
+        },
+
+        newpage(page){
+            this.computerList   = [];
+            page.data.forEach(element => {
+                this.computerList.push(element)
+            })
+            this.paginationLink = page.links;
         }
     },
 }
