@@ -43,6 +43,9 @@ export default {
             Axios.get('api/computers', {
                 params: {
                     date: this.dateRechercher
+                },
+                headers: {
+                    Authorization : `Bearer ${localStorage.getItem('token')}`
                 }
             }).then( ({ data }) => {
                 var responseData = data.data;

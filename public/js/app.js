@@ -1978,6 +1978,10 @@ __webpack_require__.r(__webpack_exports__);
         setTimeout(function () {
           axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/client/search', {
             clientInfo: v
+          }, {
+            headers: {
+              Authorization: "Bearer ".concat(localStorage.getItem('token'))
+            }
           }).then(function (_ref) {
             var data = _ref.data;
             var responseData = data.data;
@@ -2112,7 +2116,11 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name
       }; // Send data to add desktop API route
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers', dataSend).then(function (_ref) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers', dataSend, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (_ref) {
         var data = _ref.data;
 
         if (data.success) {
@@ -2199,6 +2207,10 @@ __webpack_require__.r(__webpack_exports__);
         client_id: this.selectedClient.id,
         hours: this.selectedHours,
         date: this.selectedDate
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
       }).then(function (_ref) {
         var data = _ref.data;
         var responseData = data.data;
@@ -2290,7 +2302,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteassign: function deleteassign() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/attributions/".concat(this.idAssign)).then(function (_ref) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/attributions/".concat(this.idAssign), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (_ref) {
         var data = _ref.data;
         var responseData = data;
 
@@ -2345,7 +2361,11 @@ __webpack_require__.r(__webpack_exports__);
     deletedesktop: function deletedesktop() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/".concat(this.iddesktop)).then(function (_ref) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/".concat(this.iddesktop), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (_ref) {
         var data = _ref.data;
 
         if (data.success) {
@@ -2392,6 +2412,9 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.paginations.prev, {
         params: {
           date: this.date
+        },
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -2405,6 +2428,9 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.paginations.next, {
         params: {
           date: this.date
+        },
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
       }).then(function (_ref2) {
         var data = _ref2.data;
@@ -2475,6 +2501,9 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers', {
         params: {
           date: this.dateRechercher
+        },
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -2564,6 +2593,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (responseData.success) {
           localStorage.setItem('token', responseData.token);
+          location.href = '/';
         } else {}
       });
     }

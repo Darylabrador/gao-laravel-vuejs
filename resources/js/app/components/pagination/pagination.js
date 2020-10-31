@@ -17,7 +17,8 @@ export default {
     methods: {
         prevPagination() {
             Axios.get(this.paginations.prev, {
-                params: {date: this.date}
+                params: {date: this.date},
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             .then(({data}) => {
                 this.$emit('newpage', data)
@@ -25,7 +26,8 @@ export default {
         },
         nextPagination(){
             Axios.get(this.paginations.next, {
-                params: { date: this.date }
+                params: { date: this.date },
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             .then(({ data }) => {
                 this.$emit('newpage', data)

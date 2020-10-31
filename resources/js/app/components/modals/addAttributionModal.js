@@ -53,6 +53,11 @@ export default {
                 client_id: this.selectedClient.id,
                 hours: this.selectedHours,
                 date: this.selectedDate
+            }, 
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
             .then(({data}) => {
                 const responseData = data.data;

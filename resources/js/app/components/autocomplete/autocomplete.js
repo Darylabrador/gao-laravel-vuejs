@@ -21,18 +21,25 @@ export default {
         querySelections(v) {
             if(v.length >= 3) {
                 setTimeout(() => {
-                    Axios.post('/api/client/search', { clientInfo: v })
-                        .then(({ data }) => {
-                            var responseData = data.data;
-                            responseData.forEach(client => {
-                                this.items.push({
-                                    id: client.id,
-                                    name: client.name,
-                                    surname: client.surname,
-                                    fullname: `${client.surname} ${client.name}`
-                                })
+                    Axios.post('/api/client/search', 
+                    { clientInfo: v },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('token')}`
+                        }
+                    }
+                    )
+                    .then(({ data }) => {
+                        var responseData = data.data;
+                        responseData.forEach(client => {
+                            this.items.push({
+                                id: client.id,
+                                name: client.name,
+                                surname: client.surname,
+                                fullname: `${client.surname} ${client.name}`
                             })
                         })
+                    })
                 }, 500)
             }
         },

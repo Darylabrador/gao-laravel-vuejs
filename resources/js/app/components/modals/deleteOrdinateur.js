@@ -24,7 +24,11 @@ export default {
             this.$emit('update:dialog', false);
         },
         deletedesktop() {
-            Axios.delete(`/api/computers/${this.iddesktop}`)
+            Axios.delete(`/api/computers/${this.iddesktop}`, {
+                headers : {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
                 .then(({ data }) =>{
                     if(data.success){
                         this.$emit('deleteddesktop', this.iddesktop);

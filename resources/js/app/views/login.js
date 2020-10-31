@@ -19,7 +19,7 @@ export default {
                 let responseData = response.data;
                 if (responseData.success){
                     localStorage.setItem('token', responseData.token);
-                    
+                    location.href = '/';
                 } else {
 
                 }

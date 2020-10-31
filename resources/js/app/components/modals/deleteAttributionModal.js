@@ -24,7 +24,11 @@ export default {
             this.$emit('update:dialog', false);
         },
         deleteassign() {
-            Axios.delete(`/api/computers/attributions/${this.idAssign}`)
+            Axios.delete(`/api/computers/attributions/${this.idAssign}`,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             .then(({data}) => {
                 let responseData = data;
                 if(responseData.success){

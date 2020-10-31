@@ -29,18 +29,22 @@ export default {
             };
 
             // Send data to add desktop API route
-            Axios.post('/api/computers', dataSend)
-                .then(({data}) => {
-                    if(data.success) {
-                        document.getElementById('formAddOrdi').reset();
-                        this.$emit('closemodal', false);
-                        this.$emit('adddesktop', data.desktop);
-                    } else {
-                        this.color = "red";
-                        this.message = data.message;
-                        this.isError = true;
-                    }
-                })
+            Axios.post('/api/computers', dataSend, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(({data}) => {
+                if(data.success) {
+                    document.getElementById('formAddOrdi').reset();
+                    this.$emit('closemodal', false);
+                    this.$emit('adddesktop', data.desktop);
+                } else {
+                    this.color = "red";
+                    this.message = data.message;
+                    this.isError = true;
+                }
+            })
         }
     }
 }
