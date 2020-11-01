@@ -16,13 +16,13 @@ Après avoir fait un git clone de ce projet, vous devez effectué les actions su
 - php artisan migrate:refresh --seed
 - php artisan passport:install --force
 
-Après avoir fait les deux commandes utilisant "php artisan", vous devez modifier créer le fichier .env et modifier les lignes suivantes : 
+Après avoir fait les deux commandes utilisant "php artisan", vous devez créer et modifier le fichier .env et modifier les lignes suivantes : 
 
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
-PASSPORT_PERSONAL_ACCESS_CLIENT_ID=
-PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET=
+- DB_DATABASE=
+- DB_USERNAME=
+- DB_PASSWORD=
+- PASSPORT_PERSONAL_ACCESS_CLIENT_ID=
+- PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET=
 
 Les informations concernant le passport se trouve dans votre base de données.
 
