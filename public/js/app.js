@@ -2176,10 +2176,6 @@ __webpack_require__.r(__webpack_exports__);
           _this.$emit('closeModal', false);
 
           _this.$emit('addDesktop', data.desktop);
-        } else {
-          _this.color = "red";
-          _this.message = data.message;
-          _this.isError = true;
         }
       });
     }

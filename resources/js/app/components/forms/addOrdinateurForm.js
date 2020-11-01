@@ -5,8 +5,6 @@ import token from "../../services/token.js";
  * Form to add computer
  */
 export default {
-
-
     // Data that can be use on component
     data: () => ({
         name: '',
@@ -35,10 +33,6 @@ export default {
                     document.getElementById('formAddOrdi').reset();
                     this.$emit('closeModal', false);
                     this.$emit('addDesktop', data.desktop);
-                } else {
-                    this.color = "red";
-                    this.message = data.message;
-                    this.isError = true;
                 }
             })
         }
