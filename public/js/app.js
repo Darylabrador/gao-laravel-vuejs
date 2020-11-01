@@ -1969,8 +1969,7 @@ __webpack_require__.r(__webpack_exports__);
       search: null,
       client: null,
       disabledButton: true,
-      isDisplayModal: false,
-      dialog: false
+      isActive: false
     };
   },
   watch: {
@@ -2026,8 +2025,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('disabledButtonAttribute', false);
     },
     displayModalAddClient: function displayModalAddClient() {
-      this.isDisplayModal = true;
-      this.$emit('displayAddClientModal', false);
+      this.isActive = true;
     }
   }
 });
@@ -2316,12 +2314,7 @@ __webpack_require__.r(__webpack_exports__);
    * Data from parent component
    */
   props: {
-    dialog: {
-      "default": function _default() {
-        return {};
-      }
-    },
-    isDisplayModal: {
+    isActive: {
       "default": function _default() {
         return {};
       }
@@ -2334,7 +2327,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       name: '',
-      surname: ''
+      surname: '',
+      dialog: this.isActive ? true : false
     };
   },
 
@@ -21417,11 +21411,12 @@ var render = function() {
                     1
                   )
                 : _c("addClientModal", {
-                    attrs: { dialog: _vm.isDisplayModal },
+                    attrs: { dialog: _vm.isActive },
                     on: {
                       "update:dialog": function($event) {
-                        _vm.isDisplayModal = $event
-                      }
+                        _vm.isActive = $event
+                      },
+                      click: _vm.displayModalAddClient
                     }
                   })
             ],
@@ -21698,12 +21693,7 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _c("autocomplete", {
-                on: {
-                  attributeClient: _vm.getInfoClient,
-                  disabledButtonAttribute: _vm.isDisabledAttribute
-                }
-              })
+              _c("autocomplete", { on: { attributeClient: _vm.getInfoClient } })
             ],
             1
           ),
@@ -21838,49 +21828,64 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-card-actions",
+            { staticClass: "d-flex flex-column" },
             [
-              _c("v-text-field", {
-                attrs: { color: "dark", label: "Nom", required: "" },
-                model: {
-                  value: _vm.surname,
-                  callback: function($$v) {
-                    _vm.surname = $$v
-                  },
-                  expression: "surname"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: { color: "dark", label: "Prenom", required: "" },
-                model: {
-                  value: _vm.name,
-                  callback: function($$v) {
-                    _vm.name = $$v
-                  },
-                  expression: "name"
-                }
-              }),
-              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
-                "v-btn",
-                {
-                  staticClass: "text-white",
-                  attrs: { color: "grey darken-1" },
-                  on: { click: _vm.close }
-                },
-                [_vm._v(" Annuler ")]
+                "div",
+                { staticClass: "w-100 px-3" },
+                [
+                  _c("v-text-field", {
+                    attrs: { color: "dark", label: "Nom", required: "" },
+                    model: {
+                      value: _vm.surname,
+                      callback: function($$v) {
+                        _vm.surname = $$v
+                      },
+                      expression: "surname"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: { color: "dark", label: "Prenom", required: "" },
+                    model: {
+                      value: _vm.name,
+                      callback: function($$v) {
+                        _vm.name = $$v
+                      },
+                      expression: "name"
+                    }
+                  })
+                ],
+                1
               ),
               _vm._v(" "),
               _c(
-                "v-btn",
-                {
-                  staticClass: "text-white",
-                  attrs: { color: "blue darken-1" },
-                  on: { click: _vm.createClient }
-                },
-                [_vm._v(" Ajouter ")]
+                "div",
+                { staticClass: "d-flex justify-content-end w-100" },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "text-white mx-2",
+                      attrs: { color: "grey darken-1" },
+                      on: { click: _vm.close }
+                    },
+                    [_vm._v(" Annuler ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "text-white mx-2",
+                      attrs: { color: "blue darken-1" },
+                      on: { click: _vm.createClient }
+                    },
+                    [_vm._v(" Ajouter ")]
+                  )
+                ],
+                1
               )
             ],
             1

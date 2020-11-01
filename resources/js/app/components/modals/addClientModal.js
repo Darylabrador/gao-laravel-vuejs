@@ -9,12 +9,7 @@ export default {
      * Data from parent component
      */
     props: {
-        dialog: {
-            default: function () {
-                return {}
-            }
-        },
-        isDisplayModal: {
+        isActive: {
             default: function () {
                 return {}
             }
@@ -28,7 +23,8 @@ export default {
     data() {
         return {
             name: '',
-            surname: ''
+            surname: '',
+            dialog: this.isActive ? true : false
         }
     },
 

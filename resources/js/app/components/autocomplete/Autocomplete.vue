@@ -24,7 +24,7 @@
                     <v-icon> mdi-plus-circle-outline</v-icon>
                 </v-btn>
                
-                <addClientModal :dialog.sync="isDisplayModal" v-else />
+                <addClientModal :dialog.sync="isActive" v-else @click="displayModalAddClient" />
                 
             </v-col>
         </v-row>

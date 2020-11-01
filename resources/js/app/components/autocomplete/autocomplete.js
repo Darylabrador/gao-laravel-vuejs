@@ -17,8 +17,7 @@ export default {
             search: null,
             client: null,
             disabledButton: true,
-            isDisplayModal: false,
-            dialog: false
+            isActive: false
         }
     },
 
@@ -76,8 +75,7 @@ export default {
         },
 
         displayModalAddClient() {
-            this.isDisplayModal = true;
-            this.$emit('displayAddClientModal', false);
-        }
+            this.isActive = true;
+        },
     },
 }
