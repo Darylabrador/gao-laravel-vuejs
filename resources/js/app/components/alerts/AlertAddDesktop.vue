@@ -2,8 +2,8 @@
 * Alert vue for add desktop
 */
 <template>
-  <div>
-    <v-alert v-model="alert" border="left" close-text="Close Alert" :color="color" dark dismissible @click="resetAlert">
+  <div class="my-0 py-0">
+    <v-alert v-model="alert" border="left" :color="color" dark v-if="isError">
       {{ message }}
     </v-alert>
   </div>

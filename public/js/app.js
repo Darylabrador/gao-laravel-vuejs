@@ -1899,6 +1899,55 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Js for alert add desktop component
+ */
+/* harmony default export */ __webpack_exports__["default"] = ({
+  // data from parent components
+  props: {
+    message: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    color: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    isError: {
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
+  watch: {
+    isError: {
+      immediate: true,
+      handler: function handler(val) {
+        this.alert = val;
+      }
+    }
+  },
+  // data that can be use by alert add desktop component
+  data: function data() {
+    return {
+      alert: false
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/autocomplete/autocomplete.js?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/autocomplete/autocomplete.js?vue&type=script&lang=js& ***!
@@ -2864,16 +2913,26 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_alerts_AlertAddDesktop_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/alerts/AlertAddDesktop.vue */ "./resources/js/app/components/alerts/AlertAddDesktop.vue");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AlertComponent: _components_alerts_AlertAddDesktop_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      message: '',
+      color: '',
+      isError: ''
     };
   },
   methods: {
     postLogin: function postLogin() {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', {
         email: this.email,
         password: this.password
@@ -2883,7 +2942,14 @@ __webpack_require__.r(__webpack_exports__);
         if (responseData.success) {
           localStorage.setItem('token', responseData.token);
           location.href = '/';
-        } else {}
+          _this.isError = false;
+          _this.message = "";
+          _this.color = "";
+        } else {
+          _this.isError = true;
+          _this.message = responseData.message;
+          _this.color = "red";
+        }
       });
     }
   }
@@ -21339,6 +21405,52 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "my-0 py-0" },
+    [
+      _vm.isError
+        ? _c(
+            "v-alert",
+            {
+              attrs: { border: "left", color: _vm.color, dark: "" },
+              model: {
+                value: _vm.alert,
+                callback: function($$v) {
+                  _vm.alert = $$v
+                },
+                expression: "alert"
+              }
+            },
+            [_vm._v("\n    " + _vm._s(_vm.message) + "\n  ")]
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/autocomplete/Autocomplete.vue?vue&type=template&id=7fe27e7c&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/autocomplete/Autocomplete.vue?vue&type=template&id=7fe27e7c& ***!
@@ -22446,17 +22558,22 @@ var render = function() {
         "div",
         { staticClass: "p-4 rounded border shadow" },
         [
-          _c("h5", { staticClass: "text-center" }, [
+          _c("h5", { staticClass: "text-center mb-5" }, [
             _vm._v(" Bienvenue sur l’espace culturel ")
           ]),
+          _vm._v(" "),
+          _c("alertComponent", {
+            attrs: {
+              message: _vm.message,
+              color: _vm.color,
+              isError: _vm.isError
+            }
+          }),
           _vm._v(" "),
           _c(
             "v-form",
             {
-              staticStyle: {
-                "min-width": "350px !important",
-                "margin-top": "50px !important"
-              },
+              staticStyle: { "min-width": "350px !important" },
               attrs: { method: "POST" }
             },
             [
@@ -81770,6 +81887,75 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./app/main */ "./resources/js/app/main.js");
+
+/***/ }),
+
+/***/ "./resources/js/app/components/alerts/AlertAddDesktop.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/app/components/alerts/AlertAddDesktop.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlertAddDesktop.vue?vue&type=template&id=6538d53c& */ "./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&");
+/* harmony import */ var _alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alertAddDesktop.js?vue&type=script&lang=js& */ "./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/alerts/AlertAddDesktop.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AlertAddDesktop.vue?vue&type=template&id=6538d53c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/alerts/AlertAddDesktop.vue?vue&type=template&id=6538d53c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertAddDesktop_vue_vue_type_template_id_6538d53c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./alertAddDesktop.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/alerts/alertAddDesktop.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_alertAddDesktop_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

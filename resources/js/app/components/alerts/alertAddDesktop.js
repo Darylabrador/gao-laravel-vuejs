@@ -22,10 +22,19 @@ export default {
         }
     },
 
+    watch: {
+        isError: {
+            immediate: true,
+            handler(val){
+                this.alert = val;
+            }
+        }
+    },
+
     // data that can be use by alert add desktop component
     data () {
         return {
-            alert: this.isError
+            alert: false
         }
     },
 }
