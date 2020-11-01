@@ -29,6 +29,7 @@ Route::middleware('auth:api')->group(function() {
     Route::get('/computers', [GeneralController::class, 'getAll']);
     Route::post('/computers', [GeneralController::class, 'createDesktop']);
     Route::post('/client/search', [ClientController::class, 'searchClient']);
+    Route::post('/client/attributions', [ClientController::class, 'createClient']);
     Route::post('/computers/attributions', [AssignController::class, 'setAttribution']);
     Route::delete('/computers/attributions/{id}', [AssignController::class, 'deleteAttribution']);
     Route::delete('/computers/{id}', [DesktopController::class, 'deleteDesktop']);

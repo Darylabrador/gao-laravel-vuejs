@@ -1,11 +1,5 @@
 <template>
     <v-dialog v-model="dialog" max-width="500" persistent>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn icon color="green" v-bind="attrs" v-on="on">
-            <v-icon> mdi-plus-circle-outline</v-icon>
-        </v-btn>
-      </template>
-
       <v-card>
         <v-card-title class="headline font-weight-bold border-bottom border-dark d-flex justify-content-between">
           <h5> Ajouter un client </h5>
@@ -20,7 +14,8 @@
             </div>
            <div class="d-flex justify-content-end w-100">
                 <v-btn class="text-white mx-2" color="grey darken-1" @click="close"> Annuler </v-btn>
-                <v-btn class="text-white mx-2" color="blue darken-1" @click="createClient"> Ajouter </v-btn>
+                <v-btn class="text-white mx-2" color="blue darken-1" disabled v-if="isDisabledButton"> Ajouter </v-btn>
+                <v-btn class="text-white mx-2" color="blue darken-1" @click="createClient" v-else> Ajouter </v-btn>
            </div>
         </v-card-actions>
       </v-card>

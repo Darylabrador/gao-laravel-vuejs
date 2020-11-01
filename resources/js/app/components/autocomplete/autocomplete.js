@@ -10,6 +10,12 @@ export default {
         AddClientModal
     },
 
+    props: {
+        selectedHours: {},
+        selectedDesktop: {},
+        selectedDate: {},
+    },
+
     data() {
         return {
             loading: false,
@@ -17,7 +23,7 @@ export default {
             search: null,
             client: null,
             disabledButton: true,
-            isActive: false
+            isActiveModalClient: false
         }
     },
 
@@ -74,8 +80,13 @@ export default {
             this.$emit('disabledButtonAttribute', false)
         },
 
-        displayModalAddClient() {
-            this.isActive = true;
+        openAddClientModal(){
+            this.isActiveModalClient = true
+            this.$emit('addClientModalActive', false);
         },
+
+        createdClientAndAssign(val){
+            this.$emit('createdClientAndAssign', val)
+        }
     },
 }

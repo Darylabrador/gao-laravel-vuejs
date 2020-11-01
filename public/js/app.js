@@ -1962,6 +1962,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AddClientModal: _modals_AddClientModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: {
+    selectedHours: {},
+    selectedDesktop: {},
+    selectedDate: {}
+  },
   data: function data() {
     return {
       loading: false,
@@ -1969,7 +1974,7 @@ __webpack_require__.r(__webpack_exports__);
       search: null,
       client: null,
       disabledButton: true,
-      isActive: false
+      isActiveModalClient: false
     };
   },
   watch: {
@@ -2024,8 +2029,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('attributeClient', client);
       this.$emit('disabledButtonAttribute', false);
     },
-    displayModalAddClient: function displayModalAddClient() {
-      this.isActive = true;
+    openAddClientModal: function openAddClientModal() {
+      this.isActiveModalClient = true;
+      this.$emit('addClientModalActive', false);
+    },
+    createdClientAndAssign: function createdClientAndAssign(val) {
+      this.$emit('createdClientAndAssign', val);
     }
   }
 });
@@ -2287,6 +2296,16 @@ __webpack_require__.r(__webpack_exports__);
      */
     isDisabledAttribute: function isDisabledAttribute(isDisabled) {
       this.isDisabled = isDisabled;
+    },
+
+    /**
+     * Close the attribute modal if add client modal is open
+     */
+    isModalClientActive: function isModalClientActive(modalClientActive) {
+      this.close();
+    },
+    createdClientAndAssign: function createdClientAndAssign(val) {
+      this.$emit('addAssign', val);
     }
   }
 });
@@ -2314,10 +2333,26 @@ __webpack_require__.r(__webpack_exports__);
    * Data from parent component
    */
   props: {
-    isActive: {
+    dialog: {
       "default": function _default() {
         return {};
       }
+    },
+    addClientModal: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    selectedHours: {},
+    selectedDesktop: {},
+    selectedDate: {}
+  },
+  watch: {
+    surname: function surname(val) {
+      this.disabledButton();
+    },
+    name: function name(val) {
+      this.disabledButton();
     }
   },
 
@@ -2328,7 +2363,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       surname: '',
-      dialog: this.isActive ? true : false
+      isDisabledButton: true
     };
   },
 
@@ -2342,8 +2377,45 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.$emit('update:dialog', false);
     },
+
+    /**
+     * Create client and assign in timeslot
+     */
     createClient: function createClient() {
-      console.log('nom', this.surname, 'prenom', this.name);
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/client/attributions", {
+        name: this.name,
+        surname: this.surname,
+        desktop_id: this.selectedDesktop,
+        hours: this.selectedHours,
+        date: this.selectedDate
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        var responseData = response.data;
+
+        if (responseData.success) {
+          _this.$emit('createdClientAndAssign', responseData.message);
+
+          _this.close();
+        }
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+
+    /**
+     * Enable create client button only on some condition
+     */
+    disabledButton: function disabledButton() {
+      if (this.name != "" && this.surname != "" && this.name.length >= 3 && this.surname.length >= 3) {
+        this.isDisabledButton = false;
+      } else {
+        this.isDisabledButton = true;
+      }
     }
   }
 });
@@ -21356,6 +21428,21 @@ var render = function() {
     "v-container",
     { attrs: { fluid: "" } },
     [
+      _c("addClientModal", {
+        attrs: {
+          dialog: _vm.isActiveModalClient,
+          selectedHours: _vm.selectedHours,
+          selectedDesktop: _vm.selectedDesktop,
+          selectedDate: _vm.selectedDate
+        },
+        on: {
+          "update:dialog": function($event) {
+            _vm.isActiveModalClient = $event
+          },
+          createdClientAndAssign: _vm.createdClientAndAssign
+        }
+      }),
+      _vm._v(" "),
       _c(
         "v-row",
         [
@@ -21410,15 +21497,15 @@ var render = function() {
                     [_c("v-icon", [_vm._v(" mdi-plus-circle-outline")])],
                     1
                   )
-                : _c("addClientModal", {
-                    attrs: { dialog: _vm.isActive },
-                    on: {
-                      "update:dialog": function($event) {
-                        _vm.isActive = $event
-                      },
-                      click: _vm.displayModalAddClient
-                    }
-                  })
+                : _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", color: "green" },
+                      on: { click: _vm.openAddClientModal }
+                    },
+                    [_c("v-icon", [_vm._v(" mdi-plus-circle-outline")])],
+                    1
+                  )
             ],
             1
           )
@@ -21693,7 +21780,18 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _c("autocomplete", { on: { attributeClient: _vm.getInfoClient } })
+              _c("autocomplete", {
+                attrs: {
+                  selectedHours: _vm.selectedHours,
+                  selectedDesktop: _vm.selectedDesktop,
+                  selectedDate: _vm.selectedDate
+                },
+                on: {
+                  attributeClient: _vm.getInfoClient,
+                  addClientModalActive: _vm.isModalClientActive,
+                  createdClientAndAssign: _vm.createdClientAndAssign
+                }
+              })
             ],
             1
           ),
@@ -21767,31 +21865,6 @@ var render = function() {
     "v-dialog",
     {
       attrs: { "max-width": "500", persistent: "" },
-      scopedSlots: _vm._u([
-        {
-          key: "activator",
-          fn: function(ref) {
-            var on = ref.on
-            var attrs = ref.attrs
-            return [
-              _c(
-                "v-btn",
-                _vm._g(
-                  _vm._b(
-                    { attrs: { icon: "", color: "green" } },
-                    "v-btn",
-                    attrs,
-                    false
-                  ),
-                  on
-                ),
-                [_c("v-icon", [_vm._v(" mdi-plus-circle-outline")])],
-                1
-              )
-            ]
-          }
-        }
-      ]),
       model: {
         value: _vm.dialog,
         callback: function($$v) {
@@ -21801,7 +21874,6 @@ var render = function() {
       }
     },
     [
-      _vm._v(" "),
       _c(
         "v-card",
         [
@@ -21875,15 +21947,24 @@ var render = function() {
                     [_vm._v(" Annuler ")]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      staticClass: "text-white mx-2",
-                      attrs: { color: "blue darken-1" },
-                      on: { click: _vm.createClient }
-                    },
-                    [_vm._v(" Ajouter ")]
-                  )
+                  _vm.isDisabledButton
+                    ? _c(
+                        "v-btn",
+                        {
+                          staticClass: "text-white mx-2",
+                          attrs: { color: "blue darken-1", disabled: "" }
+                        },
+                        [_vm._v(" Ajouter ")]
+                      )
+                    : _c(
+                        "v-btn",
+                        {
+                          staticClass: "text-white mx-2",
+                          attrs: { color: "blue darken-1" },
+                          on: { click: _vm.createClient }
+                        },
+                        [_vm._v(" Ajouter ")]
+                      )
                 ],
                 1
               )

@@ -1,5 +1,8 @@
 <template>
     <v-container fluid>
+
+        <addClientModal :dialog.sync="isActiveModalClient" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @createdClientAndAssign="createdClientAndAssign" />
+
         <v-row>
             <v-col cols="10">
                 <v-autocomplete
@@ -23,9 +26,10 @@
                 <v-btn icon color="green" v-if="disabledButton" disabled>
                     <v-icon> mdi-plus-circle-outline</v-icon>
                 </v-btn>
-               
-                <addClientModal :dialog.sync="isActive" v-else @click="displayModalAddClient" />
-                
+
+                <v-btn icon color="green" v-else @click="openAddClientModal">
+                    <v-icon> mdi-plus-circle-outline</v-icon>
+                </v-btn>
             </v-col>
         </v-row>
     </v-container>

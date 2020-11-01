@@ -44,7 +44,7 @@ export default {
             } 
         }
     },
-    
+
 
     /**
      * Data of child component
@@ -104,6 +104,17 @@ export default {
          */
         isDisabledAttribute(isDisabled) {
             this.isDisabled = isDisabled
+        },
+
+        /**
+         * Close the attribute modal if add client modal is open
+         */
+        isModalClientActive(modalClientActive){
+            this.close();
+        },
+
+        createdClientAndAssign(val){
+            this.$emit('addAssign', val)
         }
     }
 }

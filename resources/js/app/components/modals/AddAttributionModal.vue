@@ -7,7 +7,7 @@
           </v-card-title>
 
         <v-card-text>
-          <autocomplete @attributeClient="getInfoClient" />
+          <autocomplete @attributeClient="getInfoClient" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @addClientModalActive="isModalClientActive" @createdClientAndAssign="createdClientAndAssign" />
         </v-card-text>
 
         <v-card-actions class="d-flex justify-content-end mt-0 pt-0">
