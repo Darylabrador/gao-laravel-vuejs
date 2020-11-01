@@ -16,7 +16,7 @@ Après avoir fait un git clone de ce projet, vous devez effectué les actions su
 - php artisan migrate:refresh --seed
 - php artisan passport:install --force
 
-Après avoir fait les deux commandes utilisant "php artisan", vous devez créer et modifier le fichier .env et modifier les lignes suivantes : 
+Ensuite, vous devez créer et modifier le fichier .env pour les lignes suivantes : 
 
 - DB_DATABASE=
 - DB_USERNAME=
