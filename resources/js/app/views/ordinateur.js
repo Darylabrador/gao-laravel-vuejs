@@ -11,6 +11,7 @@ import AddAttributionModal from "../components/modals/AddAttributionModal.vue";
 import DeleteAttributionModal from "../components/modals/DeleteAttributionModal.vue";
 import DeleteOrdinateur from "../components/modals/DeleteOrdinateur.vue";
 
+
 export default {
     components: {
         AddAttributionModal,

@@ -1,4 +1,5 @@
 import Axios from "axios";
+import token from '../../services/token.js';
 
 /**
  * Handle the delete attribution timeslot
@@ -45,7 +46,7 @@ export default {
         deleteAssign() {
             Axios.delete(`/api/computers/attributions/${this.idAssign}`,{
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({data}) => {

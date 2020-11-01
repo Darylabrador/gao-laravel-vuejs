@@ -1,4 +1,5 @@
 import Axios from "axios";
+import token from '../../services/token.js';
 
 /**
  * handle delete desktop action
@@ -46,7 +47,7 @@ export default {
         deleteDesktop() {
             Axios.delete(`/api/computers/${this.idDesktop}`, {
                 headers : {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({ data }) =>{

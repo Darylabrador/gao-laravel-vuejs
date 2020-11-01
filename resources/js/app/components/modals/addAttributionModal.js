@@ -1,5 +1,6 @@
 import Axios from "axios";
 import Autocomplete from "../autocomplete/Autocomplete.vue";
+import token from "../../services/token.js";
 
 /**
  * Add attribution js file
@@ -89,7 +90,7 @@ export default {
             }, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({data}) => {

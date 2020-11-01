@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import token from '../../services/token.js';
 
 /**
  * Handle pagination
@@ -32,7 +33,7 @@ export default {
         prevPagination() {
             Axios.get(this.paginations.prev, {
                 params: {date: this.date},
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                headers: { Authorization: `Bearer ${token.isTokenStored()}` }
             })
             .then(({data}) => {
                 this.$emit('newPage', data)
@@ -45,7 +46,7 @@ export default {
         nextPagination(){
             Axios.get(this.paginations.next, {
                 params: { date: this.date },
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                headers: { Authorization: `Bearer ${token.isTokenStored()}` }
             })
             .then(({ data }) => {
                 this.$emit('newPage', data)

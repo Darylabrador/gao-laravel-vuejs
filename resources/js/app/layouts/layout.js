@@ -1,7 +1,9 @@
+import token from '../services/token.js';
+
 export default {
     data() {
         return {
-            isLogged: localStorage.getItem('token')
+            isLogged: token.isTokenStored()
         }
     },
     methods: {

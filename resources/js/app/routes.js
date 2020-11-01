@@ -5,6 +5,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
+import token from './services/token.js';
 
 Vue.use(VueRouter);
 
@@ -17,8 +18,7 @@ const router = new VueRouter({
             name: 'home',
             component: Home,
             beforeEnter(to, from, next) {
-                const loggedIn = localStorage.getItem('token');
-                if(!loggedIn) {
+                if (!token.isTokenStored()) {
                     return next('/login')
                 }
                 next()
@@ -29,8 +29,7 @@ const router = new VueRouter({
             name: 'login',
             component: Login,
             beforeEnter(to, from, next) {
-                const loggedIn = localStorage.getItem('token');
-                if (loggedIn != null) {
+                if (token.isTokenStored() != null) {
                     return location.href = '/';
                 }
                 next()

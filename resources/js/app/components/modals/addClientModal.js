@@ -1,4 +1,5 @@
 import Axios from "axios";
+import token from "../../services/token.js";
 
 /**
  * Add client js file
@@ -71,7 +72,7 @@ export default {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
                 .then((response) => {

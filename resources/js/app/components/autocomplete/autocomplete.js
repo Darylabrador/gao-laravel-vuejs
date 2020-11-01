@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import AddClientModal from '../modals/AddClientModal.vue';
+import token from '../../services/token.js';
 
 /**
  * Autocomplete
@@ -48,7 +49,7 @@ export default {
                     { clientInfo: v },
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem('token')}`
+                            Authorization: `Bearer ${token.isTokenStored()}`
                         }
                     }
                     )

@@ -1,15 +1,11 @@
 import Axios from "axios"
-import AlertDesktop from "../alerts/AlertAddDesktop.vue";
+import token from "../../services/token.js";
 
 /**
  * Form to add computer
  */
 export default {
 
-    // child components
-    // components: {
-    //     AlertDesktop
-    // },
 
     // Data that can be use on component
     data: () => ({
@@ -31,7 +27,7 @@ export default {
             // Send data to add desktop API route
             Axios.post('/api/computers', dataSend, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({data}) => {

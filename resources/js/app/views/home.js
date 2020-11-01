@@ -3,6 +3,7 @@ import Ordinateur from './Ordinateur.vue';
 import AddOrdinateurModal from '../components/modals/AddOrdinateurModal.vue';
 import Datepicker from '../components/datepickers/Datepicker.vue';
 import Pagination from '../components/pagination/Pagination.vue';
+import token from "../services/token.js";
 
 /**
  * Dashboard data
@@ -46,7 +47,7 @@ export default {
                     date: this.dateRechercher
                 },
                 headers: {
-                    Authorization : `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             }).then( ({ data }) => {
                 var responseData = data.data;
@@ -70,7 +71,7 @@ export default {
                     page: this.currentPage
                 },
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({ data }) => {
@@ -110,7 +111,7 @@ export default {
                     page: this.currentPage
                 },
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({ data }) => {
