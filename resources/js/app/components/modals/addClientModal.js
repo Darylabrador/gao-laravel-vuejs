@@ -78,6 +78,7 @@ export default {
                 .then((response) => {
                     let responseData = response.data;
                     if(responseData.success) {
+                        this.flashMessage.success({ title: "Attribution effectuée" });
                         this.$emit('createdClientAndAssign', responseData.message)
                         this.close();
                     }

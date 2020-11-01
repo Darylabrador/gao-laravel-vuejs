@@ -27,6 +27,7 @@ export default {
 
         // $emit can be use to push data to parent component through an event
         newDesktop: function(evnt){
+            this.flashMessage.success({ title: "Poste ajouter avec succès" });
             this.$emit('addDesktop', evnt)
         }
     }

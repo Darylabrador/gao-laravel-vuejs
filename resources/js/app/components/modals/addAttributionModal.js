@@ -95,6 +95,7 @@ export default {
             })
             .then(({data}) => {
                 const responseData = data.data;
+                this.flashMessage.success({ title: "Attribution effectuée" });
                 this.$emit('addAssign', responseData)
                 this.close();
             })

@@ -10,17 +10,61 @@ use Illuminate\Support\Facades\Validator;
 class DesktopController extends Controller
 {
     /**
-     * delete desktop 
+     * Display a listing of the desktop.
      *
+     * @return \Illuminate\Http\Response
      */
-    public function deleteDesktop($id)
+    public function getAll(Request $request)
     {
-        Desktop::destroy($id);
+        $dateNow = $request->date;
+
+        $desktop = Desktop::with(array('assigns' => function ($query) use ($dateNow) {
+            $query->where('date', $dateNow);
+        }))->paginate(3);
+
+        return DesktopResources::collection($desktop);
+    }
+
+
+    /**
+     * Store a newly created desktop in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createDesktop(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|min:4|unique:desktops',
+            ],
+            [
+                'required' => 'Le champ :attribute est requis',
+                'min' => '5 caractères minimums',
+                'unique' => 'Poste existe déjà'
+            ]
+        );
+
+        $errors = $validator->errors();
+
+        if (count($errors) != 0) {
+            return response()->json([
+                'success' => false,
+                'message' => $errors->first()
+            ]);
+        }
+
+        $desktop = Desktop::create($validator->validated());
+        $desktop = new DesktopResources($desktop);
+
         return response()->json([
             'success' => true,
-            'message' => "Suppression réussie"
-        ]);
+            'message' => 'Poste créer',
+            'desktop' =>  $desktop
+        ], 200);
     }
+
 
     
     /**
@@ -67,6 +111,21 @@ class DesktopController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Mise à jour effectuée'
+        ]);
+    }
+
+
+
+    /**
+     * delete desktop 
+     *
+     */
+    public function deleteDesktop($id)
+    {
+        Desktop::destroy($id);
+        return response()->json([
+            'success' => true,
+            'message' => "Suppression réussie"
         ]);
     }
 }

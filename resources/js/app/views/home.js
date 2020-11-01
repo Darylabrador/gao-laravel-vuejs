@@ -98,12 +98,6 @@ export default {
          * Refresh desktop list and paginations when one it deleted
          */
         getDeletedDesktop(idDesktop){
-            // const refreshDeleteData = this.computerList.filter(element => element.id != idDesktop);
-            // this.computerList = [];
-            // refreshDeleteData.forEach(element => {
-            //     this.computerList.push(element);
-            // });
-
             this.computerList = [];
             Axios.get(`/api/computers`, {
                 params: { 

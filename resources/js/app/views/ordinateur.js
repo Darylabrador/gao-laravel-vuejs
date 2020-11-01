@@ -56,14 +56,7 @@ export default {
         }
     },
 
-
-    // init function when the component is created
-    // created() {
-    //     this.initialize();
-    //     this.displayHoraire();
-    // },
-
-
+    
     // All data disponible for the child component
     data() {
         return {

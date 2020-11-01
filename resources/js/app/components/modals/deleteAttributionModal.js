@@ -52,6 +52,7 @@ export default {
             .then(({data}) => {
                 let responseData = data;
                 if(responseData.success){
+                    this.flashMessage.success({ title: "Attribution annuler" });
                     this.$emit('deleteAssign', this.idAssign);
                     this.close();
                 }

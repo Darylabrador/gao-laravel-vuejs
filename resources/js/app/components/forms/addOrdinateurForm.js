@@ -33,6 +33,9 @@ export default {
                     document.getElementById('formAddOrdi').reset();
                     this.$emit('closeModal', false);
                     this.$emit('addDesktop', data.desktop);
+                    this.flashMessage.success({ title: data.message });
+                } else {
+                    this.flashMessage.error({ title: data.message });
                 }
             })
         }

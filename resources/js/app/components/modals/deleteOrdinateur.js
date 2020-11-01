@@ -53,6 +53,7 @@ export default {
             .then(({ data }) =>{
                 if(data.success){
                     this.$emit('deletedDesktop', this.idDesktop);
+                    this.flashMessage.success({ title: 'Poste supprimer avec succès' });
                     this.close();
                 }
             })

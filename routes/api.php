@@ -26,8 +26,8 @@ Route::post('/login', [AuthController::class, 'postLogin']);
 
 // protected routes
 Route::middleware('auth:api')->group(function() {
-    Route::get('/computers', [GeneralController::class, 'getAll']);
-    Route::post('/computers', [GeneralController::class, 'createDesktop']);
+    Route::get('/computers', [DesktopController::class, 'getAll']);
+    Route::post('/computers', [DesktopController::class, 'createDesktop']);
     Route::post('/client/search', [ClientController::class, 'searchClient']);
     Route::post('/client/attributions', [ClientController::class, 'createClient']);
     Route::post('/computers/attributions', [AssignController::class, 'setAttribution']);

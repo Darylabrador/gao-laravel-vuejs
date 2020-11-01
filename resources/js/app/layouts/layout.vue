@@ -22,6 +22,8 @@
       </v-container>
     </v-main>
 
+    <flashMessage></flashMessage>
+    
   </v-app>
 </template>
 
