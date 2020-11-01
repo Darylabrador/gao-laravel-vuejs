@@ -7,9 +7,9 @@ import AlertDesktop from "../alerts/AlertAddDesktop.vue";
 export default {
 
     // child components
-    components: {
-        AlertDesktop
-    },
+    // components: {
+    //     AlertDesktop
+    // },
 
     // Data that can be use on component
     data: () => ({
@@ -37,8 +37,8 @@ export default {
             .then(({data}) => {
                 if(data.success) {
                     document.getElementById('formAddOrdi').reset();
-                    this.$emit('closemodal', false);
-                    this.$emit('adddesktop', data.desktop);
+                    this.$emit('closeModal', false);
+                    this.$emit('addDesktop', data.desktop);
                 } else {
                     this.color = "red";
                     this.message = data.message;

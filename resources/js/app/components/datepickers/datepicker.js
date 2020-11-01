@@ -1,4 +1,6 @@
-
+/**
+ * handle datepicker
+ */
 export default {
     data: vm => ({
         date: new Date().toISOString().substr(0, 10),
@@ -16,7 +18,7 @@ export default {
     watch: {
         date(val) {
             this.dateFormatted = this.formatDate(this.date)
-            this.$emit('datechange', val)
+            this.$emit('dateChange', val)
         },
     },
 

@@ -5,7 +5,7 @@
     <v-container fluid>
 
         <!-- alert message -->
-        <alertDesktop :color="color" :message="message" :isError="isError" v-if="isError" />
+        <!-- <alertDesktop :color="color" :message="message" :isError="isError" v-if="isError" /> -->
 
         <!-- form to add desktop -->
         <v-form id="formAddOrdi" ref="form" method="POST" @submit="submitForm">

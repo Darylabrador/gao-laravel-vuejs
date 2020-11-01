@@ -21,13 +21,13 @@ export default {
     // all methods
     methods: {
         // GET data from emit event from child element to close modal
-        isclosemodal: function(event){
+        isCloseModal: function(event){
            return this.dialog = event;
         },
 
         // $emit can be use to push data to parent component through an event
-        newdesktop: function(evnt){
-            this.$emit('adddesktop', evnt)
+        newDesktop: function(evnt){
+            this.$emit('addDesktop', evnt)
         }
     }
 }

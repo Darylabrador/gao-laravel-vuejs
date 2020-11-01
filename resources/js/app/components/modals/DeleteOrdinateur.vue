@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog" max-width="500">
+    <v-dialog v-model="dialog" max-width="500" persistent>
       <v-card>
           <v-card-title class="headline font-weight-bold d-flex justify-content-end">
             <v-btn color="grey darken-1" text @click="close"> X </v-btn>
@@ -11,7 +11,7 @@
 
         <v-card-actions class="d-flex justify-content-end mt-0 pt-0">
           <v-btn class="text-white" color="blue darken-1" @click="close"> Non </v-btn>
-          <v-btn class="text-white" color="red darken-1" @click="deletedesktop"> Oui </v-btn>
+          <v-btn class="text-white" color="red darken-1" @click="deleteDesktop"> Oui </v-btn>
         </v-card-actions>
       </v-card>
 

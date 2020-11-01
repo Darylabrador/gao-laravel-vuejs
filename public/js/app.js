@@ -1951,22 +1951,37 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modals_AddClientModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/AddClientModal.vue */ "./resources/js/app/components/modals/AddClientModal.vue");
+
+
+/**
+ * Autocomplete
+ */
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AddClientModal: _modals_AddClientModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       loading: false,
       items: [],
       search: null,
-      client: null
+      client: null,
+      disabledButton: true,
+      isDisplayModal: false,
+      dialog: false
     };
   },
   watch: {
     search: function search(val) {
       val && val !== this.client && this.querySelections(val);
+      this.$emit('disabledButtonAttribute', false);
 
       if (this.client == val) {
         this.attribute(this.client);
+      } else {
+        this.disabledButton = true;
       }
     }
   },
@@ -1985,6 +2000,13 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function (_ref) {
             var data = _ref.data;
             var responseData = data.data;
+
+            if (responseData.length == 0 && _this.client == null) {
+              _this.disabledButton = false;
+
+              _this.$emit('disabledButtonAttribute', true);
+            }
+
             responseData.forEach(function (client) {
               _this.items.push({
                 id: client.id,
@@ -1998,7 +2020,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     attribute: function attribute(client) {
-      this.$emit('attributeclient', client);
+      this.items = [];
+      this.disabledButton = true;
+      this.$emit('attributeClient', client);
+      this.$emit('disabledButtonAttribute', false);
+    },
+    displayModalAddClient: function displayModalAddClient() {
+      this.isDisplayModal = true;
+      this.$emit('displayAddClientModal', false);
     }
   }
 });
@@ -2026,6 +2055,9 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+/**
+ * handle datepicker
+ */
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data(vm) {
     return {
@@ -2043,7 +2075,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   watch: {
     date: function date(val) {
       this.dateFormatted = this.formatDate(this.date);
-      this.$emit('datechange', val);
+      this.$emit('dateChange', val);
     }
   },
   methods: {
@@ -2094,9 +2126,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   // child components
-  components: {
-    AlertDesktop: _alerts_AlertAddDesktop_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
+  // components: {
+  //     AlertDesktop
+  // },
   // Data that can be use on component
   data: function data() {
     return {
@@ -2126,9 +2158,9 @@ __webpack_require__.r(__webpack_exports__);
         if (data.success) {
           document.getElementById('formAddOrdi').reset();
 
-          _this.$emit('closemodal', false);
+          _this.$emit('closeModal', false);
 
-          _this.$emit('adddesktop', data.desktop);
+          _this.$emit('addDesktop', data.desktop);
         } else {
           _this.color = "red";
           _this.message = data.message;
@@ -2155,17 +2187,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../autocomplete/Autocomplete.vue */ "./resources/js/app/components/autocomplete/Autocomplete.vue");
 
 
+/**
+ * Add attribution js file
+ */
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Components
+   */
   components: {
     Autocomplete: _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+
+  /**
+   * Data from parent component
+   */
   props: {
     dialog: {
       "default": function _default() {
         return {};
       }
     },
-    addmodal: {
+    addModal: {
       "default": function _default() {
         return {};
       }
@@ -2186,18 +2229,38 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+
+  /**
+   * Data of child component
+   */
   data: function data() {
     return {
-      selectedClient: {}
+      selectedClient: {},
+      isDisabled: false
     };
   },
+
+  /**
+   * list of methods
+   */
   methods: {
+    /**
+     * Handle close modla action
+     */
     close: function close() {
       this.$emit('update:dialog', false);
     },
+
+    /**
+     * Get information about client
+     */
     getInfoClient: function getInfoClient(client) {
       this.selectedClient = client;
     },
+
+    /**
+     * Set thee attribution timeslot on DB and inform parent component
+     */
     attribute: function attribute() {
       var _this = this;
 
@@ -2215,10 +2278,78 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
         var responseData = data.data;
 
-        _this.$emit('addassign', responseData);
+        _this.$emit('addAssign', responseData);
 
         _this.close();
       });
+    },
+
+    /**
+     * Disabled attribute button if it's needed
+     */
+    isDisabledAttribute: function isDisabledAttribute(isDisabled) {
+      this.isDisabled = isDisabled;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/addClientModal.js?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/app/components/modals/addClientModal.js?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/**
+ * Add client js file
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Data from parent component
+   */
+  props: {
+    dialog: {
+      "default": function _default() {
+        return {};
+      }
+    },
+    isDisplayModal: {
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
+
+  /**
+   * Data of child component
+   */
+  data: function data() {
+    return {
+      name: '',
+      surname: ''
+    };
+  },
+
+  /**
+   * list of methods
+   */
+  methods: {
+    /**
+     * Handle close modla action
+     */
+    close: function close() {
+      this.$emit('update:dialog', false);
+    },
+    createClient: function createClient() {
+      console.log('nom', this.surname, 'prenom', this.name);
     }
   }
 });
@@ -2253,12 +2384,12 @@ __webpack_require__.r(__webpack_exports__);
   // all methods
   methods: {
     // GET data from emit event from child element to close modal
-    isclosemodal: function isclosemodal(event) {
+    isCloseModal: function isCloseModal(event) {
       return this.dialog = event;
     },
     // $emit can be use to push data to parent component through an event
-    newdesktop: function newdesktop(evnt) {
-      this.$emit('adddesktop', evnt);
+    newDesktop: function newDesktop(evnt) {
+      this.$emit('addDesktop', evnt);
     }
   }
 });
@@ -2277,14 +2408,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
+/**
+ * Handle the delete attribution timeslot
+ */
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Data from the parent component
+   */
   props: {
     dialog: {
       "default": function _default() {
         return {};
       }
     },
-    deletemodal: {
+    deleteModal: {
       "default": function _default() {
         return {};
       }
@@ -2295,11 +2433,22 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+
+  /**
+   * List of methods
+   */
   methods: {
+    /**
+     * Handle close modal action
+     */
     close: function close() {
       this.$emit('update:dialog', false);
     },
-    deleteassign: function deleteassign() {
+
+    /**
+     * Delete attribution and inform parent component
+     */
+    deleteAssign: function deleteAssign() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/attributions/".concat(this.idAssign), {
@@ -2311,7 +2460,7 @@ __webpack_require__.r(__webpack_exports__);
         var responseData = data;
 
         if (responseData.success) {
-          _this.$emit('deleteassign', _this.idAssign);
+          _this.$emit('deleteAssign', _this.idAssign);
 
           _this.close();
         }
@@ -2336,32 +2485,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
+/**
+ * handle delete desktop action
+ */
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Data from parent component
+   */
   props: {
     dialog: {
       "default": function _default() {
         return {};
       }
     },
-    deletedesktopmodal: {
+    deleteDesktopModal: {
       "default": function _default() {
         return {};
       }
     },
-    iddesktop: {
+    idDesktop: {
       "default": function _default() {
         return {};
       }
     }
   },
+
+  /**
+   * List of methods
+   */
   methods: {
+    /**
+     * handle close modal action
+     */
     close: function close() {
       this.$emit('update:dialog', false);
     },
-    deletedesktop: function deletedesktop() {
+
+    /**
+     * handle delete the desktop from DB and inform the parent component
+     */
+    deleteDesktop: function deleteDesktop() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/".concat(this.iddesktop), {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/".concat(this.idDesktop), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -2369,7 +2536,7 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
 
         if (data.success) {
-          _this.$emit('deleteddesktop', _this.iddesktop);
+          _this.$emit('deletedDesktop', _this.idDesktop);
 
           _this.close();
         }
@@ -2392,7 +2559,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
+/**
+ * Handle pagination
+ */
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Data from parent component
+   */
   props: {
     paginations: {
       "default": function _default() {
@@ -2405,7 +2579,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+
+  /**
+   * List of methods
+   */
   methods: {
+    /**
+     * Handle the click on prev button
+     */
     prevPagination: function prevPagination() {
       var _this = this;
 
@@ -2419,9 +2600,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (_ref) {
         var data = _ref.data;
 
-        _this.$emit('newpage', data);
+        _this.$emit('newPage', data);
       });
     },
+
+    /**
+     * Handle the click on next button
+     */
     nextPagination: function nextPagination() {
       var _this2 = this;
 
@@ -2435,7 +2620,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (_ref2) {
         var data = _ref2.data;
 
-        _this2.$emit('newpage', data);
+        _this2.$emit('newPage', data);
       });
     }
   }
@@ -2483,15 +2668,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modals/AddOrdinateurModal.vue */ "./resources/js/app/components/modals/AddOrdinateurModal.vue");
 /* harmony import */ var _components_datepickers_Datepicker_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/datepickers/Datepicker.vue */ "./resources/js/app/components/datepickers/Datepicker.vue");
 /* harmony import */ var _components_pagination_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pagination/Pagination.vue */ "./resources/js/app/components/pagination/Pagination.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
 
-
-var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
 /**
  * Dashboard data
  */
@@ -2519,6 +2700,9 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
   },
   // All methods
   methods: {
+    /**
+     * Request to get all desktop with pagination
+     */
     getAllDesktops: function getAllDesktops() {
       var _this = this;
 
@@ -2539,18 +2723,47 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
         _this.paginationLink = data.links;
       });
     },
-    // push the created desktop info to current array depending on $emit event
-    newdesktop: function newdesktop(newcomputer) {
-      this.computerList.push(newcomputer);
+
+    /**
+     * On the emit we refresh the list of desktop and keep the same page
+     */
+    newDesktop: function newDesktop(newComputer) {
+      var _this2 = this;
+
+      // this.computerList.push(newComputer)
+      this.computerList = [];
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/computers", {
+        params: {
+          date: this.dateRechercher,
+          page: this.currentPage
+        },
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        var responseData = data.data;
+        responseData.forEach(function (element) {
+          _this2.computerList.push(element);
+        });
+        _this2.paginationLink = data.links;
+      });
     },
-    // Datepicker value
+
+    /**
+     * Datepicker value
+     */
     changementDate: function changementDate(selectDate) {
       this.dateRechercher = selectDate;
       this.computerList = [];
       this.getAllDesktops();
     },
+
+    /**
+     * Refresh desktop list and paginations when one it deleted
+     */
     getDeletedDesktop: function getDeletedDesktop(idDesktop) {
-      var _this2 = this;
+      var _this3 = this;
 
       // const refreshDeleteData = this.computerList.filter(element => element.id != idDesktop);
       // this.computerList = [];
@@ -2562,22 +2775,29 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
         params: {
           date: this.dateRechercher,
           page: this.currentPage
+        },
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
-      }).then(function (_ref2) {
-        var data = _ref2.data;
+      }).then(function (_ref3) {
+        var data = _ref3.data;
         var responseData = data.data;
         responseData.forEach(function (element) {
-          _this2.computerList.push(element);
+          _this3.computerList.push(element);
         });
-        _this2.paginationLink = data.links;
+        _this3.paginationLink = data.links;
       });
     },
-    newpage: function newpage(page) {
-      var _this3 = this;
+
+    /**
+     * handle the pagination action
+     */
+    newPage: function newPage(page) {
+      var _this4 = this;
 
       this.computerList = [];
       page.data.forEach(function (element) {
-        _this3.computerList.push(element);
+        _this4.computerList.push(element);
       });
       this.paginationLink = page.links;
       this.currentPage = page.meta.current_page;
@@ -2598,8 +2818,6 @@ var bus = new vue__WEBPACK_IMPORTED_MODULE_5___default.a();
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes.js */ "./resources/js/app/routes.js");
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2701,13 +2919,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       attributions: {},
       timeslots: [],
-      addmodal: false,
-      deletemodal: false,
-      deletedesktopmodal: false,
+      addModal: false,
+      deleteModal: false,
+      deleteDesktopModal: false,
       selectedHours: '',
       selectedDesktop: '',
       idAssign: '',
-      iddesktop: ''
+      idDesktop: ''
     };
   },
   // All disponible methods
@@ -2758,7 +2976,7 @@ __webpack_require__.r(__webpack_exports__);
      * Pass multiple value as props to child component
      */
     attributionDataAction: function attributionDataAction(dialog, hours, desktop) {
-      this.addmodal = dialog;
+      this.addModal = dialog;
       this.selectedHours = hours;
       this.selectedDesktop = desktop;
     },
@@ -2781,7 +2999,7 @@ __webpack_require__.r(__webpack_exports__);
      * Pass value to delete attribution
      */
     deleteAttributionData: function deleteAttributionData(dialog, idAssign) {
-      this.deletemodal = dialog;
+      this.deleteModal = dialog;
       this.idAssign = idAssign;
     },
 
@@ -2811,16 +3029,16 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * Pass value to delete desktop component
      */
-    deletedesktop: function deletedesktop(dialog, ordinateurId) {
-      this.deletedesktopmodal = dialog;
-      this.iddesktop = ordinateurId;
+    deleteDesktop: function deleteDesktop(dialog, ordinateurId) {
+      this.deleteDesktopModal = dialog;
+      this.idDesktop = ordinateurId;
     },
 
     /**
      * Get information about deleted desktop
      */
-    getDeletedDesktop: function getDeletedDesktop(iddesktop) {
-      this.$emit('deleteddesktop', iddesktop);
+    getDeletedDesktop: function getDeletedDesktop(idDesktop) {
+      this.$emit('deletedDesktop', idDesktop);
     }
   }
 });
@@ -21191,12 +21409,21 @@ var render = function() {
             "v-col",
             { staticClass: "mt-2", attrs: { cols: "2" } },
             [
-              _c(
-                "v-btn",
-                { attrs: { icon: "", color: "green", disabled: "" } },
-                [_c("v-icon", [_vm._v(" mdi-plus-circle-outline")])],
-                1
-              )
+              _vm.disabledButton
+                ? _c(
+                    "v-btn",
+                    { attrs: { icon: "", color: "green", disabled: "" } },
+                    [_c("v-icon", [_vm._v(" mdi-plus-circle-outline")])],
+                    1
+                  )
+                : _c("addClientModal", {
+                    attrs: { dialog: _vm.isDisplayModal },
+                    on: {
+                      "update:dialog": function($event) {
+                        _vm.isDisplayModal = $event
+                      }
+                    }
+                  })
             ],
             1
           )
@@ -21349,16 +21576,6 @@ var render = function() {
     "v-container",
     { attrs: { fluid: "" } },
     [
-      _vm.isError
-        ? _c("alertDesktop", {
-            attrs: {
-              color: _vm.color,
-              message: _vm.message,
-              isError: _vm.isError
-            }
-          })
-        : _vm._e(),
-      _vm._v(" "),
       _c(
         "v-form",
         {
@@ -21444,7 +21661,7 @@ var render = function() {
   return _c(
     "v-dialog",
     {
-      attrs: { "max-width": "500" },
+      attrs: { "max-width": "500", persistent: "" },
       model: {
         value: _vm.dialog,
         callback: function($$v) {
@@ -21481,7 +21698,12 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _c("autocomplete", { on: { attributeclient: _vm.getInfoClient } })
+              _c("autocomplete", {
+                on: {
+                  attributeClient: _vm.getInfoClient,
+                  disabledButtonAttribute: _vm.isDisabledAttribute
+                }
+              })
             ],
             1
           ),
@@ -21500,14 +21722,165 @@ var render = function() {
                 [_vm._v(" Annuler ")]
               ),
               _vm._v(" "),
+              _vm.isDisabled
+                ? _c(
+                    "v-btn",
+                    {
+                      staticClass: "text-white",
+                      attrs: { color: "blue darken-1", disabled: "" },
+                      on: { click: _vm.attribute }
+                    },
+                    [_vm._v(" Attribuer ")]
+                  )
+                : _c(
+                    "v-btn",
+                    {
+                      staticClass: "text-white",
+                      attrs: { color: "blue darken-1" },
+                      on: { click: _vm.attribute }
+                    },
+                    [_vm._v(" Attribuer ")]
+                  )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/modals/AddClientModal.vue?vue&type=template&id=4fc48a1d&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/modals/AddClientModal.vue?vue&type=template&id=4fc48a1d& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-dialog",
+    {
+      attrs: { "max-width": "500", persistent: "" },
+      scopedSlots: _vm._u([
+        {
+          key: "activator",
+          fn: function(ref) {
+            var on = ref.on
+            var attrs = ref.attrs
+            return [
+              _c(
+                "v-btn",
+                _vm._g(
+                  _vm._b(
+                    { attrs: { icon: "", color: "green" } },
+                    "v-btn",
+                    attrs,
+                    false
+                  ),
+                  on
+                ),
+                [_c("v-icon", [_vm._v(" mdi-plus-circle-outline")])],
+                1
+              )
+            ]
+          }
+        }
+      ]),
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
+      }
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-card-title",
+            {
+              staticClass:
+                "headline font-weight-bold border-bottom border-dark d-flex justify-content-between"
+            },
+            [
+              _c("h5", [_vm._v(" Ajouter un client ")]),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "grey darken-1", text: "" },
+                  on: { click: _vm.close }
+                },
+                [_vm._v(" X ")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [
+              _c("v-text-field", {
+                attrs: { color: "dark", label: "Nom", required: "" },
+                model: {
+                  value: _vm.surname,
+                  callback: function($$v) {
+                    _vm.surname = $$v
+                  },
+                  expression: "surname"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { color: "dark", label: "Prenom", required: "" },
+                model: {
+                  value: _vm.name,
+                  callback: function($$v) {
+                    _vm.name = $$v
+                  },
+                  expression: "name"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  staticClass: "text-white",
+                  attrs: { color: "grey darken-1" },
+                  on: { click: _vm.close }
+                },
+                [_vm._v(" Annuler ")]
+              ),
+              _vm._v(" "),
               _c(
                 "v-btn",
                 {
                   staticClass: "text-white",
                   attrs: { color: "blue darken-1" },
-                  on: { click: _vm.attribute }
+                  on: { click: _vm.createClient }
                 },
-                [_vm._v(" Attribuer ")]
+                [_vm._v(" Ajouter ")]
               )
             ],
             1
@@ -21544,7 +21917,7 @@ var render = function() {
   return _c(
     "v-dialog",
     {
-      attrs: { "max-width": "500" },
+      attrs: { "max-width": "500", persistent: "" },
       scopedSlots: _vm._u([
         {
           key: "activator",
@@ -21622,7 +21995,7 @@ var render = function() {
               _c("v-spacer"),
               _vm._v(" "),
               _c("addOrdinateurForm", {
-                on: { closemodal: _vm.isclosemodal, adddesktop: _vm.newdesktop }
+                on: { closeModal: _vm.isCloseModal, addDesktop: _vm.newDesktop }
               })
             ],
             1
@@ -21659,7 +22032,7 @@ var render = function() {
   return _c(
     "v-dialog",
     {
-      attrs: { "max-width": "500" },
+      attrs: { "max-width": "500", persistent: "" },
       model: {
         value: _vm.dialog,
         callback: function($$v) {
@@ -21716,7 +22089,7 @@ var render = function() {
                 {
                   staticClass: "text-white",
                   attrs: { color: "red darken-1" },
-                  on: { click: _vm.deleteassign }
+                  on: { click: _vm.deleteAssign }
                 },
                 [_vm._v(" Oui ")]
               )
@@ -21755,7 +22128,7 @@ var render = function() {
   return _c(
     "v-dialog",
     {
-      attrs: { "max-width": "500" },
+      attrs: { "max-width": "500", persistent: "" },
       model: {
         value: _vm.dialog,
         callback: function($$v) {
@@ -21810,7 +22183,7 @@ var render = function() {
                 {
                   staticClass: "text-white",
                   attrs: { color: "red darken-1" },
-                  on: { click: _vm.deletedesktop }
+                  on: { click: _vm.deleteDesktop }
                 },
                 [_vm._v(" Oui ")]
               )
@@ -21977,7 +22350,7 @@ var render = function() {
   return _c(
     "v-container",
     [
-      _c("datepicker", { on: { datechange: _vm.changementDate } }),
+      _c("datepicker", { on: { dateChange: _vm.changementDate } }),
       _vm._v(" "),
       _c(
         "div",
@@ -21989,10 +22362,10 @@ var render = function() {
               paginations: _vm.paginationLink,
               date: _vm.dateRechercher
             },
-            on: { newpage: _vm.newpage }
+            on: { newPage: _vm.newPage }
           }),
           _vm._v(" "),
-          _c("addOrdinateurModal", { on: { adddesktop: _vm.newdesktop } })
+          _c("addOrdinateurModal", { on: { addDesktop: _vm.newDesktop } })
         ],
         1
       ),
@@ -22011,7 +22384,7 @@ var render = function() {
                   attributionList: ordinateur.attributions,
                   selectedDate: _vm.dateRechercher
                 },
-                on: { deleteddesktop: _vm.getDeletedDesktop }
+                on: { deletedDesktop: _vm.getDeletedDesktop }
               })
             ],
             1
@@ -22151,36 +22524,36 @@ var render = function() {
     [
       _c("addAttributionModal", {
         attrs: {
-          dialog: _vm.addmodal,
+          dialog: _vm.addModal,
           selectedHours: _vm.selectedHours,
           selectedDesktop: _vm.selectedDesktop,
           selectedDate: _vm.selectedDate
         },
         on: {
           "update:dialog": function($event) {
-            _vm.addmodal = $event
+            _vm.addModal = $event
           },
-          addassign: _vm.getAssignData
+          addAssign: _vm.getAssignData
         }
       }),
       _vm._v(" "),
       _c("deleteAttributionModal", {
-        attrs: { dialog: _vm.deletemodal, idAssign: _vm.idAssign },
+        attrs: { dialog: _vm.deleteModal, idAssign: _vm.idAssign },
         on: {
           "update:dialog": function($event) {
-            _vm.deletemodal = $event
+            _vm.deleteModal = $event
           },
-          deleteassign: _vm.getDeleteAssignData
+          deleteAssign: _vm.getDeleteAssignData
         }
       }),
       _vm._v(" "),
       _c("deleteOrdinateur", {
-        attrs: { dialog: _vm.deletedesktopmodal, iddesktop: _vm.iddesktop },
+        attrs: { dialog: _vm.deleteDesktopModal, idDesktop: _vm.idDesktop },
         on: {
           "update:dialog": function($event) {
-            _vm.deletedesktopmodal = $event
+            _vm.deleteDesktopModal = $event
           },
-          deleteddesktop: _vm.getDeletedDesktop
+          deletedDesktop: _vm.getDeletedDesktop
         }
       }),
       _vm._v(" "),
@@ -22205,7 +22578,7 @@ var render = function() {
                   attrs: { color: "red", icon: "" },
                   on: {
                     click: function($event) {
-                      return _vm.deletedesktop(true, _vm.ordinateurId)
+                      return _vm.deleteDesktop(true, _vm.ordinateurId)
                     }
                   }
                 },
@@ -81715,6 +82088,61 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/app/components/modals/AddClientModal.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/app/components/modals/AddClientModal.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddClientModal_vue_vue_type_template_id_4fc48a1d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddClientModal.vue?vue&type=template&id=4fc48a1d& */ "./resources/js/app/components/modals/AddClientModal.vue?vue&type=template&id=4fc48a1d&");
+/* harmony import */ var _addClientModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addClientModal.js?vue&type=script&lang=js& */ "./resources/js/app/components/modals/addClientModal.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _addClientModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddClientModal_vue_vue_type_template_id_4fc48a1d___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddClientModal_vue_vue_type_template_id_4fc48a1d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/modals/AddClientModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/modals/AddClientModal.vue?vue&type=template&id=4fc48a1d&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/app/components/modals/AddClientModal.vue?vue&type=template&id=4fc48a1d& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddClientModal_vue_vue_type_template_id_4fc48a1d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddClientModal.vue?vue&type=template&id=4fc48a1d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/modals/AddClientModal.vue?vue&type=template&id=4fc48a1d&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddClientModal_vue_vue_type_template_id_4fc48a1d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddClientModal_vue_vue_type_template_id_4fc48a1d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/app/components/modals/AddOrdinateurModal.vue":
 /*!*******************************************************************!*\
   !*** ./resources/js/app/components/modals/AddOrdinateurModal.vue ***!
@@ -81891,6 +82319,20 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_addAttributionModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./addAttributionModal.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/addAttributionModal.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_addAttributionModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/components/modals/addClientModal.js?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/app/components/modals/addClientModal.js?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_addClientModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./addClientModal.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/app/components/modals/addClientModal.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_addClientModal_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

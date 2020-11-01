@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog" max-width="500">
+    <v-dialog v-model="dialog" max-width="500" persistent>
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" dark v-bind="attrs" v-on="on">
           <span class="iconify" data-inline="false" data-icon="ant-design:plus-circle-outlined" style="font-size: 35px !important;"></span>
@@ -16,7 +16,7 @@
           <v-spacer></v-spacer>
 
             <!-- Get data from child when we have an emit request from it -->
-            <addOrdinateurForm @closemodal='isclosemodal' @adddesktop="newdesktop"/>
+            <addOrdinateurForm @closeModal='isCloseModal' @addDesktop="newDesktop"/>
 
         </v-card-actions>
       </v-card>

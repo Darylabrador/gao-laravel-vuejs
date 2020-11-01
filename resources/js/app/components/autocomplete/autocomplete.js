@@ -1,22 +1,40 @@
 import Axios from 'axios';
+import AddClientModal from '../modals/AddClientModal.vue';
 
+/**
+ * Autocomplete
+ */
 export default {
+
+    components: {
+        AddClientModal
+    },
+
     data() {
         return {
             loading: false,
             items: [],
             search: null,
-            client: null
+            client: null,
+            disabledButton: true,
+            isDisplayModal: false,
+            dialog: false
         }
     },
+
     watch: {
         search(val) {
             val && val !== this.client && this.querySelections(val)
+            this.$emit('disabledButtonAttribute', false);
+
             if(this.client == val){
                 this.attribute(this.client)
+            }else{
+                this.disabledButton = true;
             }
         },
     },
+
     methods: {
         querySelections(v) {
             if(v.length >= 3) {
@@ -31,6 +49,12 @@ export default {
                     )
                     .then(({ data }) => {
                         var responseData = data.data;
+
+                        if(responseData.length == 0 && this.client == null) {
+                            this.disabledButton = false;
+                            this.$emit('disabledButtonAttribute', true)
+                        }
+
                         responseData.forEach(client => {
                             this.items.push({
                                 id: client.id,
@@ -43,8 +67,17 @@ export default {
                 }, 500)
             }
         },
+
         attribute(client){
-            this.$emit('attributeclient', client)
+            this.items = [];
+            this.disabledButton = true;
+            this.$emit('attributeClient', client);
+            this.$emit('disabledButtonAttribute', false)
+        },
+
+        displayModalAddClient() {
+            this.isDisplayModal = true;
+            this.$emit('displayAddClientModal', false);
         }
     },
 }

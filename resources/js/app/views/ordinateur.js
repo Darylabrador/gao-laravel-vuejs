@@ -68,13 +68,13 @@ export default {
         return {
             attributions: {},
             timeslots: [],
-            addmodal: false,
-            deletemodal: false,
-            deletedesktopmodal: false,
+            addModal: false,
+            deleteModal: false,
+            deleteDesktopModal: false,
             selectedHours: '',
             selectedDesktop: '',
             idAssign: '',
-            iddesktop: ''
+            idDesktop: ''
         }
     },
 
@@ -123,14 +123,16 @@ export default {
             }
         },
 
+
         /**
          * Pass multiple value as props to child component
          */
         attributionDataAction(dialog, hours, desktop ) {
-            this.addmodal = dialog;
+            this.addModal = dialog;
             this.selectedHours = hours;
             this.selectedDesktop = desktop;
         },
+
 
         /**
          * Refresh desktop component with new assign data
@@ -146,13 +148,15 @@ export default {
             this.displayHoraire();
         },
 
+
         /**
          * Pass value to delete attribution
          */
         deleteAttributionData(dialog, idAssign){
-            this.deletemodal = dialog;
+            this.deleteModal = dialog;
             this.idAssign = idAssign;
         },
+
 
         /**
          * Get delete assign data to refresh component
@@ -173,19 +177,21 @@ export default {
             this.displayHoraire();
         },
 
+
         /**
          * Pass value to delete desktop component
          */
-        deletedesktop(dialog, ordinateurId) {
-            this.deletedesktopmodal = dialog
-            this.iddesktop = ordinateurId;
+        deleteDesktop(dialog, ordinateurId) {
+            this.deleteDesktopModal = dialog
+            this.idDesktop = ordinateurId;
         },
+
 
         /**
          * Get information about deleted desktop
          */
-        getDeletedDesktop(iddesktop) {
-            this.$emit('deleteddesktop', iddesktop);
-        }
+        getDeletedDesktop(idDesktop) {
+            this.$emit('deletedDesktop', idDesktop);
+        },
     }
 }

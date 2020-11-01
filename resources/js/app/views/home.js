@@ -4,9 +4,6 @@ import AddOrdinateurModal from '../components/modals/AddOrdinateurModal.vue';
 import Datepicker from '../components/datepickers/Datepicker.vue';
 import Pagination from '../components/pagination/Pagination.vue';
 
-import Vue from 'vue';
-var bus = new Vue();
-
 /**
  * Dashboard data
  */
@@ -38,6 +35,10 @@ export default {
     
     // All methods
     methods: {
+
+        /**
+         * Request to get all desktop with pagination
+         */
         getAllDesktops() {
             this.computerList = [];
             Axios.get('api/computers', {
@@ -56,18 +57,45 @@ export default {
             })
         },
 
-        // push the created desktop info to current array depending on $emit event
-        newdesktop(newcomputer) {
-            this.computerList.push(newcomputer)
+
+        /**
+         * On the emit we refresh the list of desktop and keep the same page
+         */
+        newDesktop(newComputer) {
+            // this.computerList.push(newComputer)
+            this.computerList = [];
+            Axios.get(`/api/computers`, {
+                params: {
+                    date: this.dateRechercher,
+                    page: this.currentPage
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(({ data }) => {
+                var responseData = data.data;
+                responseData.forEach(element => {
+                    this.computerList.push(element);
+                })
+                this.paginationLink = data.links;
+            })
         },
 
-        // Datepicker value
+
+        /**
+         * Datepicker value
+         */
         changementDate(selectDate){
             this.dateRechercher = selectDate;
             this.computerList = [];
             this.getAllDesktops(); 
         },
 
+
+        /**
+         * Refresh desktop list and paginations when one it deleted
+         */
         getDeletedDesktop(idDesktop){
             // const refreshDeleteData = this.computerList.filter(element => element.id != idDesktop);
             // this.computerList = [];
@@ -80,6 +108,9 @@ export default {
                 params: { 
                     date: this.dateRechercher ,
                     page: this.currentPage
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
             .then(({ data }) => {
@@ -91,7 +122,11 @@ export default {
             })
         },
 
-        newpage(page){
+
+        /**
+         * handle the pagination action
+         */
+        newPage(page){
             this.computerList   = [];
             page.data.forEach(element => {
                 this.computerList.push(element)

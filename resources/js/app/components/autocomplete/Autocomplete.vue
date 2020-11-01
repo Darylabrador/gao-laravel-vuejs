@@ -20,9 +20,12 @@
                 ></v-autocomplete>
             </v-col>
             <v-col class="mt-2" cols="2">
-                <v-btn icon color="green" disabled>
+                <v-btn icon color="green" v-if="disabledButton" disabled>
                     <v-icon> mdi-plus-circle-outline</v-icon>
                 </v-btn>
+               
+                <addClientModal :dialog.sync="isDisplayModal" v-else />
+                
             </v-col>
         </v-row>
     </v-container>

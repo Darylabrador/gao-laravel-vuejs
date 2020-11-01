@@ -1,40 +1,60 @@
 import Axios from "axios";
 
+/**
+ * handle delete desktop action
+ */
 export default {
+
+    /**
+     * Data from parent component
+     */
     props: {
         dialog: {
             default: function () {
                 return {}
             }
         },
-        deletedesktopmodal: {
+        deleteDesktopModal: {
             default: function () {
                 return {}
             }
         },
-        iddesktop: {
+        idDesktop: {
             default: function () {
                 return {}
             }
         }
     },
 
+
+    /**
+     * List of methods
+     */
     methods: {
+
+        /**
+         * handle close modal action
+         */
         close() {
             this.$emit('update:dialog', false);
         },
-        deletedesktop() {
-            Axios.delete(`/api/computers/${this.iddesktop}`, {
+
+
+        /**
+         * handle delete the desktop from DB and inform the parent component
+         */
+        deleteDesktop() {
+            Axios.delete(`/api/computers/${this.idDesktop}`, {
                 headers : {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
-                .then(({ data }) =>{
-                    if(data.success){
-                        this.$emit('deleteddesktop', this.iddesktop);
-                        this.close();
-                    }
-                })
+            .then(({ data }) =>{
+                if(data.success){
+                    this.$emit('deletedDesktop', this.idDesktop);
+                    this.close();
+                }
+            })
         }
     }
 }
