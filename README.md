@@ -7,6 +7,13 @@ Ce projet utilise les technologies suivantes :
 - backend : Laravel 8 (API)
 - frontend : VueJS
 
+
+Identifiant du compte admin : 
+
+- identifiant : admin@gmail.com
+- mot de passe : password
+
+
 ## Initialisation du projet
 
 Après avoir fait un git clone de ce projet, vous devez effectué les actions suivantes : 
