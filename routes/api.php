@@ -21,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/toto', function(){
+    return "toto";
+});
+
+
 // post login route
 Route::post('/login', [AuthController::class, 'postLogin']);
 
