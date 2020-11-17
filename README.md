@@ -18,12 +18,13 @@ Identifiant du compte admin :
 
 Après avoir fait un git clone de ce projet, vous devez effectué les actions suivantes : 
 
-- npm install
 - docker-compose build
 - docker-compose up
-- docker-compose exec app composer install
-- docker-compose exec app php artisan migrate:fresh --seed
-- docker-compose exec app php artisan passport:install --force
+- docker-compose exec php composer install
+- docker-compose exec php php artisan migrate:fresh --seed
+- docker-compose exec php php artisan passport:install --force
+- docker-compose exec node npm install
+- docker-compose exec node npm run watch
 
 Ensuite, vous devez créer et modifier le fichier .env pour les lignes suivantes : 
 

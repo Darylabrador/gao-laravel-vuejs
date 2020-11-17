@@ -38,9 +38,19 @@ services:
       - .docker/volumes/db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=gao
+      - MYSQL_DATABASE=gao_laravel_vuejs
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
+
+  node:
+    build:
+      context: ./.docker/node
+    container_name: gao-node
+    tty: true
+    volumes: 
+      - .:/home/node/app
+    # ports:
+    #   - 3020:3000
 
   traefik: 
     image: traefik:1.7
