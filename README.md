@@ -28,6 +28,10 @@ Après avoir fait un git clone de ce projet, vous devez effectué les actions su
 
 Ensuite, vous devez créer et modifier le fichier .env pour les lignes suivantes : 
 
+- DB_HOST=db
+- DB_DATABASE=gao_laravel_vuejs
+- DB_USERNAME=root
+- DB_PASSWORD=root
 - PASSPORT_PERSONAL_ACCESS_CLIENT_ID=
 - PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET=
 
