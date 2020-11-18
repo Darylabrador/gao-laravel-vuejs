@@ -1,6 +1,8 @@
-FROM node:15.2-buster
+FROM node:10.21.0-alpine
 
-LABEL author="Toto-Ad" 
+LABEL author="Toto-AD" 
+
+USER node
 
 RUN mkdir /home/node/.npm-global
 ENV PATH=/home/node/.npm-global/bin:$PATH
@@ -10,5 +12,7 @@ ENV HOME=/home/node
 
 WORKDIR $HOME/app
 
-# RUN echo 'alias watchs="npm run watch"' >> ~/.bashrc
-# RUN echo 'alias installs="npm install"' >> ~/.bashrc
+RUN npm i -g npm
+
+RUN echo 'alias nw="npm run watch"' >> ~/.bashrc
+RUN echo 'alias ni="npm install"' >> ~/.bashrc

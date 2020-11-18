@@ -59,6 +59,14 @@ class AssignController extends Controller
 
 
     /**
+     * Get all attributions
+     */
+    public function getAllTest() {
+        return AssignResources::collection(Assign::all());
+    }
+
+
+    /**
      * delete attribution 
      *
      */

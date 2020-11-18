@@ -26,6 +26,24 @@ class DesktopController extends Controller
     }
 
 
+
+    /**
+     * Display a listing of the desktop.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllTest(Request $request)
+    {
+        $dateNow = $request->date;
+
+        $desktop = Desktop::with(array('assigns' => function ($query) use ($dateNow) {
+            $query->where('date', $dateNow);
+        }))->get();
+
+        return DesktopResources::collection($desktop);
+    }
+
+
     /**
      * Store a newly created desktop in storage.
      *

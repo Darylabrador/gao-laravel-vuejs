@@ -22606,34 +22606,10 @@ var render = function() {
       _c(
         "v-card-text",
         [
-          _c(
-            "div",
-            {
-              staticClass:
-                "border-bottom border-dark d-flex justify-content-between"
-            },
-            [
-              _c("h5", { staticClass: "text-center pl-5" }, [
-                _vm._v(" " + _vm._s(_vm.ordinateurName) + " ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  staticClass: "pr-5",
-                  attrs: { color: "red", icon: "" },
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteDesktop(true, _vm.ordinateurId)
-                    }
-                  }
-                },
-                [_c("v-icon", [_vm._v(" mdi-delete ")])],
-                1
-              )
-            ],
-            1
-          ),
+          _c("div", {
+            staticClass:
+              "border-bottom border-dark d-flex justify-content-between"
+          }),
           _vm._v(" "),
           _c("v-simple-table", {
             attrs: { dense: "" },
@@ -82855,8 +82831,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-laravel-vuejs-2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-laravel-vuejs-2\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/node/app/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/node/app/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

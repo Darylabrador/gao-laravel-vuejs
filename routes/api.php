@@ -22,11 +22,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/toto', function(){
-    return "toto";
-});
-
-
 // post login route
 Route::post('/login', [AuthController::class, 'postLogin']);
 
@@ -39,4 +34,10 @@ Route::middleware('auth:api')->group(function() {
     Route::post('/computers/attributions', [AssignController::class, 'setAttribution']);
     Route::delete('/computers/attributions/{id}', [AssignController::class, 'deleteAttribution']);
     Route::delete('/computers/{id}', [DesktopController::class, 'deleteDesktop']);
+
+    // Route spécifique pour le test unitaire des ressources
+    Route::get('/computers/test', [DesktopController::class, 'getAllTest'])->name('api.computers');
+    Route::get('/clients/test', [ClientController::class, 'allUser'])->name('api.clients');
+    Route::get('/attributions/test', [AssignController::class, 'getAllTest'])->name('api.attributions');
+
 });

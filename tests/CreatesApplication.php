@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Testing\TestResponse;
 
 trait CreatesApplication
 {
@@ -16,6 +17,11 @@ trait CreatesApplication
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
+
+        // macro pour tester la ressource
+        TestResponse::macro('assertResource', function($resource) {
+            $this->assertJson($resource->response()->getData(true));
+        });
 
         return $app;
     }

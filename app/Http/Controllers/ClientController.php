@@ -71,4 +71,13 @@ class ClientController extends Controller
         $listClient   = Client::where('surname', 'like', '%' . $clientSearch . '%')->orWhere('name', 'like', '%' . $clientSearch . '%')->get();
         return ClientResources::collection($listClient);
     }
+
+
+    /**
+     * Get list of all user
+     */
+    public function allUser() {
+        $listClient = Client::all();
+        return ClientResources::collection($listClient);
+    }
 }
