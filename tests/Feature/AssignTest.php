@@ -13,7 +13,6 @@ use Tests\TestCase;
 
 class AssignTest extends TestCase
 {
-    use RefreshDatabase;
 
     public function testNominalRessourceAttribution() {
         $client = new Client([

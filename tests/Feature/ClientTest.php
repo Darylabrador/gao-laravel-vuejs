@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 
 class ClientTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function testNominalFormatRessourceClient()
     {
         $this->withoutMiddleware();

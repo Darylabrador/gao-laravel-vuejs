@@ -13,8 +13,6 @@ use Tests\TestCase;
 class OrdinateurTest extends TestCase
 {
 
-    use RefreshDatabase;
-
     public function testNominalFormatRessourceOrdinateur()
     {
         $client = new Client([
@@ -38,11 +36,10 @@ class OrdinateurTest extends TestCase
 
         $resource = new DesktopResources($ordinateur);
         $expect = $resource->jsonSerialize();
-    
-        // dd($expect['attributions'][0]['clients']);
 
         $this->assertEquals(1, $expect['id']);
         $this->assertIsObject($expect['attributions']);
+        $this->assertInstanceOf('Illuminate\Http\Resources\Json\AnonymousResourceCollection', $expect['attributions']);
         $this->assertInstanceOf('App\Http\Resources\AssignResources', $expect['attributions'][0]);
         $this->assertInstanceOf('App\Models\Client', $expect['attributions'][0]['clients']);
     }
@@ -54,5 +51,4 @@ class OrdinateurTest extends TestCase
     //     $resource = DesktopResources::collection($ordinateurs);
     //     $response->assertResource($resource);
     // }
-
 }
