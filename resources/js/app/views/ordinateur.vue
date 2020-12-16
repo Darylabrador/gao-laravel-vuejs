@@ -7,13 +7,19 @@
         <addAttributionModal :dialog.sync="addModal" :selectedHours="selectedHours" :selectedDesktop="selectedDesktop" :selectedDate="selectedDate" @addAssign="getAssignData" />
         <deleteAttributionModal :dialog.sync="deleteModal" :idAssign="idAssign" @deleteAssign='getDeleteAssignData' />
         <deleteOrdinateur :dialog.sync="deleteDesktopModal" :idDesktop="idDesktop" @deletedDesktop="getDeletedDesktop" />
+        <modificationOrdi :dialog.sync="modifDialog" :ordinateurId="selectedDesktop" @renameOrdi="renamedOrdi" />
 
         <v-card-text>
             <div class="border-bottom border-dark d-flex justify-content-between">
                 <h5 class="text-center pl-5"> {{ ordinateurName }} </h5>
-                <v-btn class="pr-5" color="red" icon  @click="deleteDesktop(true, ordinateurId)"> 
-                    <v-icon> mdi-delete </v-icon>
-                </v-btn>
+                <div class="d-flex justify-content-end">
+                    <v-btn color="red" text @click="deleteDesktop(true, ordinateurId)">
+                        <v-icon> mdi-delete </v-icon>
+                    </v-btn>
+                    <v-btn color="black" text @click="handleRename(true, ordinateurId)">
+                        <v-icon> mdi-pencil </v-icon>
+                    </v-btn>
+                </div>
             </div>
 
           <v-simple-table dense>

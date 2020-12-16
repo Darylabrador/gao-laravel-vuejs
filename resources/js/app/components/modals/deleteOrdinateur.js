@@ -56,7 +56,7 @@ export default {
                     this.flashMessage.success({ title: 'Poste supprimer avec succès' });
                     this.close();
                 }
-            })
+            }).catch(error)
         }
     }
 }

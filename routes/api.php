@@ -28,6 +28,7 @@ Route::post('/login', [AuthController::class, 'postLogin']);
 Route::middleware('auth:api')->group(function() {
     Route::get('/computers', [DesktopController::class, 'getAll']);
     Route::post('/computers', [DesktopController::class, 'createDesktop']);
+    Route::put('/computer/{id}', [DesktopController::class, 'updateDesktop']);
     Route::post('/client/search', [ClientController::class, 'searchClient']);
     Route::post('/client/attributions', [ClientController::class, 'createClient']);
     Route::post('/computers/attributions', [AssignController::class, 'setAttribution']);

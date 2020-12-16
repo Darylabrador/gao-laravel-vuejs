@@ -10,13 +10,14 @@
 import AddAttributionModal from "../components/modals/AddAttributionModal.vue";
 import DeleteAttributionModal from "../components/modals/DeleteAttributionModal.vue";
 import DeleteOrdinateur from "../components/modals/DeleteOrdinateur.vue";
-
+import ModificationOrdi from '../components/modals/RenameOrdi.vue';
 
 export default {
     components: {
         AddAttributionModal,
         DeleteAttributionModal,
-        DeleteOrdinateur
+        DeleteOrdinateur,
+        ModificationOrdi
     },
 
     // Data from parent components
@@ -65,6 +66,7 @@ export default {
             addModal: false,
             deleteModal: false,
             deleteDesktopModal: false,
+            modifDialog: false,
             selectedHours: '',
             selectedDesktop: '',
             idAssign: '',
@@ -186,6 +188,23 @@ export default {
          */
         getDeletedDesktop(idDesktop) {
             this.$emit('deletedDesktop', idDesktop);
+        },
+
+        /**
+         * Handle renamed desktop
+         */
+        renamedOrdi(ordinateur) {
+            this.$emit('deletedDesktop', ordinateur);
+        },
+
+        /**
+         * Handle the click to rename desktop
+         * @param {Boolean} dialog 
+         * @param {Number} ordinateurId 
+         */
+        handleRename(dialog, ordinateurId) {
+            this.modifDialog = dialog;
+            this.selectedDesktop = ordinateurId;
         },
     }
 }
