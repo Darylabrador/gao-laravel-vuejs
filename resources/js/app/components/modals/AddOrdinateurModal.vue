@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" max-width="500" persistent>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+        <v-btn color="teal" dark v-bind="attrs" v-on="on">
           <span class="iconify" data-inline="false" data-icon="ant-design:plus-circle-outlined" style="font-size: 35px !important;"></span>
         </v-btn>
       </template>

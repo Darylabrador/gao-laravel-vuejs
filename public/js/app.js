@@ -22899,7 +22899,7 @@ var render = function() {
                 "v-btn",
                 _vm._g(
                   _vm._b(
-                    { attrs: { color: "primary", dark: "" } },
+                    { attrs: { color: "teal", dark: "" } },
                     "v-btn",
                     attrs,
                     false
@@ -84002,8 +84002,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-backup\gao-laravel-vuejs\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\logiciels\xampp\htdocs\Simplon\gao-backup\gao-laravel-vuejs\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\0-AUTO-FORMATIONS\0-PROJET\0-PROJETS_FORMATIONS_SIMPLONS\4-Gestion-ordinateur\gao-laravel-vuejs\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\0-AUTO-FORMATIONS\0-PROJET\0-PROJETS_FORMATIONS_SIMPLONS\4-Gestion-ordinateur\gao-laravel-vuejs\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
