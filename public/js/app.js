@@ -23723,22 +23723,33 @@ var render = function() {
                     return _c("tr", { key: timeslot.id }, [
                       _c(
                         "td",
-                        { staticClass: "border-right border-dark col-2 py-0" },
+                        {
+                          staticClass: "border-bottom border-light col-2 py-0"
+                        },
                         [_vm._v(_vm._s(timeslot.hours) + "h")]
                       ),
                       _vm._v(" "),
-                      _c("td", { staticClass: "col-8 py-0 text-center" }, [
-                        _vm._v(
-                          _vm._s(timeslot.client.surname) +
-                            "  " +
-                            _vm._s(timeslot.client.name) +
-                            " "
-                        )
-                      ]),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "border-bottom border-light col-8 py-0 text-center"
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(timeslot.client.surname) +
+                              "  " +
+                              _vm._s(timeslot.client.name) +
+                              " "
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
                         "td",
-                        { staticClass: "col-2 py-0" },
+                        {
+                          staticClass: "border-bottom border-light col-2 py-0"
+                        },
                         [
                           timeslot.client != ""
                             ? _c(
