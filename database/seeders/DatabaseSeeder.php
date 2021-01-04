@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Client::factory(5)->create();
 
         $now = now()->toDateString();
-
         $faker = \Faker\Factory::create();
         for ($i=1; $i < 5; $i++) { 
             DB::table('assigns')->insert([
