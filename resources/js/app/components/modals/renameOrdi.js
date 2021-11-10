@@ -1,6 +1,4 @@
-import Axios from 'axios';
-import token from '../../services/token.js';
-
+import { apiService } from "../../services/apiService";
 
 export default {
     props: {
@@ -43,11 +41,7 @@ export default {
                     name: this.renameOrdi,
     
                 };
-                const ordiData = await Axios.put(`/api/computer/${this.ordinateurId}`, dataSend, {
-                    headers: {
-                        Authorization: `Bearer ${token.isTokenStored()}`
-                    }
-                });
+                const ordiData = await apiService.put(`/computer/${this.ordinateurId}`, dataSend);
                 let responseData = ordiData.data;
                 if (responseData.success) {
                     this.flashMessage.success({

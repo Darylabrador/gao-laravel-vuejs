@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import { apiService } from "../services/apiService";
 
 export default {
     data(){
@@ -10,7 +10,7 @@ export default {
 
     methods: {
         postLogin() {
-            Axios.post('/api/login',{
+            apiService.post('/login',{
                 email: this.email,
                 password: this.password
             }).then((response) => {

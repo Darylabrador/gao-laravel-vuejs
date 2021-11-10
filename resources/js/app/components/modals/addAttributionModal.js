@@ -1,6 +1,5 @@
-import Axios from "axios";
 import Autocomplete from "../autocomplete/Autocomplete.vue";
-import token from "../../services/token.js";
+import { apiService } from "../../services/apiService";
 
 /**
  * Add attribution js file
@@ -82,16 +81,11 @@ export default {
          */
         attribute() {
             // Send data to attribute desktop API route
-            Axios.post('/api/computers/attributions', {
+            apiService.post('/computers/attributions', {
                 desktop_id: this.selectedDesktop,
                 client_id: this.selectedClient.id,
                 hours: this.selectedHours,
                 date: this.selectedDate
-            }, 
-            {
-                headers: {
-                    Authorization: `Bearer ${token.isTokenStored()}`
-                }
             })
             .then(({data}) => {
                 const responseData = data.data;

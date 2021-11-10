@@ -1,6 +1,5 @@
-import Axios from 'axios';
 import AddClientModal from '../modals/AddClientModal.vue';
-import token from '../../services/token.js';
+import { apiService } from '../../services/apiService';
 
 /**
  * Autocomplete
@@ -45,14 +44,7 @@ export default {
         querySelections(v) {
             if(v.length >= 3) {
                 setTimeout(() => {
-                    Axios.post('/api/client/search', 
-                    { clientInfo: v },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token.isTokenStored()}`
-                        }
-                    }
-                    )
+                    apiService.post('/client/search', { clientInfo: v })
                     .then(({ data }) => {
                         var responseData = data.data;
 

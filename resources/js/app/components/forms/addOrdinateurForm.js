@@ -1,5 +1,4 @@
-import Axios from "axios"
-import token from "../../services/token.js";
+import { apiService } from "../../services/apiService.js";
 
 /**
  * Form to add computer
@@ -23,11 +22,7 @@ export default {
             };
 
             // Send data to add desktop API route
-            Axios.post('/api/computers', dataSend, {
-                headers: {
-                    Authorization: `Bearer ${token.isTokenStored()}`
-                }
-            })
+            apiService.post('/computers', dataSend)
             .then(({data}) => {
                 if(data.success) {
                     document.getElementById('formAddOrdi').reset();

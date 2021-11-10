@@ -1931,12 +1931,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modals_AddClientModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/AddClientModal.vue */ "./resources/js/app/components/modals/AddClientModal.vue");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/token.js */ "./resources/js/app/services/token.js");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var _modals_AddClientModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/AddClientModal.vue */ "./resources/js/app/components/modals/AddClientModal.vue");
+/* harmony import */ var _services_apiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/apiService */ "./resources/js/app/services/apiService.js");
 
 
 /**
@@ -1945,7 +1941,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AddClientModal: _modals_AddClientModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    AddClientModal: _modals_AddClientModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     selectedHours: {},
@@ -1980,12 +1976,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (v.length >= 3) {
         setTimeout(function () {
-          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/client/search', {
+          _services_apiService__WEBPACK_IMPORTED_MODULE_1__["apiService"].post('/client/search', {
             clientInfo: v
-          }, {
-            headers: {
-              Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_2___default.a.isTokenStored())
-            }
           }).then(function (_ref) {
             var data = _ref.data;
             var responseData = data.data;
@@ -2107,11 +2099,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/token.js */ "./resources/js/app/services/token.js");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var _services_apiService_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/apiService.js */ "./resources/js/app/services/apiService.js");
 
 /**
  * Form to add computer
@@ -2137,11 +2125,7 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name
       }; // Send data to add desktop API route
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers', dataSend, {
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_1___default.a.isTokenStored())
-        }
-      }).then(function (_ref) {
+      _services_apiService_js__WEBPACK_IMPORTED_MODULE_0__["apiService"].post('/computers', dataSend).then(function (_ref) {
         var data = _ref.data;
 
         if (data.success) {
@@ -2175,12 +2159,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../autocomplete/Autocomplete.vue */ "./resources/js/app/components/autocomplete/Autocomplete.vue");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/token.js */ "./resources/js/app/services/token.js");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../autocomplete/Autocomplete.vue */ "./resources/js/app/components/autocomplete/Autocomplete.vue");
+/* harmony import */ var _services_apiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/apiService */ "./resources/js/app/services/apiService.js");
 
 
 /**
@@ -2192,7 +2172,7 @@ __webpack_require__.r(__webpack_exports__);
    * Components
    */
   components: {
-    Autocomplete: _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Autocomplete: _autocomplete_Autocomplete_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
 
   /**
@@ -2261,15 +2241,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // Send data to attribute desktop API route
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/computers/attributions', {
+      _services_apiService__WEBPACK_IMPORTED_MODULE_1__["apiService"].post('/computers/attributions', {
         desktop_id: this.selectedDesktop,
         client_id: this.selectedClient.id,
         hours: this.selectedHours,
         date: this.selectedDate
-      }, {
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_2___default.a.isTokenStored())
-        }
       }).then(function (_ref) {
         var data = _ref.data;
         var responseData = data.data;
@@ -2314,11 +2290,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/token.js */ "./resources/js/app/services/token.js");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var _services_apiService_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/apiService.js */ "./resources/js/app/services/apiService.js");
 
 /**
  * Add client js file
@@ -2380,16 +2352,12 @@ __webpack_require__.r(__webpack_exports__);
     createClient: function createClient() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/client/attributions", {
+      _services_apiService_js__WEBPACK_IMPORTED_MODULE_0__["apiService"].post("/client/attributions", {
         name: this.name,
         surname: this.surname,
         desktop_id: this.selectedDesktop,
         hours: this.selectedHours,
         date: this.selectedDate
-      }, {
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_1___default.a.isTokenStored())
-        }
       }).then(function (response) {
         var responseData = response.data;
 
@@ -2478,6 +2446,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/token.js */ "./resources/js/app/services/token.js");
 /* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_apiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/apiService */ "./resources/js/app/services/apiService.js");
+
 
 
 /**
@@ -2523,11 +2493,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteAssign: function deleteAssign() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/attributions/".concat(this.idAssign), {
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_1___default.a.isTokenStored())
-        }
-      }).then(function (_ref) {
+      _services_apiService__WEBPACK_IMPORTED_MODULE_2__["apiService"]["delete"]("/computers/attributions/".concat(this.idAssign)).then(function (_ref) {
         var data = _ref.data;
         var responseData = data;
 
@@ -2558,11 +2524,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/token.js */ "./resources/js/app/services/token.js");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var _services_apiService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/apiService */ "./resources/js/app/services/apiService.js");
 
 /**
  * handle delete desktop action
@@ -2607,11 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteDesktop: function deleteDesktop() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/computers/".concat(this.idDesktop), {
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_1___default.a.isTokenStored())
-        }
-      }).then(function (_ref) {
+      _services_apiService__WEBPACK_IMPORTED_MODULE_0__["apiService"]["delete"]("/computers/".concat(this.idDesktop)).then(function (_ref) {
         var data = _ref.data;
 
         if (data.success) {
@@ -2641,16 +2599,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/token.js */ "./resources/js/app/services/token.js");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _services_apiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/apiService */ "./resources/js/app/services/apiService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2698,11 +2652,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   name: _this.renameOrdi
                 };
                 _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/computer/".concat(_this.ordinateurId), dataSend, {
-                  headers: {
-                    Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_2___default.a.isTokenStored())
-                  }
-                });
+                return _services_apiService__WEBPACK_IMPORTED_MODULE_1__["apiService"].put("/computer/".concat(_this.ordinateurId), dataSend);
 
               case 4:
                 ordiData = _context.sent;
@@ -2882,15 +2832,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_apiService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/apiService */ "./resources/js/app/services/apiService.js");
 /* harmony import */ var _Ordinateur_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ordinateur.vue */ "./resources/js/app/views/Ordinateur.vue");
 /* harmony import */ var _components_modals_AddOrdinateurModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modals/AddOrdinateurModal.vue */ "./resources/js/app/components/modals/AddOrdinateurModal.vue");
 /* harmony import */ var _components_datepickers_Datepicker_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/datepickers/Datepicker.vue */ "./resources/js/app/components/datepickers/Datepicker.vue");
 /* harmony import */ var _components_pagination_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pagination/Pagination.vue */ "./resources/js/app/components/pagination/Pagination.vue");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/token.js */ "./resources/js/app/services/token.js");
-/* harmony import */ var _services_token_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_services_token_js__WEBPACK_IMPORTED_MODULE_5__);
-
 
 
 
@@ -2930,12 +2876,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.computerList = [];
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/computers', {
+      _services_apiService__WEBPACK_IMPORTED_MODULE_0__["apiService"].get('/computers', {
         params: {
           date: this.dateRechercher
-        },
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_5___default.a.isTokenStored())
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -2955,13 +2898,10 @@ __webpack_require__.r(__webpack_exports__);
 
       // this.computerList.push(newComputer)
       this.computerList = [];
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/computers", {
+      _services_apiService__WEBPACK_IMPORTED_MODULE_0__["apiService"].get("/computers", {
         params: {
           date: this.dateRechercher,
           page: this.currentPage
-        },
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_5___default.a.isTokenStored())
         }
       }).then(function (_ref2) {
         var data = _ref2.data;
@@ -2989,13 +2929,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.computerList = [];
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/computers", {
+      _services_apiService__WEBPACK_IMPORTED_MODULE_0__["apiService"].get("/computers", {
         params: {
           date: this.dateRechercher,
           page: this.currentPage
-        },
-        headers: {
-          Authorization: "Bearer ".concat(_services_token_js__WEBPACK_IMPORTED_MODULE_5___default.a.isTokenStored())
         }
       }).then(function (_ref3) {
         var data = _ref3.data;
@@ -3034,8 +2971,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_apiService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/apiService */ "./resources/js/app/services/apiService.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3048,7 +2984,7 @@ __webpack_require__.r(__webpack_exports__);
     postLogin: function postLogin() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', {
+      _services_apiService__WEBPACK_IMPORTED_MODULE_0__["apiService"].post('/login', {
         email: this.email,
         password: this.password
       }).then(function (response) {
@@ -83754,6 +83690,76 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 /***/ }),
 
+/***/ "./resources/js/app/services/apiService.js":
+/*!*************************************************!*\
+  !*** ./resources/js/app/services/apiService.js ***!
+  \*************************************************/
+/*! exports provided: apiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "apiService", function() { return apiService; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var STARTING_URL = "/api";
+var apiService = {
+  get: function get(url) {
+    var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+      method: 'get',
+      url: STARTING_URL + url,
+      params: data,
+      headers: headers()
+    });
+  },
+  post: function post(url) {
+    var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+      method: 'post',
+      url: STARTING_URL + url,
+      data: data,
+      headers: headers()
+    });
+  },
+  put: function put(url) {
+    var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+      method: 'put',
+      url: STARTING_URL + url,
+      data: data,
+      headers: headers()
+    });
+  },
+  "delete": function _delete(url) {
+    var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+      method: 'delete',
+      url: STARTING_URL + url,
+      params: data,
+      headers: headers()
+    });
+  }
+};
+
+function headers() {
+  var authHeader = localStorage.getItem('token') ? {
+    Authorization: "Bearer " + localStorage.getItem('token')
+  } : {};
+  return _objectSpread(_objectSpread({}, authHeader), {}, {
+    "Content-Type": "application/json"
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/app/services/token.js":
 /*!********************************************!*\
   !*** ./resources/js/app/services/token.js ***!
@@ -84013,8 +84019,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\0-AUTO-FORMATIONS\0-PROJET\0-PROJETS_FORMATIONS_SIMPLONS\4-Gestion-ordinateur\gao-laravel-vuejs\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\0-AUTO-FORMATIONS\0-PROJET\0-PROJETS_FORMATIONS_SIMPLONS\4-Gestion-ordinateur\gao-laravel-vuejs\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\charl\Documents\0-AUTO-FORMATIONS\0-PROJET\0-PROJETS_FORMATIONS_SIMPLONS\4-Gestion-ordinateur\web\gao-laravel-vuejs\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\charl\Documents\0-AUTO-FORMATIONS\0-PROJET\0-PROJETS_FORMATIONS_SIMPLONS\4-Gestion-ordinateur\web\gao-laravel-vuejs\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

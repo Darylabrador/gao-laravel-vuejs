@@ -1,5 +1,4 @@
-import Axios from "axios";
-import token from "../../services/token.js";
+import { apiService } from "../../services/apiService.js";
 
 /**
  * Add client js file
@@ -62,18 +61,13 @@ export default {
          * Create client and assign in timeslot
          */
         createClient() {
-            Axios.post(`/api/client/attributions`, 
+            apiService.post(`/client/attributions`, 
             {
                 name: this.name,
                 surname: this.surname,
                 desktop_id: this.selectedDesktop,
                 hours: this.selectedHours,
                 date: this.selectedDate
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token.isTokenStored()}`
-                }
             })
                 .then((response) => {
                     let responseData = response.data;

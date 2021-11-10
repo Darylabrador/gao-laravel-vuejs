@@ -1,9 +1,8 @@
-import Axios from "axios";
+import {apiService} from "../services/apiService";
 import Ordinateur from './Ordinateur.vue';
 import AddOrdinateurModal from '../components/modals/AddOrdinateurModal.vue';
 import Datepicker from '../components/datepickers/Datepicker.vue';
 import Pagination from '../components/pagination/Pagination.vue';
-import token from "../services/token.js";
 
 /**
  * Dashboard data
@@ -42,12 +41,9 @@ export default {
          */
         getAllDesktops() {
             this.computerList = [];
-            Axios.get('api/computers', {
+            apiService.get('/computers', {
                 params: {
                     date: this.dateRechercher
-                },
-                headers: {
-                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             }).then( ({ data }) => {
                 var responseData = data.data;
@@ -65,13 +61,10 @@ export default {
         newDesktop(newComputer) {
             // this.computerList.push(newComputer)
             this.computerList = [];
-            Axios.get(`/api/computers`, {
+            apiService.get(`/computers`, {
                 params: {
                     date: this.dateRechercher,
                     page: this.currentPage
-                },
-                headers: {
-                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({ data }) => {
@@ -99,13 +92,10 @@ export default {
          */
         getDeletedDesktop(idDesktop){
             this.computerList = [];
-            Axios.get(`/api/computers`, {
+            apiService.get(`/computers`, {
                 params: { 
                     date: this.dateRechercher ,
                     page: this.currentPage
-                },
-                headers: {
-                    Authorization: `Bearer ${token.isTokenStored()}`
                 }
             })
             .then(({ data }) => {

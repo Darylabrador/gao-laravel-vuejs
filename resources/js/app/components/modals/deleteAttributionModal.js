@@ -1,5 +1,6 @@
 import Axios from "axios";
 import token from '../../services/token.js';
+import { apiService } from "../../services/apiService";
 
 /**
  * Handle the delete attribution timeslot
@@ -44,11 +45,7 @@ export default {
          * Delete attribution and inform parent component
          */
         deleteAssign() {
-            Axios.delete(`/api/computers/attributions/${this.idAssign}`,{
-                headers: {
-                    Authorization: `Bearer ${token.isTokenStored()}`
-                }
-            })
+            apiService.delete(`/computers/attributions/${this.idAssign}`)
             .then(({data}) => {
                 let responseData = data;
                 if(responseData.success){

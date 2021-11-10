@@ -1,5 +1,4 @@
-import Axios from "axios";
-import token from '../../services/token.js';
+import { apiService } from "../../services/apiService";
 
 /**
  * handle delete desktop action
@@ -45,11 +44,7 @@ export default {
          * handle delete the desktop from DB and inform the parent component
          */
         deleteDesktop() {
-            Axios.delete(`/api/computers/${this.idDesktop}`, {
-                headers : {
-                    Authorization: `Bearer ${token.isTokenStored()}`
-                }
-            })
+            apiService.delete(`/computers/${this.idDesktop}`)
             .then(({ data }) =>{
                 if(data.success){
                     this.$emit('deletedDesktop', this.idDesktop);
